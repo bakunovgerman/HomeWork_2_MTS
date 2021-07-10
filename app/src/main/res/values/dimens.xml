@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="movie_poster_height">290dp</dimen>
+    <dimen name="guideline_margin_begin_end">20dp</dimen>
+    <dimen name="movie_category_margin_top">32dp</dimen>
+    <dimen name="movie_category_padding_top">5dp</dimen>
+    <dimen name="movie_category_padding_bottom">5dp</dimen>
+    <dimen name="movie_category_padding_start">15dp</dimen>
+    <dimen name="movie_category_padding_end">15dp</dimen>
+    <dimen name="movie_date_text_size">12sp</dimen>
+    <dimen name="movie_date_margin_start">14dp</dimen>
+    <dimen name="movie_date_margin_top">32dp</dimen>
+    <dimen name="movie_title_margin_top">14dp</dimen>
+    <dimen name="movie_age_padding">12dp</dimen>
+    <dimen name="movie_age_margin_top">40dp</dimen>
+    <dimen name="movie_rating_margin_top">8dp</dimen>
+    <dimen name="movie_description_margin_top">20dp</dimen>
+    <dimen name="movie_actors_title_margin_top">35dp</dimen>
+    <dimen name="horizontal_scroll_view_margin_top">16dp</dimen>
+    <dimen name="horizontal_scroll_view_margin_bottom">46dp</dimen>
+    <dimen name="actor_item_margin_start_start">20dp</dimen>
+    <dimen name="actor_item_margin_end">20dp</dimen>
+    <dimen name="actor_image_width">150dp</dimen>
+    <dimen name="actor_image_height">200dp</dimen>
+    <dimen name="actor_name_margin_top">12dp</dimen>
+    <dimen name="actor_item_margin_start">10dp</dimen>
+</resources>
