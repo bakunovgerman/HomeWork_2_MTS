@@ -8,6 +8,9 @@ class PopularNowDataSourceImpl : PopularNowDataSource{
         PopularNowDto("драмы"),
         PopularNowDto("комедии"),
         PopularNowDto("артхаус"),
-        PopularNowDto("мелодрамы")
+        PopularNowDto("мелодрамы"),
+        PopularNowDto("ужасы"),
+        PopularNowDto("фантастика"),
+        PopularNowDto("документальные")
     )
 }
