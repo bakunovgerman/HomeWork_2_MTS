@@ -1,21 +1,21 @@
 package com.example.homework_2_mts.adapters
 
-import android.graphics.Movie
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.view.marginBottom
-import androidx.core.view.marginStart
 import androidx.recyclerview.widget.RecyclerView
 import com.example.homework_2_mts.R
 import com.example.homework_2_mts.data.dto.PopularNowDto
 
-class popularNowRecyclerViewAdapter (private val list: List<PopularNowDto>)
-    : RecyclerView.Adapter<popularNowRecyclerViewAdapter.PopularNowViewHolder>(){
+class PopularNowRecyclerViewAdapter (private val list: List<PopularNowDto>)
+    : RecyclerView.Adapter<PopularNowRecyclerViewAdapter.PopularNowViewHolder>(){
 
-    class PopularNowViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
+    private var popularNowNameView: TextView? = null
+    var onPopularNowItemClick: ((PopularNowDto) -> Unit)? = null
+
+    inner class PopularNowViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         RecyclerView.ViewHolder(inflater.inflate(R.layout.popular_now_item, parent, false)) {
-        private var popularNowNameView: TextView? = null
+
 
 
         init {
@@ -33,8 +33,8 @@ class popularNowRecyclerViewAdapter (private val list: List<PopularNowDto>)
         }
 
         override fun onBindViewHolder(holder: PopularNowViewHolder, position: Int) {
-            val popularNowDto: PopularNowDto = list[position]
-            holder.bind(popularNowDto)
+            holder.bind(list[position])
+            popularNowNameView?.setOnClickListener { onPopularNowItemClick?.invoke(list[position]) }
         }
 
         override fun getItemCount(): Int = list.size

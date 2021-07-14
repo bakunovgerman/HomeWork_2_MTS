@@ -14,7 +14,8 @@
         app:layout_constraintBottom_toTopOf="@id/movieTitleText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="10dp"
+        android:foreground="?attr/selectableItemBackgroundBorderless">
         <ImageView
             android:id="@+id/movie_poster_img"
             android:layout_width="match_parent"

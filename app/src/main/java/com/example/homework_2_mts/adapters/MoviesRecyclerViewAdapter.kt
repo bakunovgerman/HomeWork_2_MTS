@@ -1,30 +1,25 @@
 package com.example.homework_2_mts.adapters
 
 import android.content.Context
-import android.graphics.Movie
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.marginBottom
-import androidx.core.view.marginStart
-import androidx.core.view.setMargins
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.homework_2_mts.R
 import com.example.homework_2_mts.data.dto.MovieDto
-import com.example.homework_2_mts.data.dto.PopularNowDto
 import com.squareup.picasso.Picasso
 
-class moviesRecyclerViewAdapter (private val list: List<MovieDto>)
-    : RecyclerView.Adapter<moviesRecyclerViewAdapter.MoviesViewHolder>(){
+class MoviesRecyclerViewAdapter (private val list: List<MovieDto>)
+    : RecyclerView.Adapter<MoviesRecyclerViewAdapter.MoviesViewHolder>(){
 
-
+    var onMovieItemClick: ((MovieDto) -> Unit)? = null
     private var context: Context? = null
+    private var movieItemRoot: ConstraintLayout? = null
+
     inner class MoviesViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         RecyclerView.ViewHolder(inflater.inflate(R.layout.movie_item, parent, false)) {
-        private var movieItemRoot: ConstraintLayout? = null
         private var moviePosterImg: ImageView? = null
         private var movieTitleText: TextView? = null
         private var movieDecorationText: TextView? = null
@@ -64,7 +59,7 @@ class moviesRecyclerViewAdapter (private val list: List<MovieDto>)
             Picasso.get().load(movieDto.imageUrl).into(moviePosterImg);
             movieTitleText?.text = movieDto.title
             movieDecorationText?.text = movieDto.description
-            ageRatingText?.text = movieDto.ageRestriction.toString() + "+"
+            ageRatingText?.text = movieDto.ageRestriction.toString() + '+'
             when(movieDto.rateScore){
                 1 -> {
                     star1?.setImageResource(R.drawable.ic_star_active);
@@ -113,6 +108,7 @@ class moviesRecyclerViewAdapter (private val list: List<MovieDto>)
 
         override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
             holder.bind(list[position], position)
+            movieItemRoot?.setOnClickListener { onMovieItemClick?.invoke(list[position]) }
         }
         private fun dpToPx(dp: Int):Int{
             val px:Float = dp * context?.resources?.displayMetrics!!.density;
