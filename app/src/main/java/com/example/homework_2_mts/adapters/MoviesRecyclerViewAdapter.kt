@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
@@ -24,11 +25,7 @@ class MoviesRecyclerViewAdapter (private val list: List<MovieDto>)
         private var movieTitleText: TextView? = null
         private var movieDecorationText: TextView? = null
         private var ageRatingText: TextView? = null
-        private var star1: ImageView? = null
-        private var star2: ImageView? = null
-        private var star3: ImageView? = null
-        private var star4: ImageView? = null
-        private var star5: ImageView? = null
+        private var movieRatingLayout: RatingBar? = null
 
         init {
             movieItemRoot = itemView.findViewById(R.id.movieItemRoot)
@@ -37,11 +34,8 @@ class MoviesRecyclerViewAdapter (private val list: List<MovieDto>)
             movieTitleText = itemView.findViewById(R.id.movieTitleText)
             movieDecorationText = itemView.findViewById(R.id.movieDescriptionText)
             ageRatingText = itemView.findViewById(R.id.movieAgeText)
-            star1 = itemView.findViewById(R.id.star_1)
-            star2 = itemView.findViewById(R.id.star_2)
-            star3 = itemView.findViewById(R.id.star_3)
-            star4 = itemView.findViewById(R.id.star_4)
-            star5 = itemView.findViewById(R.id.star_5)
+            movieRatingLayout = itemView.findViewById(R.id.movieRatingLayout)
+            movieRatingLayout?.numStars = 5
         }
 
         fun bind(movieDto: MovieDto, position: Int) {
@@ -60,43 +54,7 @@ class MoviesRecyclerViewAdapter (private val list: List<MovieDto>)
             movieTitleText?.text = movieDto.title
             movieDecorationText?.text = movieDto.description
             ageRatingText?.text = movieDto.ageRestriction.toString() + '+'
-            when(movieDto.rateScore){
-                1 -> {
-                    star1?.setImageResource(R.drawable.ic_star_active);
-                    star2?.setImageResource(R.drawable.ic_star_no_active);
-                    star3?.setImageResource(R.drawable.ic_star_no_active);
-                    star4?.setImageResource(R.drawable.ic_star_no_active);
-                    star5?.setImageResource(R.drawable.ic_star_no_active);
-                }
-                2 -> {
-                    star1?.setImageResource(R.drawable.ic_star_active);
-                    star2?.setImageResource(R.drawable.ic_star_active);
-                    star3?.setImageResource(R.drawable.ic_star_no_active);
-                    star4?.setImageResource(R.drawable.ic_star_no_active);
-                    star5?.setImageResource(R.drawable.ic_star_no_active);
-                }
-                3 -> {
-                    star1?.setImageResource(R.drawable.ic_star_active);
-                    star2?.setImageResource(R.drawable.ic_star_active);
-                    star3?.setImageResource(R.drawable.ic_star_active);
-                    star4?.setImageResource(R.drawable.ic_star_no_active);
-                    star5?.setImageResource(R.drawable.ic_star_no_active);
-                }
-                4 -> {
-                    star1?.setImageResource(R.drawable.ic_star_active);
-                    star2?.setImageResource(R.drawable.ic_star_active);
-                    star3?.setImageResource(R.drawable.ic_star_active);
-                    star4?.setImageResource(R.drawable.ic_star_active);
-                    star5?.setImageResource(R.drawable.ic_star_no_active);
-                }
-                5 -> {
-                    star1?.setImageResource(R.drawable.ic_star_active);
-                    star2?.setImageResource(R.drawable.ic_star_active);
-                    star3?.setImageResource(R.drawable.ic_star_active);
-                    star4?.setImageResource(R.drawable.ic_star_active);
-                    star5?.setImageResource(R.drawable.ic_star_active);
-                }
-            }
+            movieRatingLayout?.rating = movieDto.rateScore.toFloat()
 
         }
 
