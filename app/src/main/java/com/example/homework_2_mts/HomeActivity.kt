@@ -34,7 +34,7 @@ class HomeActivity : AppCompatActivity() {
         findViewById<RecyclerView>(R.id.popularNowRecyclerView)?.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = popularNowRecyclerViewAdapter
-            addItemDecoration(SpacesItemDecoration(20))
+            addItemDecoration(SpacesItemDecoration(25))
         }
         findViewById<RecyclerView>(R.id.moviesRecyclerView)?.apply {
             layoutManager = GridLayoutManager(context, 2)

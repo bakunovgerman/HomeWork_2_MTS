@@ -2,6 +2,7 @@ package com.example.homework_2_mts.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.homework_2_mts.R
 import com.example.homework_2_mts.data.dto.MovieDto
 import com.squareup.picasso.Picasso
+import java.lang.IllegalStateException
 
 class MoviesRecyclerViewAdapter (private val list: List<MovieDto>)
     : RecyclerView.Adapter<MoviesRecyclerViewAdapter.MoviesViewHolder>(){
@@ -19,8 +21,14 @@ class MoviesRecyclerViewAdapter (private val list: List<MovieDto>)
     private var context: Context? = null
     private var movieItemRoot: ConstraintLayout? = null
 
-    inner class MoviesViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
-        RecyclerView.ViewHolder(inflater.inflate(R.layout.movie_item, parent, false)) {
+    companion object {
+        const val VIEW_TYPE_HEADER = 0
+        const val VIEW_TYPE_ACTOR = 1
+    }
+
+    inner class MoviesViewHolder(inflater: View) :
+        RecyclerView.ViewHolder(inflater) {
+
         private var moviePosterImg: ImageView? = null
         private var movieTitleText: TextView? = null
         private var movieDecorationText: TextView? = null
@@ -38,35 +46,39 @@ class MoviesRecyclerViewAdapter (private val list: List<MovieDto>)
             movieRatingLayout?.numStars = 5
         }
 
-        fun bind(movieDto: MovieDto, position: Int) {
-//            if(position % 2 != 0){
-//                val margin:Int = dpToPx(20)
-//                val left:Int  = dpToPx(27)
-//                val right:Int  = dpToPx(20)
-//                val top:Int  = dpToPx(12)
-//                val bottom:Int  = dpToPx(12)
-//                val layoutParams = movieItemRoot?.layoutParams as GridLayoutManager.LayoutParams
-//                layoutParams.setMargins(27, 0, 0, 0)
-//                movieItemRoot?.layoutParams = layoutParams
-//            }
-
+        fun bind(movieDto: MovieDto) {
             Picasso.get().load(movieDto.imageUrl).into(moviePosterImg);
             movieTitleText?.text = movieDto.title
             movieDecorationText?.text = movieDto.description
             ageRatingText?.text = movieDto.ageRestriction.toString() + '+'
             movieRatingLayout?.rating = movieDto.rateScore.toFloat()
-
         }
 
     }
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
+
+    override fun getItemViewType(position: Int): Int {
+        return when (position){
+            0 -> VIEW_TYPE_HEADER
+            else -> VIEW_TYPE_ACTOR
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
             val inflater = LayoutInflater.from(parent.context)
-            return MoviesViewHolder(inflater, parent)
+            return when(viewType) {
+                VIEW_TYPE_HEADER ->  MoviesViewHolder(inflater.inflate(R.layout.movie_item, parent, false))
+                VIEW_TYPE_ACTOR -> MoviesViewHolder(inflater.inflate(R.layout.movie_item, parent, false))
+                else -> throw IllegalStateException()
+            }
         }
 
         override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
-            holder.bind(list[position], position)
-            movieItemRoot?.setOnClickListener { onMovieItemClick?.invoke(list[position]) }
+            when(holder){
+                is MoviesViewHolder -> {
+                    holder.bind(list[position])
+                    movieItemRoot?.setOnClickListener { onMovieItemClick?.invoke(list[position]) }
+                }
+            }
         }
         private fun dpToPx(dp: Int):Int{
             val px:Float = dp * context?.resources?.displayMetrics!!.density;
