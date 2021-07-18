@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.homework_2_mts.adapters.GridSpacingItemDecoration
 import com.example.homework_2_mts.adapters.SpacesItemDecoration
 import com.example.homework_2_mts.adapters.MoviesRecyclerViewAdapter
 import com.example.homework_2_mts.adapters.PopularNowRecyclerViewAdapter
@@ -39,8 +40,7 @@ class HomeActivity : AppCompatActivity() {
         findViewById<RecyclerView>(R.id.moviesRecyclerView)?.apply {
             layoutManager = GridLayoutManager(context, 2)
             adapter = moviesRecyclerViewAdapter
-            addItemDecoration(SpacesItemDecoration(spaceBottom = 100))
+            addItemDecoration(GridSpacingItemDecoration())
         }
-
     }
 }

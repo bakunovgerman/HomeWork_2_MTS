@@ -15,45 +15,14 @@ import com.squareup.picasso.Picasso
 import java.lang.IllegalStateException
 
 class MoviesRecyclerViewAdapter (private val list: List<MovieDto>)
-    : RecyclerView.Adapter<MoviesRecyclerViewAdapter.MoviesViewHolder>(){
+    : RecyclerView.Adapter<MoviesViewHolder>(){
 
     var onMovieItemClick: ((MovieDto) -> Unit)? = null
     private var context: Context? = null
-    private var movieItemRoot: ConstraintLayout? = null
 
     companion object {
         const val VIEW_TYPE_HEADER = 0
         const val VIEW_TYPE_ACTOR = 1
-    }
-
-    inner class MoviesViewHolder(inflater: View) :
-        RecyclerView.ViewHolder(inflater) {
-
-        private var moviePosterImg: ImageView? = null
-        private var movieTitleText: TextView? = null
-        private var movieDecorationText: TextView? = null
-        private var ageRatingText: TextView? = null
-        private var movieRatingLayout: RatingBar? = null
-
-        init {
-            movieItemRoot = itemView.findViewById(R.id.movieItemRoot)
-            moviePosterImg = itemView.findViewById(R.id.movie_poster_img)
-            context = moviePosterImg?.context
-            movieTitleText = itemView.findViewById(R.id.movieTitleText)
-            movieDecorationText = itemView.findViewById(R.id.movieDescriptionText)
-            ageRatingText = itemView.findViewById(R.id.movieAgeText)
-            movieRatingLayout = itemView.findViewById(R.id.movieRatingLayout)
-            movieRatingLayout?.numStars = 5
-        }
-
-        fun bind(movieDto: MovieDto) {
-            Picasso.get().load(movieDto.imageUrl).into(moviePosterImg);
-            movieTitleText?.text = movieDto.title
-            movieDecorationText?.text = movieDto.description
-            ageRatingText?.text = movieDto.ageRestriction.toString() + '+'
-            movieRatingLayout?.rating = movieDto.rateScore.toFloat()
-        }
-
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -76,7 +45,7 @@ class MoviesRecyclerViewAdapter (private val list: List<MovieDto>)
             when(holder){
                 is MoviesViewHolder -> {
                     holder.bind(list[position])
-                    movieItemRoot?.setOnClickListener { onMovieItemClick?.invoke(list[position]) }
+                    holder.movieItemRoot?.setOnClickListener { onMovieItemClick?.invoke(list[position]) }
                 }
             }
         }
