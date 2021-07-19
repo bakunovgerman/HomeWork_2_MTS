@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.homework_2_mts.R
 import com.example.homework_2_mts.items_decoration.GridSpacingItemDecoration
 import com.example.homework_2_mts.items_decoration.SpacesItemDecoration
@@ -26,18 +27,26 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var moviesRecyclerViewAdapter: MoviesRecyclerViewAdapter
     private lateinit var moviesRecyclerView: RecyclerView
     private lateinit var popularNowRecyclerView: RecyclerView
+    private lateinit var swipeRefresh: SwipeRefreshLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
         initView()
+        initListener()
         setData()
     }
 
     private fun initView() {
         moviesRecyclerView = findViewById<RecyclerView>(R.id.rvMovies)
         popularNowRecyclerView = findViewById<RecyclerView>(R.id.rvPopularNow)
+        swipeRefresh = findViewById<SwipeRefreshLayout>(R.id.swipe_refresh)
+    }
+    private fun initListener(){
+        swipeRefresh.setOnRefreshListener {
+            updateData(moviesModel.getMovies(), moviesModel.getMovies2())
+        }
     }
 
     private fun setData() {
@@ -65,10 +74,11 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun changeData(oldList: List<MovieDto>, newList: List<MovieDto>){
+    private fun updateData(oldList: List<MovieDto>, newList: List<MovieDto>){
         val callback = MoviesCallbackDiffUtils(oldList, newList)
         val diff = DiffUtil.calculateDiff(callback)
-        diff.dispatchUpdatesTo(popularNowRecyclerViewAdapter)
+        diff.dispatchUpdatesTo(moviesRecyclerViewAdapter)
         moviesRecyclerViewAdapter.list = newList
+        swipeRefresh.isRefreshing = false
     }
 }
