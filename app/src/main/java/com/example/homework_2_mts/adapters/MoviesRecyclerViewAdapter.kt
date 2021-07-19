@@ -14,7 +14,7 @@ import com.example.homework_2_mts.data.dto.MovieDto
 import com.squareup.picasso.Picasso
 import java.lang.IllegalStateException
 
-class MoviesRecyclerViewAdapter (private val list: List<MovieDto>)
+class MoviesRecyclerViewAdapter (var list: List<MovieDto>)
     : RecyclerView.Adapter<MoviesViewHolder>(){
 
     var onMovieItemClick: ((MovieDto) -> Unit)? = null

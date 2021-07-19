@@ -1,4 +1,4 @@
-package com.example.homework_2_mts.adapters
+package com.example.homework_2_mts.items_decoration
 
 import android.graphics.Rect
 import android.view.View
