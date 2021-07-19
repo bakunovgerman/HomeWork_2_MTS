@@ -70,7 +70,9 @@ class HomeActivity : AppCompatActivity() {
         moviesRecyclerView.apply {
             layoutManager = GridLayoutManager(context, 2)
             adapter = moviesRecyclerViewAdapter
-            addItemDecoration(GridSpacingItemDecoration(2, 140, false))
+            addItemDecoration(GridSpacingItemDecoration(2, resources.getDimensionPixelSize(R.dimen.marginMoviesGrid), false,
+                100 // offSet вниз
+            ))
         }
     }
 
