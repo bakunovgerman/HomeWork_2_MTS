@@ -12,4 +12,5 @@
     <string name="actor_3_name">Джош Харнетт</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tv_popular_now_title_string">Популярное сейчас</string>
 </resources>

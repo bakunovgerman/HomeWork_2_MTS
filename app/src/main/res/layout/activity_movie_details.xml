@@ -29,7 +29,7 @@
             android:orientation="vertical"
             android:layout_height="wrap_content">
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/line_1"
+                android:id="@+id/guideLine_1"
                 android:orientation="vertical"
                 app:layout_constraintGuide_begin="@dimen/guideline_margin_begin_end"
                 android:layout_width="wrap_content"
@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="@id/line_1"
+                app:layout_constraintStart_toStartOf="@id/guideLine_1"
                 app:layout_constraintEnd_toStartOf="@+id/movieDateText"
                 android:layout_marginTop="@dimen/movie_category_margin_top"
                 android:paddingTop="@dimen/movie_category_padding_top"
@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/movie_title"
                 app:layout_constraintTop_toBottomOf="@+id/movieCategoryText"
-                app:layout_constraintStart_toStartOf="@id/line_1"
+                app:layout_constraintStart_toStartOf="@id/guideLine_1"
                 android:layout_marginTop="@dimen/movie_title_margin_top"
                 android:textSize="@dimen/movie_title_text_size"
                 android:textColor="@color/black"
@@ -78,7 +78,7 @@
                 android:id="@+id/movieAgeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@id/line_2"
+                app:layout_constraintEnd_toEndOf="@id/guideLine_2"
                 app:layout_constraintTop_toTopOf="parent"
                 android:text="@string/movie_age"
                 android:padding="@dimen/movie_age_padding"
@@ -89,7 +89,7 @@
             <LinearLayout
                 android:id="@+id/movieRatingLayout"
                 app:layout_constraintTop_toBottomOf="@+id/movieTitleText"
-                app:layout_constraintStart_toStartOf="@id/line_1"
+                app:layout_constraintStart_toStartOf="@id/guideLine_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/movie_rating_margin_top">
@@ -122,11 +122,11 @@
                 android:layout_marginTop="@dimen/movie_description_margin_top"
                 android:text="@string/movie_description"
                 android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="@id/line_2"
-                app:layout_constraintStart_toStartOf="@id/line_1"
+                app:layout_constraintEnd_toEndOf="@id/guideLine_2"
+                app:layout_constraintStart_toStartOf="@id/guideLine_1"
                 app:layout_constraintTop_toBottomOf="@id/movieRatingLayout" />
             <TextView
-                android:id="@+id/movieActorsTitleText"
+                android:id="@+id/tvPopularNowTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
@@ -134,12 +134,12 @@
                 android:textSize="@dimen/movie_actors_title_text_size"
                 android:text="@string/actors"
                 app:layout_constraintTop_toBottomOf="@+id/movieDescriptionText"
-                app:layout_constraintStart_toStartOf="@id/line_1"
+                app:layout_constraintStart_toStartOf="@id/guideLine_1"
                 android:layout_marginTop="@dimen/movie_actors_title_margin_top"/>
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/movieActorsTitleText"
+                app:layout_constraintTop_toBottomOf="@id/tvPopularNowTitle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -207,7 +207,7 @@
                 </LinearLayout>
             </HorizontalScrollView>
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/line_2"
+                android:id="@+id/guideLine_2"
                 android:orientation="vertical"
                 app:layout_constraintGuide_end="@dimen/guideline_margin_begin_end"
                 android:layout_width="wrap_content"

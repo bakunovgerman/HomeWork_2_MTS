@@ -32,12 +32,12 @@ class HomeActivity : AppCompatActivity() {
             Toast.makeText(this, it.title, Toast.LENGTH_SHORT).show()
         }
 
-        findViewById<RecyclerView>(R.id.popularNowRecyclerView)?.apply {
+        findViewById<RecyclerView>(R.id.rvPopularNow)?.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = popularNowRecyclerViewAdapter
             addItemDecoration(SpacesItemDecoration(25))
         }
-        findViewById<RecyclerView>(R.id.moviesRecyclerView)?.apply {
+        findViewById<RecyclerView>(R.id.rvMovies)?.apply {
             layoutManager = GridLayoutManager(context, 2)
             adapter = moviesRecyclerViewAdapter
             addItemDecoration(GridSpacingItemDecoration())
