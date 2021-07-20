@@ -14,10 +14,9 @@ import com.example.homework_2_mts.data.dto.MovieDto
 import com.squareup.picasso.Picasso
 import java.lang.IllegalStateException
 
-class MoviesRecyclerViewAdapter (var list: List<MovieDto>)
+class MoviesRecyclerViewAdapter (var list: List<MovieDto>, var onMovieItemClick: ((MovieDto) -> Unit))
     : RecyclerView.Adapter<MoviesViewHolder>(){
 
-    var onMovieItemClick: ((MovieDto) -> Unit)? = null
     private var context: Context? = null
 
     companion object {
@@ -45,13 +44,9 @@ class MoviesRecyclerViewAdapter (var list: List<MovieDto>)
             when(holder){
                 is MoviesViewHolder -> {
                     holder.bind(list[position])
-                    holder.movieItemRoot?.setOnClickListener { onMovieItemClick?.invoke(list[position]) }
+                    holder.movieItemRoot?.setOnClickListener { onMovieItemClick.invoke(list[position]) }
                 }
             }
-        }
-        private fun dpToPx(dp: Int):Int{
-            val px:Float = dp * context?.resources?.displayMetrics!!.density;
-            return px.toInt()
         }
         override fun getItemCount(): Int = list.size
  }

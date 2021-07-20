@@ -1,24 +1,27 @@
 package com.example.homework_2_mts.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.DisplayMetrics
+import android.view.ViewTreeObserver
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.homework_2_mts.R
-import com.example.homework_2_mts.items_decoration.GridSpacingItemDecoration
-import com.example.homework_2_mts.items_decoration.SpacesItemDecoration
 import com.example.homework_2_mts.adapters.MoviesRecyclerViewAdapter
 import com.example.homework_2_mts.adapters.PopularNowRecyclerViewAdapter
 import com.example.homework_2_mts.data.dto.MovieDto
+import com.example.homework_2_mts.data.features.movies.MoviesDataSourceImpl
 import com.example.homework_2_mts.data.features.popular.PopularNowDataSourceImpl
+import com.example.homework_2_mts.helpers.MoviesCallbackDiffUtils
+import com.example.homework_2_mts.items_decoration.GridSpacingItemDecoration
+import com.example.homework_2_mts.items_decoration.SpacesItemDecoration
 import com.example.homework_2_mts.models.MoviesModel
 import com.example.homework_2_mts.models.PopularNowModel
-import com.example.homework_2_mts.data.features.movies.MoviesDataSourceImpl
-import com.example.homework_2_mts.helpers.MoviesCallbackDiffUtils
+
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var popularNowModel: PopularNowModel
@@ -53,10 +56,10 @@ class HomeActivity : AppCompatActivity() {
         popularNowModel = PopularNowModel(PopularNowDataSourceImpl())
         moviesModel = MoviesModel(MoviesDataSourceImpl())
 
-        popularNowRecyclerViewAdapter  = PopularNowRecyclerViewAdapter(popularNowModel.getPopularNow())
+        popularNowRecyclerViewAdapter  = PopularNowRecyclerViewAdapter(popularNowModel.getPopularNow()) {Unit}
         popularNowRecyclerViewAdapter.onPopularNowItemClick = { Toast.makeText(this, it.name, Toast.LENGTH_SHORT).show() }
 
-        moviesRecyclerViewAdapter = MoviesRecyclerViewAdapter(moviesModel.getMovies())
+        moviesRecyclerViewAdapter = MoviesRecyclerViewAdapter(moviesModel.getMovies()) { Unit }
         moviesRecyclerViewAdapter.onMovieItemClick = {
             Toast.makeText(this, it.title, Toast.LENGTH_SHORT).show()
         }
@@ -70,9 +73,7 @@ class HomeActivity : AppCompatActivity() {
         moviesRecyclerView.apply {
             layoutManager = GridLayoutManager(context, 2)
             adapter = moviesRecyclerViewAdapter
-            addItemDecoration(GridSpacingItemDecoration(2, resources.getDimensionPixelSize(R.dimen.marginMoviesGrid), false,
-                100 // offSet вниз
-            ))
+            addItemDecoration(GridSpacingItemDecoration(100))
         }
     }
 

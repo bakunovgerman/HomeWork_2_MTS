@@ -7,11 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.homework_2_mts.R
 import com.example.homework_2_mts.data.dto.PopularNowDto
 
-class PopularNowRecyclerViewAdapter (private val list: List<PopularNowDto>)
+class PopularNowRecyclerViewAdapter (private val list: List<PopularNowDto>, var onPopularNowItemClick: ((PopularNowDto) -> Unit))
     : RecyclerView.Adapter<PopularNowRecyclerViewAdapter.PopularNowViewHolder>(){
 
     private var popularNowNameView: TextView? = null
-    var onPopularNowItemClick: ((PopularNowDto) -> Unit)? = null
 
     inner class PopularNowViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         RecyclerView.ViewHolder(inflater.inflate(R.layout.popular_now_item, parent, false)) {
