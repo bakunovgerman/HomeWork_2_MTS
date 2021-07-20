@@ -14,31 +14,14 @@ import com.squareup.picasso.Picasso
 class MoviesViewHolder(inflater: View) :
     RecyclerView.ViewHolder(inflater) {
 
-    private var context: Context? = null
-    public var movieItemRoot: ConstraintLayout? = null
-    private var moviePosterImg: ImageView? = null
-    private var movieTitleText: TextView? = null
-    private var movieDecorationText: TextView? = null
-    private var ageRatingText: TextView? = null
-    private var movieRatingLayout: RatingBar? = null
-
-    init {
-        movieItemRoot = itemView.findViewById(R.id.movieItemRoot)
-        moviePosterImg = itemView.findViewById(R.id.movie_poster_img)
-        context = moviePosterImg?.context
-        movieTitleText = itemView.findViewById(R.id.movieTitleText)
-        movieDecorationText = itemView.findViewById(R.id.movieDescriptionText)
-        ageRatingText = itemView.findViewById(R.id.movieAgeText)
-        movieRatingLayout = itemView.findViewById(R.id.movieRatingLayout)
-        movieRatingLayout?.numStars = 5
-    }
+    var movieItemRoot: ConstraintLayout = itemView.findViewById<ConstraintLayout>(R.id.movieItemRoot)
 
     fun bind(movieDto: MovieDto) {
-        Picasso.get().load(movieDto.imageUrl).into(moviePosterImg);
-        movieTitleText?.text = movieDto.title
-        movieDecorationText?.text = movieDto.description
-        ageRatingText?.text = movieDto.ageRestriction.toString() + '+'
-        movieRatingLayout?.rating = movieDto.rateScore.toFloat()
+        Picasso.get().load(movieDto.imageUrl).into(itemView.findViewById<ImageView>(R.id.movie_poster_img));
+        itemView.findViewById<TextView>(R.id.movieTitleText).text = movieDto.title
+        itemView.findViewById<TextView>(R.id.movieDescriptionText).text = movieDto.description
+        itemView.findViewById<TextView>(R.id.movieAgeText).text = movieDto.ageRestriction.toString() + '+'
+        itemView.findViewById<RatingBar>(R.id.movieRatingLayout).rating = movieDto.rateScore.toFloat()
     }
 
 }

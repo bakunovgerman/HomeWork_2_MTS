@@ -7,15 +7,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.homework_2_mts.R
 import com.example.homework_2_mts.data.dto.PopularNowDto
 
-class PopularNowRecyclerViewAdapter (private val list: List<PopularNowDto>, var onPopularNowItemClick: ((PopularNowDto) -> Unit))
-    : RecyclerView.Adapter<PopularNowRecyclerViewAdapter.PopularNowViewHolder>(){
+class PopularNowRecyclerViewAdapter(
+    private val list: List<PopularNowDto>,
+    var onPopularNowItemClick: ((PopularNowDto) -> Unit)
+) : RecyclerView.Adapter<PopularNowRecyclerViewAdapter.PopularNowViewHolder>() {
 
     private var popularNowNameView: TextView? = null
 
     inner class PopularNowViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         RecyclerView.ViewHolder(inflater.inflate(R.layout.popular_now_item, parent, false)) {
-
-
 
         init {
             popularNowNameView = itemView.findViewById(R.id.popularNowText)
@@ -26,15 +26,16 @@ class PopularNowRecyclerViewAdapter (private val list: List<PopularNowDto>, var 
         }
 
     }
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularNowViewHolder {
-            val inflater = LayoutInflater.from(parent.context)
-            return PopularNowViewHolder(inflater, parent)
-        }
 
-        override fun onBindViewHolder(holder: PopularNowViewHolder, position: Int) {
-            holder.bind(list[position])
-            popularNowNameView?.setOnClickListener { onPopularNowItemClick?.invoke(list[position]) }
-        }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularNowViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        return PopularNowViewHolder(inflater, parent)
+    }
 
-        override fun getItemCount(): Int = list.size
- }
+    override fun onBindViewHolder(holder: PopularNowViewHolder, position: Int) {
+        holder.bind(list[position])
+        popularNowNameView?.setOnClickListener { onPopularNowItemClick?.invoke(list[position]) }
+    }
+
+    override fun getItemCount(): Int = list.size
+}

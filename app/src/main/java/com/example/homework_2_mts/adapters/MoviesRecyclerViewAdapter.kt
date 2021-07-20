@@ -14,8 +14,10 @@ import com.example.homework_2_mts.data.dto.MovieDto
 import com.squareup.picasso.Picasso
 import java.lang.IllegalStateException
 
-class MoviesRecyclerViewAdapter (var list: List<MovieDto>, var onMovieItemClick: ((MovieDto) -> Unit))
-    : RecyclerView.Adapter<MoviesViewHolder>(){
+class MoviesRecyclerViewAdapter(
+    var list: List<MovieDto>,
+    var onMovieItemClick: ((MovieDto) -> Unit)
+) : RecyclerView.Adapter<MoviesViewHolder>() {
 
     private var context: Context? = null
 
@@ -25,28 +27,41 @@ class MoviesRecyclerViewAdapter (var list: List<MovieDto>, var onMovieItemClick:
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when (position){
+        return when (position) {
             0 -> VIEW_TYPE_HEADER
             else -> VIEW_TYPE_ACTOR
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
-            val inflater = LayoutInflater.from(parent.context)
-            return when(viewType) {
-                VIEW_TYPE_HEADER ->  MoviesViewHolder(inflater.inflate(R.layout.movie_item, parent, false))
-                VIEW_TYPE_ACTOR -> MoviesViewHolder(inflater.inflate(R.layout.movie_item, parent, false))
-                else -> throw IllegalStateException()
-            }
+        val inflater = LayoutInflater.from(parent.context)
+        return when (viewType) {
+            VIEW_TYPE_HEADER -> MoviesViewHolder(
+                inflater.inflate(
+                    R.layout.movie_item,
+                    parent,
+                    false
+                )
+            )
+            VIEW_TYPE_ACTOR -> MoviesViewHolder(
+                inflater.inflate(
+                    R.layout.movie_item,
+                    parent,
+                    false
+                )
+            )
+            else -> throw IllegalStateException()
         }
+    }
 
-        override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
-            when(holder){
-                is MoviesViewHolder -> {
-                    holder.bind(list[position])
-                    holder.movieItemRoot?.setOnClickListener { onMovieItemClick.invoke(list[position]) }
-                }
+    override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
+        when (holder) {
+            is MoviesViewHolder -> {
+                holder.bind(list[position])
+                holder.movieItemRoot.setOnClickListener { onMovieItemClick.invoke(list[position]) }
             }
         }
-        override fun getItemCount(): Int = list.size
- }
+    }
+
+    override fun getItemCount(): Int = list.size
+}

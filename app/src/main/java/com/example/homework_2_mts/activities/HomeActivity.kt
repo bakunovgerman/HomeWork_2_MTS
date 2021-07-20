@@ -24,60 +24,52 @@ import com.example.homework_2_mts.models.PopularNowModel
 
 
 class HomeActivity : AppCompatActivity() {
-    private lateinit var popularNowModel: PopularNowModel
-    private lateinit var moviesModel: MoviesModel
-    private lateinit var popularNowRecyclerViewAdapter: PopularNowRecyclerViewAdapter
-    private lateinit var moviesRecyclerViewAdapter: MoviesRecyclerViewAdapter
-    private lateinit var moviesRecyclerView: RecyclerView
-    private lateinit var popularNowRecyclerView: RecyclerView
-    private lateinit var swipeRefresh: SwipeRefreshLayout
+
+    private val popularNowModel: PopularNowModel = PopularNowModel(PopularNowDataSourceImpl())
+    private val moviesModel: MoviesModel = MoviesModel(MoviesDataSourceImpl())
+    private val swipeRefresh: SwipeRefreshLayout =
+        findViewById<SwipeRefreshLayout>(R.id.swipe_refresh)
+    private val popularNowRecyclerViewAdapter: PopularNowRecyclerViewAdapter =
+        PopularNowRecyclerViewAdapter(popularNowModel.getPopularNow()) { Unit }
+    private val moviesRecyclerViewAdapter: MoviesRecyclerViewAdapter =
+        MoviesRecyclerViewAdapter(moviesModel.getMovies()) { Unit }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        initView()
-        initListener()
         setData()
+        initListener()
     }
 
-    private fun initView() {
-        moviesRecyclerView = findViewById<RecyclerView>(R.id.rvMovies)
-        popularNowRecyclerView = findViewById<RecyclerView>(R.id.rvPopularNow)
-        swipeRefresh = findViewById<SwipeRefreshLayout>(R.id.swipe_refresh)
-    }
-    private fun initListener(){
+    private fun initListener() {
         swipeRefresh.setOnRefreshListener {
             updateData(moviesModel.getMovies(), moviesModel.getMovies2())
         }
     }
 
     private fun setData() {
-        popularNowModel = PopularNowModel(PopularNowDataSourceImpl())
-        moviesModel = MoviesModel(MoviesDataSourceImpl())
 
-        popularNowRecyclerViewAdapter  = PopularNowRecyclerViewAdapter(popularNowModel.getPopularNow()) {Unit}
-        popularNowRecyclerViewAdapter.onPopularNowItemClick = { Toast.makeText(this, it.name, Toast.LENGTH_SHORT).show() }
-
-        moviesRecyclerViewAdapter = MoviesRecyclerViewAdapter(moviesModel.getMovies()) { Unit }
+        popularNowRecyclerViewAdapter.onPopularNowItemClick =
+            { Toast.makeText(this, it.name, Toast.LENGTH_SHORT).show() }
         moviesRecyclerViewAdapter.onMovieItemClick = {
             Toast.makeText(this, it.title, Toast.LENGTH_SHORT).show()
         }
 
-        popularNowRecyclerView.apply {
+        findViewById<RecyclerView>(R.id.rvPopularNow).apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = popularNowRecyclerViewAdapter
             addItemDecoration(SpacesItemDecoration(25))
         }
 
-        moviesRecyclerView.apply {
+        findViewById<RecyclerView>(R.id.rvMovies).apply {
             layoutManager = GridLayoutManager(context, 2)
             adapter = moviesRecyclerViewAdapter
             addItemDecoration(GridSpacingItemDecoration(100))
         }
     }
 
-    private fun updateData(oldList: List<MovieDto>, newList: List<MovieDto>){
+    private fun updateData(oldList: List<MovieDto>, newList: List<MovieDto>) {
         val callback = MoviesCallbackDiffUtils(oldList, newList)
         val diff = DiffUtil.calculateDiff(callback)
         diff.dispatchUpdatesTo(moviesRecyclerViewAdapter)
