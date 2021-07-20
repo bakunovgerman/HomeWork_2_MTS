@@ -14,14 +14,18 @@ import com.squareup.picasso.Picasso
 class MoviesViewHolder(inflater: View) :
     RecyclerView.ViewHolder(inflater) {
 
-    var movieItemRoot: ConstraintLayout = itemView.findViewById<ConstraintLayout>(R.id.movieItemRoot)
+    var movieItemRoot: ConstraintLayout =
+        itemView.findViewById<ConstraintLayout>(R.id.movieItemRoot)
 
     fun bind(movieDto: MovieDto) {
-        Picasso.get().load(movieDto.imageUrl).into(itemView.findViewById<ImageView>(R.id.movie_poster_img));
+        Picasso.get().load(movieDto.imageUrl)
+            .into(itemView.findViewById<ImageView>(R.id.movie_poster_img));
         itemView.findViewById<TextView>(R.id.movieTitleText).text = movieDto.title
         itemView.findViewById<TextView>(R.id.movieDescriptionText).text = movieDto.description
-        itemView.findViewById<TextView>(R.id.movieAgeText).text = movieDto.ageRestriction.toString() + '+'
-        itemView.findViewById<RatingBar>(R.id.movieRatingLayout).rating = movieDto.rateScore.toFloat()
+        itemView.findViewById<TextView>(R.id.movieAgeText).text =
+            movieDto.ageRestriction.toString() + '+'
+        itemView.findViewById<RatingBar>(R.id.movieRatingLayout).rating =
+            movieDto.rateScore.toFloat()
     }
 
 }
