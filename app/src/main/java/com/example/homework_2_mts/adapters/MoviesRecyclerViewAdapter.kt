@@ -11,10 +11,8 @@ import java.lang.IllegalStateException
 
 class MoviesRecyclerViewAdapter(
     var list: List<MovieDto>,
-    var onMovieItemClick: ((MovieDto) -> Unit)
+    val onMovieItemClick: ((MovieDto) -> Unit)
 ) : RecyclerView.Adapter<MoviesViewHolder>() {
-
-    private var context: Context? = null
 
     companion object {
         const val VIEW_TYPE_HEADER = 0

@@ -9,7 +9,7 @@ import com.example.homework_2_mts.data.dto.PopularNowDto
 
 class PopularNowRecyclerViewAdapter(
     private val list: List<PopularNowDto>,
-    var onPopularNowItemClick: ((PopularNowDto) -> Unit)
+    val onPopularNowItemClick: ((PopularNowDto) -> Unit)
 ) : RecyclerView.Adapter<PopularNowRecyclerViewAdapter.PopularNowViewHolder>() {
 
     private var popularNowNameView: TextView? = null

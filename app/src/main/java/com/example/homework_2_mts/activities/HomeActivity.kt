@@ -28,9 +28,9 @@ class HomeActivity : AppCompatActivity() {
     private val swipeRefresh: SwipeRefreshLayout =
         findViewById<SwipeRefreshLayout>(R.id.swipe_refresh)
     private val popularNowRecyclerViewAdapter: PopularNowRecyclerViewAdapter =
-        PopularNowRecyclerViewAdapter(popularNowModel.getPopularNow()) { Unit }
+        PopularNowRecyclerViewAdapter(popularNowModel.getPopularNow()) { Toast.makeText(this, it.name, Toast.LENGTH_SHORT).show() }
     private val moviesRecyclerViewAdapter: MoviesRecyclerViewAdapter =
-        MoviesRecyclerViewAdapter(moviesModel.getMovies()) { Unit }
+        MoviesRecyclerViewAdapter(moviesModel.getMovies()) { Toast.makeText(this, it.title, Toast.LENGTH_SHORT).show() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,13 +47,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setData() {
-
-        popularNowRecyclerViewAdapter.onPopularNowItemClick =
-            { Toast.makeText(this, it.name, Toast.LENGTH_SHORT).show() }
-        moviesRecyclerViewAdapter.onMovieItemClick = {
-            Toast.makeText(this, it.title, Toast.LENGTH_SHORT).show()
-        }
-
         findViewById<RecyclerView>(R.id.rvPopularNow).apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = popularNowRecyclerViewAdapter
