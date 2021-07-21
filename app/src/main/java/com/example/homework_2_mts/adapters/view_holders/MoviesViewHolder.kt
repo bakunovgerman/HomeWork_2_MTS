@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso
 class MoviesViewHolder(inflater: View) :
     RecyclerView.ViewHolder(inflater) {
 
-    val movieItemRoot: ConstraintLayout = itemView.findViewById<ConstraintLayout>(R.id.movieItemRoot)
+    val movieItemRoot: ConstraintLayout = itemView.findViewById(R.id.movieItemRoot)
     private val imgMoviePoster = itemView.findViewById<ImageView>(R.id.movie_poster_img)
     private val tvMovieTitle  = itemView.findViewById<TextView>(R.id.movieTitleText)
     private val tvMovieDescription = itemView.findViewById<TextView>(R.id.movieDescriptionText)
