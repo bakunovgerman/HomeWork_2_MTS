@@ -19,11 +19,11 @@ class MoviesViewHolder(inflater: View) :
 
     fun bind(movieDto: MovieDto) {
         Picasso.get().load(movieDto.imageUrl)
-            .into(itemView.findViewById<ImageView>(R.id.movie_poster_img));
+            .into(itemView.findViewById<ImageView>(R.id.movie_poster_img))
         itemView.findViewById<TextView>(R.id.movieTitleText).text = movieDto.title
         itemView.findViewById<TextView>(R.id.movieDescriptionText).text = movieDto.description
         itemView.findViewById<TextView>(R.id.movieAgeText).text =
-            movieDto.ageRestriction.toString() + '+'
+            String.format(movieDto.ageRestriction.toString() + '+')
         itemView.findViewById<RatingBar>(R.id.movieRatingLayout).rating =
             movieDto.rateScore.toFloat()
     }
