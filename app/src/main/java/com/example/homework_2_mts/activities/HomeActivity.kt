@@ -25,8 +25,8 @@ class HomeActivity : AppCompatActivity() {
 
     private val popularNowModel: PopularNowModel = PopularNowModel(PopularNowDataSourceImpl())
     private val moviesModel: MoviesModel = MoviesModel(MoviesDataSourceImpl())
-    private val swipeRefresh: SwipeRefreshLayout =
-        findViewById<SwipeRefreshLayout>(R.id.swipe_refresh)
+    private val swipeRefresh: SwipeRefreshLayout = findViewById(R.id.swipe_refresh)
+
     private val popularNowRecyclerViewAdapter: PopularNowRecyclerViewAdapter =
         PopularNowRecyclerViewAdapter(popularNowModel.getPopularNow()) { Toast.makeText(this, it.name, Toast.LENGTH_SHORT).show() }
     private val moviesRecyclerViewAdapter: MoviesRecyclerViewAdapter =
