@@ -1,8 +1,6 @@
 package com.example.homework_2_mts.activities
 
 import android.os.Bundle
-import android.util.DisplayMetrics
-import android.view.ViewTreeObserver
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DiffUtil
@@ -17,8 +15,8 @@ import com.example.homework_2_mts.data.dto.MovieDto
 import com.example.homework_2_mts.data.features.movies.MoviesDataSourceImpl
 import com.example.homework_2_mts.data.features.popular.PopularNowDataSourceImpl
 import com.example.homework_2_mts.helpers.MoviesCallbackDiffUtils
-import com.example.homework_2_mts.items_decoration.GridSpacingItemDecoration
-import com.example.homework_2_mts.items_decoration.SpacesItemDecoration
+import com.example.homework_2_mts.adapters.items_decoration.GridSpacingItemDecoration
+import com.example.homework_2_mts.adapters.items_decoration.SpacesItemDecoration
 import com.example.homework_2_mts.models.MoviesModel
 import com.example.homework_2_mts.models.PopularNowModel
 

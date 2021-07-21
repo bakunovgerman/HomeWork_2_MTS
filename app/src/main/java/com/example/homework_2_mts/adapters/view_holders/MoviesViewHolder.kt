@@ -1,4 +1,4 @@
-package com.example.homework_2_mts.adapters
+package com.example.homework_2_mts.adapters.view_holders
 
 import android.content.Context
 import android.view.View
