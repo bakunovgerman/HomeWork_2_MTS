@@ -1,6 +1,5 @@
 package com.example.homework_2_mts.adapters.view_holders
 
-import android.content.Context
 import android.view.View
 import android.widget.ImageView
 import android.widget.RatingBar
@@ -8,19 +7,17 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.homework_2_mts.R
-import com.example.homework_2_mts.adapters.MoviesRecyclerViewAdapter
 import com.example.homework_2_mts.data.dto.MovieDto
-import com.example.homework_2_mts.data.dto.PopularNowDto
 import com.squareup.picasso.Picasso
 
 class MoviesViewHolder(view: View, onMovieItemClick: ((MovieDto) -> Unit)) :
     RecyclerView.ViewHolder(view) {
 
     val movieItemRoot: ConstraintLayout = itemView.findViewById(R.id.movieItemRoot)
-    private val imgMoviePoster = itemView.findViewById<ImageView>(R.id.movie_poster_img)
-    private val tvMovieTitle = itemView.findViewById<TextView>(R.id.movieTitleText)
-    private val tvMovieDescription = itemView.findViewById<TextView>(R.id.movieDescriptionText)
-    private val tvMovieAge = itemView.findViewById<TextView>(R.id.movieAgeText)
+    private val imgMoviePoster = itemView.findViewById<ImageView>(R.id.imgMoviePoster)
+    private val tvMovieTitle = itemView.findViewById<TextView>(R.id.tvMovieTitle)
+    private val tvMovieDescription = itemView.findViewById<TextView>(R.id.tvMovieDescription)
+    private val tvMovieAge = itemView.findViewById<TextView>(R.id.tvMovieAge)
     private val rbMovie = itemView.findViewById<RatingBar>(R.id.movieRatingLayout)
 
     private lateinit var item: MovieDto
