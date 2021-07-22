@@ -3,11 +3,16 @@ package com.example.homework_2_mts.activities
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.transition.FragmentTransitionSupport
+import com.example.homework_2_mts.MainFragment
+import com.example.homework_2_mts.ProfileFragment
 import com.example.homework_2_mts.R
 import com.example.homework_2_mts.adapters.MoviesRecyclerViewAdapter
 import com.example.homework_2_mts.adapters.PopularNowRecyclerViewAdapter
@@ -19,57 +24,52 @@ import com.example.homework_2_mts.adapters.items_decoration.GridSpacingItemDecor
 import com.example.homework_2_mts.adapters.items_decoration.SpacesItemDecoration
 import com.example.homework_2_mts.models.MoviesModel
 import com.example.homework_2_mts.models.PopularNowModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class HomeActivity : AppCompatActivity() {
 
-    private val popularNowModel: PopularNowModel = PopularNowModel(PopularNowDataSourceImpl())
-    private val moviesModel: MoviesModel = MoviesModel(MoviesDataSourceImpl())
-    private lateinit var swipeRefresh: SwipeRefreshLayout
-
-    private val popularNowRecyclerViewAdapter: PopularNowRecyclerViewAdapter =
-        PopularNowRecyclerViewAdapter(popularNowModel.getPopularNow()) { Toast.makeText(this, it.name, Toast.LENGTH_SHORT).show() }
-    private val moviesRecyclerViewAdapter: MoviesRecyclerViewAdapter =
-        MoviesRecyclerViewAdapter(moviesModel.getMovies()) { Toast.makeText(this, it.title, Toast.LENGTH_SHORT).show() }
+    private lateinit var bottomNavigationView: BottomNavigationView
+    private var someFragment: MainFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        initView()
-        setData()
-        initListener()
-    }
-
-    private fun initView() {
-        swipeRefresh = findViewById(R.id.swipe_refresh)
-    }
-
-    private fun initListener() {
-        swipeRefresh.setOnRefreshListener {
-            updateData(moviesModel.getMovies(), moviesModel.getMovies2())
+        bottomNavigationView = findViewById(R.id.bottom_navigation)
+        bottomNavigationView.setOnItemSelectedListener {
+            val fragment: Fragment
+            when(it.itemId){
+                R.id.menu_home -> {
+                    fragment = MainFragment.newInstance()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_layout, fragment)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        .commit()
+                    return@setOnItemSelectedListener true
+                }
+                else -> {
+                    fragment = ProfileFragment.newInstance()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_layout, fragment)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        .commit()
+                    return@setOnItemSelectedListener true
+                }
+            }
         }
-    }
-
-    private fun setData() {
-        findViewById<RecyclerView>(R.id.rvPopularNow).apply {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            adapter = popularNowRecyclerViewAdapter
-            addItemDecoration(SpacesItemDecoration(25))
+        if (savedInstanceState == null) {
+            someFragment = MainFragment.newInstance()
+            someFragment?.apply {
+                supportFragmentManager.beginTransaction()
+                    .add(R.id.fragment_layout, this, "MainFragment")
+                    .commit()
+            }
+        } else {
+            someFragment =
+                supportFragmentManager.findFragmentByTag("MainFragment") as? MainFragment
         }
 
-        findViewById<RecyclerView>(R.id.rvMovies).apply {
-            layoutManager = GridLayoutManager(context, 2)
-            adapter = moviesRecyclerViewAdapter
-            addItemDecoration(GridSpacingItemDecoration(100))
-        }
     }
 
-    private fun updateData(oldList: List<MovieDto>, newList: List<MovieDto>) {
-        val callback = MoviesCallbackDiffUtils(oldList, newList)
-        val diff = DiffUtil.calculateDiff(callback)
-        diff.dispatchUpdatesTo(moviesRecyclerViewAdapter)
-        moviesRecyclerViewAdapter.list = newList
-        swipeRefresh.isRefreshing = false
-    }
 }

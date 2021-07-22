@@ -11,4 +11,6 @@
     <string name="actor_2_name">Холт Маккэллани</string>
     <string name="actor_3_name">Джош Харнетт</string>
     <string name="popular_now_title">Популярное сейчас</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
