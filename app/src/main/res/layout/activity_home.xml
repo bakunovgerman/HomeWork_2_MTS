@@ -53,7 +53,7 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="@dimen/tv_popular_now_title_text_size"
-                android:text="@string/tv_popular_now_title"
+                android:text="@string/popular_now_title"
                 android:layout_marginTop="@dimen/tv_popular_now_title_margin_top"
                 app:layout_constraintStart_toStartOf="@id/guideLine_1"
                 app:layout_constraintTop_toBottomOf="@+id/imgBtnSearch"/>

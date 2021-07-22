@@ -9,8 +9,8 @@ import com.example.homework_2_mts.adapters.view_holders.MoviesViewHolder
 import com.example.homework_2_mts.data.dto.MovieDto
 import java.lang.IllegalStateException
 
-class MoviesRecyclerViewAdapter(var list: List<MovieDto>, private val onMovieItemClick: ((MovieDto) -> Unit))
-    : RecyclerView.Adapter<MoviesViewHolder>() {
+class MoviesRecyclerViewAdapter(var list: List<MovieDto>, val onMovieItemClick: ((MovieDto) -> Unit)) :
+    RecyclerView.Adapter<MoviesViewHolder>() {
 
     companion object {
         const val VIEW_TYPE_HEADER = 0
@@ -27,8 +27,8 @@ class MoviesRecyclerViewAdapter(var list: List<MovieDto>, private val onMovieIte
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
-            VIEW_TYPE_HEADER -> MoviesViewHolder(inflater.inflate(R.layout.movie_item, parent, false))
-            VIEW_TYPE_ACTOR -> MoviesViewHolder(inflater.inflate(R.layout.movie_item, parent, false))
+            VIEW_TYPE_HEADER -> MoviesViewHolder(inflater.inflate(R.layout.movie_item, parent, false), onMovieItemClick)
+            VIEW_TYPE_ACTOR -> MoviesViewHolder(inflater.inflate(R.layout.movie_item, parent, false), onMovieItemClick)
             else -> throw IllegalStateException()
         }
     }
@@ -37,7 +37,6 @@ class MoviesRecyclerViewAdapter(var list: List<MovieDto>, private val onMovieIte
         when (holder) {
             is MoviesViewHolder -> {
                 holder.bind(list[position])
-                holder.movieItemRoot.setOnClickListener { onMovieItemClick.invoke(list[position]) }
             }
         }
     }

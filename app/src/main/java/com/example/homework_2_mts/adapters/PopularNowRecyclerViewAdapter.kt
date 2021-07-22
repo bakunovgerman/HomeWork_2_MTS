@@ -1,6 +1,7 @@
 package com.example.homework_2_mts.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -13,12 +14,20 @@ class PopularNowRecyclerViewAdapter(
 ) : RecyclerView.Adapter<PopularNowRecyclerViewAdapter.PopularNowViewHolder>() {
 
 
-    inner class PopularNowViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
-        RecyclerView.ViewHolder(inflater.inflate(R.layout.popular_now_item, parent, false)) {
+    inner class PopularNowViewHolder(view: View) :
+        RecyclerView.ViewHolder(view) {
 
         val tvPopularNowName: TextView = itemView.findViewById(R.id.popularNowText)
+        private lateinit var item: PopularNowDto
+
+        init {
+            tvPopularNowName.setOnClickListener {
+                onPopularNowItemClick.invoke(item)
+            }
+        }
 
         fun bind(popularNowDto: PopularNowDto) {
+            item = popularNowDto
             tvPopularNowName.text = popularNowDto.name
         }
 
@@ -26,7 +35,7 @@ class PopularNowRecyclerViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularNowViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return PopularNowViewHolder(inflater, parent)
+        return PopularNowViewHolder(inflater.inflate(R.layout.popular_now_item, parent, false))
     }
 
     override fun onBindViewHolder(holder: PopularNowViewHolder, position: Int) {
