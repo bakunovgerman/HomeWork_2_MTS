@@ -23,9 +23,9 @@
     </style>
     <style name="CustomRatingBarDetailMovie" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/custom_ratingbar_dm</item>
-        <item name="minWidth">20dp</item>
-        <item name="maxWidth">20dp</item>
-        <item name="android:minHeight">28dp</item>
-        <item name="android:maxHeight">28dp</item>
+<!--        <item name="minWidth">20dp</item>-->
+<!--        <item name="maxWidth">20dp</item>-->
+<!--        <item name="android:minHeight">16dp</item>-->
+<!--        <item name="android:maxHeight">16dp</item>-->
     </style>
 </resources>

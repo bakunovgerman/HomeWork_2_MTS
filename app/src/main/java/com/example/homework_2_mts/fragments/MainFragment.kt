@@ -1,6 +1,5 @@
-package com.example.homework_2_mts
+package com.example.homework_2_mts.fragments
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.homework_2_mts.R
 import com.example.homework_2_mts.adapters.MoviesRecyclerViewAdapter
 import com.example.homework_2_mts.adapters.PopularNowRecyclerViewAdapter
 import com.example.homework_2_mts.adapters.items_decoration.GridSpacingItemDecoration
@@ -32,6 +32,8 @@ class MainFragment : Fragment() {
     private lateinit var rvMovies: RecyclerView
     private lateinit var rvPopularNow: RecyclerView
 
+    var onMovieItemCallback: ((MovieDto) -> Unit)? = null
+
     private lateinit var popularNowRecyclerViewAdapter: PopularNowRecyclerViewAdapter
     private lateinit var moviesRecyclerViewAdapter: MoviesRecyclerViewAdapter
 
@@ -49,9 +51,17 @@ class MainFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
 
         popularNowRecyclerViewAdapter =
-            PopularNowRecyclerViewAdapter(popularNowModel.getPopularNow()) { Toast.makeText(view.context, it.name, Toast.LENGTH_SHORT).show() }
+            PopularNowRecyclerViewAdapter(popularNowModel.getPopularNow()) {
+                Toast.makeText(
+                    view.context,
+                    it.name,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         moviesRecyclerViewAdapter =
-            MoviesRecyclerViewAdapter(moviesModel.getMovies()) { Toast.makeText(view.context, it.title, Toast.LENGTH_SHORT).show() }
+            MoviesRecyclerViewAdapter(moviesModel.getMovies()) {
+                onMovieItemCallback?.invoke(it)
+            }
 
         initView(view)
         setData()
