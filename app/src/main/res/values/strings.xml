@@ -11,6 +11,23 @@
     <string name="actor_2_name">Холт Маккэллани</string>
     <string name="actor_3_name">Джош Харнетт</string>
     <string name="popular_now_title">Популярное сейчас</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name_user_profile">Константин</string>
+    <string name="email_user">konst.89@mail.com</string>
+    <string name="interests_user">Интересы</string>
+    <string name="personal_data_user">Личные данные</string>
+    <string name="name_user_input">Имя</string>
+    <string name="password_user_input">Пароль</string>
+    <string name="email_user_input">E-mail</string>
+    <string name="phone_user_input">Телефон</string>
+    <string name="settings_user">Настройки</string>
+    <string name="notifications_sounds">Уведомления и звуки</string>
+    <string name="privacy_policy">Конфедициальность</string>
+    <string name="themes">Темы</string>
+    <string name="languages">Язык</string>
+    <string name="data_memory">Данные и память</string>
+    <string name="application">Приложение</string>
+    <string name="ask_question">Задать вопрос</string>
+    <string name="report_problem">Сообщить о проблеме</string>
+    <string name="exit">Выйти</string>
 </resources>

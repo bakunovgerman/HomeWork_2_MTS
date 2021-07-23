@@ -65,7 +65,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/tvPopularNowTitle"
-                    app:layout_constraintStart_toStartOf="@id/guideLine_1"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="@dimen/rv_popular_now_margin_top"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

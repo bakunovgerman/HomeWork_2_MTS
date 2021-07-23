@@ -34,12 +34,15 @@ class MainFragment : Fragment() {
 
     var onMovieItemCallback: ((MovieDto) -> Unit)? = null
 
+    private val popularNowList = popularNowModel.getPopularNow()
+
     private lateinit var popularNowRecyclerViewAdapter: PopularNowRecyclerViewAdapter
     private lateinit var moviesRecyclerViewAdapter: MoviesRecyclerViewAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
     }
 
@@ -51,7 +54,7 @@ class MainFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
 
         popularNowRecyclerViewAdapter =
-            PopularNowRecyclerViewAdapter(popularNowModel.getPopularNow()) {
+            PopularNowRecyclerViewAdapter(popularNowList) {
                 Toast.makeText(
                     view.context,
                     it.name,
@@ -96,7 +99,7 @@ class MainFragment : Fragment() {
         rvPopularNow.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = popularNowRecyclerViewAdapter
-            addItemDecoration(SpacesItemDecoration(25))
+            addItemDecoration(SpacesItemDecoration(spaceRight = 6 ,spaceLeft = 20, size = popularNowList.size))
         }
 
         rvMovies.apply {

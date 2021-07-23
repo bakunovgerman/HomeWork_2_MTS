@@ -13,7 +13,6 @@ class PopularNowRecyclerViewAdapter(
     private val onPopularNowItemClick: ((PopularNowDto) -> Unit)
 ) : RecyclerView.Adapter<PopularNowRecyclerViewAdapter.PopularNowViewHolder>() {
 
-
     inner class PopularNowViewHolder(view: View) :
         RecyclerView.ViewHolder(view) {
 
