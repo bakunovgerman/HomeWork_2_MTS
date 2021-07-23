@@ -1,5 +1,7 @@
 package com.example.homework_2_mts.fragments
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +22,7 @@ import com.example.homework_2_mts.adapters.items_decoration.SpacesItemDecoration
 import com.example.homework_2_mts.data.dto.MovieDto
 import com.example.homework_2_mts.data.features.movies.MoviesDataSourceImpl
 import com.example.homework_2_mts.data.features.popular.PopularNowDataSourceImpl
+import com.example.homework_2_mts.helpers.MainFragmentClickListener
 import com.example.homework_2_mts.helpers.MoviesCallbackDiffUtils
 import com.example.homework_2_mts.models.MoviesModel
 import com.example.homework_2_mts.models.PopularNowModel
@@ -32,8 +35,7 @@ class MainFragment : Fragment() {
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var rvMovies: RecyclerView
     private lateinit var rvPopularNow: RecyclerView
-
-    var onMovieItemCallback: ((MovieDto) -> Unit)? = null
+    private var mainFragmentClickListener: MainFragmentClickListener? = null
 
     private val popularNowList = popularNowModel.getPopularNow()
 
@@ -56,15 +58,11 @@ class MainFragment : Fragment() {
 
         popularNowRecyclerViewAdapter =
             PopularNowRecyclerViewAdapter(popularNowList) {
-                Toast.makeText(
-                    view.context,
-                    it.name,
-                    Toast.LENGTH_SHORT
-                ).show()
+                mainFragmentClickListener?.onClickPopularNow(it)
             }
         moviesRecyclerViewAdapter =
             MoviesRecyclerViewAdapter(moviesModel.getMovies()) {
-                onMovieItemCallback?.invoke(it)
+                mainFragmentClickListener?.onOpenDetailMovieClicked(it)
             }
 
         initView(view)
@@ -72,6 +70,17 @@ class MainFragment : Fragment() {
         initListener()
 
         return view
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is MainFragmentClickListener)
+            mainFragmentClickListener = context
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        mainFragmentClickListener = null
     }
 
     companion object {

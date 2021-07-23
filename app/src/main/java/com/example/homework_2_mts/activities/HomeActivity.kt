@@ -9,11 +9,13 @@ import com.example.homework_2_mts.fragments.MainFragment
 import com.example.homework_2_mts.fragments.ProfileFragment
 import com.example.homework_2_mts.R
 import com.example.homework_2_mts.data.dto.MovieDto
+import com.example.homework_2_mts.data.dto.PopularNowDto
 import com.example.homework_2_mts.fragments.MovieDetailFragment
+import com.example.homework_2_mts.helpers.MainFragmentClickListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
 
     private lateinit var bottomNavigationView: BottomNavigationView
     private var someFragment: MainFragment? = null
@@ -51,20 +53,10 @@ class HomeActivity : AppCompatActivity() {
                 supportFragmentManager.beginTransaction()
                     .add(R.id.fragment_layout, this, "MainFragment")
                     .commit()
-                onMovieItemCallback = {
-                    openDetailMovie(it)
-                }
             }
         } else {
             someFragment =
                 supportFragmentManager.findFragmentByTag("MainFragment") as? MainFragment
-            someFragment?.onMovieItemCallback = {
-                Toast.makeText(
-                    this,
-                    it.title,
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
         }
 
     }
@@ -75,6 +67,14 @@ class HomeActivity : AppCompatActivity() {
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .addToBackStack(null)
             .commit()
+    }
+
+    override fun onOpenDetailMovieClicked(movieDto: MovieDto) {
+        openDetailMovie(movieDto)
+    }
+
+    override fun onClickPopularNow(popularNowDto: PopularNowDto) {
+        Toast.makeText(this, popularNowDto.name, Toast.LENGTH_LONG).show()
     }
 
 }
