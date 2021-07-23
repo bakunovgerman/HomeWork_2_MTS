@@ -1,11 +1,12 @@
 package com.example.homework_2_mts.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -101,11 +102,10 @@ class MainFragment : Fragment() {
             adapter = popularNowRecyclerViewAdapter
             addItemDecoration(SpacesItemDecoration(spaceRight = 6 ,spaceLeft = 20, size = popularNowList.size))
         }
-
         rvMovies.apply {
             layoutManager = GridLayoutManager(context, 2)
             adapter = moviesRecyclerViewAdapter
-            addItemDecoration(GridSpacingItemDecoration(100))
+            addItemDecoration(GridSpacingItemDecoration(50))
         }
     }
 
