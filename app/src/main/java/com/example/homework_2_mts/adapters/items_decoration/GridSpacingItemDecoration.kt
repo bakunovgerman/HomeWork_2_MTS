@@ -20,12 +20,9 @@ class GridSpacingItemDecoration(private val bottom: Int) : RecyclerView.ItemDeco
         val displayMetrics = DisplayMetrics()
         (view.context as Activity).windowManager.defaultDisplay.getMetrics(displayMetrics)
         val width = displayMetrics.widthPixels
-        //Toast.makeText(view.context,"screen:" + view.layoutParams.width.toString(), Toast.LENGTH_LONG ).show()
 
         if (position % 2 != 0){
-            //Toast.makeText(view.context,"old:" + outRect.left.toString(), Toast.LENGTH_LONG ).show()
             outRect.left = (width - dpToPx(40)) / 2 - view.layoutParams.width
-            //Toast.makeText(view.context,"new:" + outRect.left.toString(), Toast.LENGTH_LONG ).show()
         }
 
         outRect.bottom = dpToPx(bottom)

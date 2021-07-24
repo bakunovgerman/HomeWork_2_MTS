@@ -82,12 +82,7 @@ class MainFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() =
-            MainFragment().apply {
-                arguments = Bundle().apply {
-                    // putString(ARG_PARAM1, param1)
-                }
-            }
+        fun newInstance() = MainFragment()
     }
 
     private fun initView(view: View) {

@@ -10,24 +10,24 @@ import com.example.homework_2_mts.data.dto.PopularNowDto
 
 class PopularNowAdapter(
     private val list: List<PopularNowDto>,
-    private val onPopularNowItemClick: ((PopularNowDto) -> Unit)
+    private val onPopularNowItemClick: (PopularNowDto) -> Unit
 ) : RecyclerView.Adapter<PopularNowAdapter.PopularNowViewHolder>() {
 
     inner class PopularNowViewHolder(view: View) :
         RecyclerView.ViewHolder(view) {
 
-        val tvPopularNowName: TextView = itemView.findViewById(R.id.popularNowText)
+        val popularNowNameText: TextView = itemView.findViewById(R.id.tvPopularNow)
         private lateinit var item: PopularNowDto
 
         init {
-            tvPopularNowName.setOnClickListener {
+            popularNowNameText.setOnClickListener {
                 onPopularNowItemClick.invoke(item)
             }
         }
 
         fun bind(popularNowDto: PopularNowDto) {
             item = popularNowDto
-            tvPopularNowName.text = popularNowDto.name
+            popularNowNameText.text = popularNowDto.name
         }
 
     }
@@ -39,7 +39,7 @@ class PopularNowAdapter(
 
     override fun onBindViewHolder(holder: PopularNowViewHolder, position: Int) {
         holder.bind(list[position])
-        holder.tvPopularNowName.setOnClickListener { onPopularNowItemClick.invoke(list[position]) }
+        holder.popularNowNameText.setOnClickListener { onPopularNowItemClick.invoke(list[position]) }
     }
 
     override fun getItemCount(): Int = list.size
