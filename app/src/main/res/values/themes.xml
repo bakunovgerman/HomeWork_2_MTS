@@ -13,4 +13,12 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/beige</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="CustomRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/custom_ratingbar</item>
+        <item name="minWidth">14dp</item>
+        <item name="maxWidth">14dp</item>
+        <item name="android:minHeight">16dp</item>
+        <item name="android:maxHeight">16dp</item>
+    </style>
 </resources>

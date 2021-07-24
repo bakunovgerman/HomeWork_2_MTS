@@ -25,4 +25,9 @@
     <dimen name="actor_image_height">200dp</dimen>
     <dimen name="actor_name_margin_top">12dp</dimen>
     <dimen name="actor_item_margin_start">10dp</dimen>
+    <dimen name="img_btn_margin_top">30dp</dimen>
+    <dimen name="tv_popular_now_title_margin_top">22dp</dimen>
+    <dimen name="rv_popular_now_margin_top">12dp</dimen>
+    <dimen name="rv_movies_margin_top">15dp</dimen>
+    <dimen name="marginMoviesGrid">45px</dimen>
 </resources>

@@ -1,7 +1,8 @@
-package com.example.homework_2_mts
+package com.example.homework_2_mts.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.homework_2_mts.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
