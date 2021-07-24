@@ -3,19 +3,21 @@
     android:id="@+id/movieItemRoot"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="150dp"
-    android:layout_height="380dp"
+    android:layout_width="@dimen/movie_item_width"
+    android:layout_height="@dimen/movie_item_height"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <androidx.cardview.widget.CardView
         android:id="@+id/moviePosterWrapper"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="@dimen/movie_item_poster_height"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tvMovieTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="@dimen/movie_item_poster_corner_radius"
         android:foreground="?attr/selectableItemBackgroundBorderless">
+
         <ImageView
             android:id="@+id/imgMoviePoster"
             android:layout_width="match_parent"
@@ -23,7 +25,9 @@
             tools:srcCompat="@tools:sample/avatars"
             android:scaleType="centerCrop"
             android:contentDescription="@string/movie_poster_description" />
+
     </androidx.cardview.widget.CardView>
+
     <TextView
         android:id="@+id/tvMovieTitle"
         android:layout_width="wrap_content"
@@ -31,10 +35,11 @@
         app:layout_constraintTop_toBottomOf="@+id/moviePosterWrapper"
         app:layout_constraintStart_toStartOf="parent"
         android:text="@string/movie_title"
-        android:textSize="14sp"
+        android:textSize="@dimen/movie_title"
         android:textStyle="bold"
         android:textColor="@color/black"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="@dimen/movie_item_title_margin_top"/>
+
     <TextView
         android:id="@+id/tvMovieDescription"
         android:layout_width="0dp"
@@ -43,9 +48,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvMovieTitle"
         android:text="@string/movie_description"
-        android:textSize="12sp"
+        android:textSize="@dimen/movie_item_description"
         android:textColor="@color/black"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/movie_item_description_margin_top"
         android:maxLines="6"
         android:ellipsize="end"/>
 
@@ -55,11 +60,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="wrap_content"
-        android:layout_height="13dp"
-        android:layout_marginBottom="5dp"
+        android:layout_height="@dimen/movie_item_ratingbar_height"
+        android:layout_marginBottom="@dimen/movie_item_ratingbar_margin_bottom"
         android:numStars="5"
         android:rating="3"
         android:stepSize="1"/>
+
     <TextView
         android:id="@+id/tvMovieAge"
         android:layout_width="wrap_content"
@@ -67,10 +73,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:text="@string/movie_age"
-        android:padding="8dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="2dp"
+        android:padding="@dimen/movie_item_age_padding"
+        android:layout_marginTop="@dimen/movie_item_age_margin_top"
+        android:layout_marginEnd="@dimen/movie_item_age_margin_end"
         android:background="@drawable/bg_circle_age_movie_item"
         android:textColor="@color/black"
-        android:textSize="7dp"/>
+        android:textSize="@dimen/movie_item_age"
+        tools:ignore="SmallSp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

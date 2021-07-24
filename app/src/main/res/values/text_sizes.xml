@@ -12,4 +12,7 @@
     <dimen name="personal_user_data">16sp</dimen>
     <dimen name="settings">16sp</dimen>
     <dimen name="btn_log_out">16sp</dimen>
+    <dimen name="movie_title">14sp</dimen>
+    <dimen name="movie_item_description">12sp</dimen>
+    <dimen name="movie_item_age">7sp</dimen>
 </resources>
