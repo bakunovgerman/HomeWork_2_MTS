@@ -38,8 +38,8 @@
 
                 <ImageButton
                     android:id="@+id/imgBtnSearch"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="@dimen/search_btn_width"
+                    android:layout_height="@dimen/search_btn_height"
                     android:background="@android:color/transparent"
                     android:foreground="?attr/selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_search"
