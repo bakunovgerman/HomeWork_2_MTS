@@ -57,4 +57,8 @@
     <dimen name="movie_item_age_padding">8dp</dimen>
     <dimen name="movie_item_age_margin_top">10dp</dimen>
     <dimen name="movie_item_age_margin_end">2dp</dimen>
+    <dimen name="soon_padding_start">15dp</dimen>
+    <dimen name="soon_padding_end">15dp</dimen>
+    <dimen name="soon_padding_bottom">5dp</dimen>
+    <dimen name="soon_padding_top">5dp</dimen>
 </resources>
