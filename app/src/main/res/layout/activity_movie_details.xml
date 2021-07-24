@@ -14,8 +14,7 @@
         android:layout_width="match_parent"
         android:src="@drawable/movie_poster"
         android:scaleType="centerCrop"
-        android:layout_height="@dimen/movie_poster_height"
-        android:contentDescription="@string/movie_poster_description" />
+        android:layout_height="@dimen/movie_poster_height" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/NestedScrollView"
