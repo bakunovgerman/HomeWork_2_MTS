@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.homework_2_mts.R
 import com.example.homework_2_mts.data.dto.PopularNowDto
 
-class PopularNowRecyclerViewAdapter(
+class PopularNowAdapter(
     private val list: List<PopularNowDto>,
     private val onPopularNowItemClick: ((PopularNowDto) -> Unit)
-) : RecyclerView.Adapter<PopularNowRecyclerViewAdapter.PopularNowViewHolder>() {
+) : RecyclerView.Adapter<PopularNowAdapter.PopularNowViewHolder>() {
 
     inner class PopularNowViewHolder(view: View) :
         RecyclerView.ViewHolder(view) {

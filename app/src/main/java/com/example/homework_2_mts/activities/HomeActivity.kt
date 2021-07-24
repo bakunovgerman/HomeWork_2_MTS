@@ -18,7 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
 
     private lateinit var bottomNavigationView: BottomNavigationView
-    private var someFragment: MainFragment? = null
+    private var mainFragment: MainFragment? = null
     private lateinit var fragment: Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,14 +49,14 @@ class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
         }
 
         if (savedInstanceState == null) {
-            someFragment = MainFragment.newInstance()
-            someFragment?.apply {
+            mainFragment = MainFragment.newInstance()
+            mainFragment?.apply {
                 supportFragmentManager.beginTransaction()
                     .add(R.id.fragment_layout, this, "MainFragment")
                     .commit()
             }
         } else {
-            someFragment =
+            mainFragment =
                 supportFragmentManager.findFragmentByTag("MainFragment") as? MainFragment
         }
 

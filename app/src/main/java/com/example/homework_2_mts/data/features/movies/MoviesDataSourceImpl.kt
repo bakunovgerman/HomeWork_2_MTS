@@ -96,6 +96,10 @@ class MoviesDataSourceImpl : MoviesDataSource {
 			rateScore = 3,
 			ageRestriction = 16,
 			imageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/mbtN6V6y5kdawvAkzqN4ohi576a.jpg"
-		),
+		)
 	)
+
+	override fun getMoviesSoon(): List<MovieDto> {
+		TODO("Not yet implemented")
+	}
 }

@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.homework_2_mts.R
-import com.example.homework_2_mts.adapters.PopularNowRecyclerViewAdapter
+import com.example.homework_2_mts.adapters.PopularNowAdapter
 import com.example.homework_2_mts.adapters.items_decoration.SpacesItemDecoration
 import com.example.homework_2_mts.data.features.popular.PopularNowDataSourceImpl
 import com.example.homework_2_mts.models.PopularNowModel
@@ -38,7 +38,7 @@ class ProfileFragment : Fragment() {
         rvInteresting.apply {
             val items = interestingUserModel.getPopularNow()
 
-            adapter = PopularNowRecyclerViewAdapter(items) {
+            adapter = PopularNowAdapter(items) {
                 Unit
             }
             addItemDecoration(SpacesItemDecoration(spaceRight = 6 ,spaceLeft = 20, size = items.size))

@@ -1,13 +1,10 @@
 package com.example.homework_2_mts.fragments
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver.OnGlobalLayoutListener
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
@@ -15,8 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.homework_2_mts.R
-import com.example.homework_2_mts.adapters.MoviesRecyclerViewAdapter
-import com.example.homework_2_mts.adapters.PopularNowRecyclerViewAdapter
+import com.example.homework_2_mts.adapters.MoviesAdapter
+import com.example.homework_2_mts.adapters.PopularNowAdapter
 import com.example.homework_2_mts.adapters.items_decoration.GridSpacingItemDecoration
 import com.example.homework_2_mts.adapters.items_decoration.SpacesItemDecoration
 import com.example.homework_2_mts.data.dto.MovieDto
@@ -39,8 +36,8 @@ class MainFragment : Fragment() {
 
     private val popularNowList = popularNowModel.getPopularNow()
 
-    private lateinit var popularNowRecyclerViewAdapter: PopularNowRecyclerViewAdapter
-    private lateinit var moviesRecyclerViewAdapter: MoviesRecyclerViewAdapter
+    private lateinit var popularNowRecyclerViewAdapter: PopularNowAdapter
+    private lateinit var moviesRecyclerViewAdapter: MoviesAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,11 +54,11 @@ class MainFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
 
         popularNowRecyclerViewAdapter =
-            PopularNowRecyclerViewAdapter(popularNowList) {
+            PopularNowAdapter(popularNowList) {
                 mainFragmentClickListener?.onClickPopularNow(it)
             }
         moviesRecyclerViewAdapter =
-            MoviesRecyclerViewAdapter(moviesModel.getMovies()) {
+            MoviesAdapter(moviesModel.getMovies()) {
                 mainFragmentClickListener?.onOpenDetailMovieClicked(it)
             }
 
@@ -122,7 +119,7 @@ class MainFragment : Fragment() {
         val callback = MoviesCallbackDiffUtils(oldList, newList)
         val diff = DiffUtil.calculateDiff(callback)
         diff.dispatchUpdatesTo(moviesRecyclerViewAdapter)
-        moviesRecyclerViewAdapter.list = newList
+        moviesRecyclerViewAdapter.movieList = newList
         swipeRefresh.isRefreshing = false
     }
 }
