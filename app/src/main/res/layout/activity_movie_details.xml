@@ -15,7 +15,7 @@
         android:src="@drawable/movie_poster"
         android:scaleType="centerCrop"
         android:layout_height="@dimen/movie_poster_height"
-        android:contentDescription="@string/movie_poster_img_description" />
+        android:contentDescription="@string/movie_poster_description" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/NestedScrollView"
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="@id/guideLine_1"
-                app:layout_constraintEnd_toStartOf="@+id/tvMovieDate"
+                app:layout_constraintEnd_toStartOf="@+id/movieDateText"
                 android:layout_marginTop="@dimen/movie_category_margin_top"
                 android:paddingTop="@dimen/movie_category_padding_top"
                 android:paddingBottom="@dimen/movie_category_padding_bottom"
