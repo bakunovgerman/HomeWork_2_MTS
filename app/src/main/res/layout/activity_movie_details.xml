@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
-        android:id="@+id/imgMoviePoster"
+        android:id="@+id/movie_poster_img"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,9 +21,9 @@
         android:id="@+id/NestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/imgMoviePoster"
+        app:layout_constraintTop_toBottomOf="@+id/movie_poster_img"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:id="@+id/tvMovieCategory"
+                android:id="@+id/movieCategoryText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
@@ -57,24 +57,24 @@
                 tools:ignore="SmallSp" />
 
             <TextView
-                android:id="@+id/tvMovieDate"
+                android:id="@+id/movieDateText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/movie_date_text_size"
                 android:layout_marginStart="@dimen/movie_date_margin_start"
                 android:text="@string/movie_date"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tvMovieCategory"
+                app:layout_constraintBaseline_toBaselineOf="@+id/movieCategoryText"
                 android:textColor="@color/black"
                 android:layout_marginTop="@dimen/movie_date_margin_top"
-                app:layout_constraintStart_toEndOf="@+id/tvMovieCategory"
+                app:layout_constraintStart_toEndOf="@+id/movieCategoryText"
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
-                android:id="@+id/tvMovieTitle"
+                android:id="@+id/movieTitleText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/movie_title"
-                app:layout_constraintTop_toBottomOf="@+id/tvMovieCategory"
+                app:layout_constraintTop_toBottomOf="@+id/movieCategoryText"
                 app:layout_constraintStart_toStartOf="@id/guideLine_1"
                 android:layout_marginTop="@dimen/movie_title_margin_top"
                 android:textSize="@dimen/movie_title_text_size"
@@ -82,7 +82,7 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/tvMovieAge"
+                android:id="@+id/movieAgeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="@id/guideLine_2"
@@ -95,8 +95,8 @@
                 android:textSize="@dimen/movie_age_text_size"/>
 
             <LinearLayout
-                android:id="@+id/llMovieRating"
-                app:layout_constraintTop_toBottomOf="@+id/tvMovieTitle"
+                android:id="@+id/movieRatingLayout"
+                app:layout_constraintTop_toBottomOf="@+id/movieTitleText"
                 app:layout_constraintStart_toStartOf="@id/guideLine_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -130,7 +130,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tvMovieDescription"
+                android:id="@+id/movieDescriptionText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/movie_description_margin_top"
@@ -138,24 +138,24 @@
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="@id/guideLine_2"
                 app:layout_constraintStart_toStartOf="@id/guideLine_1"
-                app:layout_constraintTop_toBottomOf="@id/llMovieRating" />
+                app:layout_constraintTop_toBottomOf="@id/movieRatingLayout" />
 
             <TextView
-                android:id="@+id/tvMovieActorsTitle"
+                android:id="@+id/tvPopularNowTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="@dimen/movie_actors_title_text_size"
                 android:text="@string/actors"
-                app:layout_constraintTop_toBottomOf="@+id/tvMovieDescription"
+                app:layout_constraintTop_toBottomOf="@+id/movieDescriptionText"
                 app:layout_constraintStart_toStartOf="@id/guideLine_1"
                 android:layout_marginTop="@dimen/movie_actors_title_margin_top"/>
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/tvMovieActorsTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvPopularNowTitle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -173,21 +173,22 @@
                         android:orientation="vertical"
                         android:layout_marginStart="@dimen/actor_item_margin_start_start">
 
-                            <ImageView
-                                android:layout_width="@dimen/actor_image_width"
-                                android:layout_height="@dimen/actor_image_height"
-                                android:src="@drawable/actor_1"/>
+                        <ImageView
+                            android:layout_width="@dimen/actor_image_width"
+                            android:layout_height="@dimen/actor_image_height"
+                            android:src="@drawable/actor_1"/>
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/actor_1_name"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/actor_name_text_size"
-                                android:textStyle="bold"
-                                android:layout_marginTop="@dimen/actor_name_margin_top"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/actor_1_name"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/actor_name_text_size"
+                            android:textStyle="bold"
+                            android:layout_marginTop="@dimen/actor_name_margin_top"/>
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -209,6 +210,7 @@
                             android:layout_marginTop="@dimen/actor_name_margin_top"/>
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -248,7 +250,7 @@
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
+        android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
