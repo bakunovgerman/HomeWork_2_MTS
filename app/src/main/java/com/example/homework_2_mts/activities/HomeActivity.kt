@@ -41,6 +41,7 @@ class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragment_layout, fragment)
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        .addToBackStack(null)
                         .commit()
                     return@setOnItemSelectedListener true
                 }
