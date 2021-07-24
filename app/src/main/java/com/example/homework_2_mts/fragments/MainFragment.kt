@@ -55,11 +55,11 @@ class MainFragment : Fragment() {
 
         popularNowRecyclerViewAdapter =
             PopularNowAdapter(popularNowList) {
-                mainFragmentClickListener?.onClickPopularNow(it)
+                mainFragmentClickListener?.onPopularNowClick(it)
             }
         moviesRecyclerViewAdapter =
             MoviesAdapter(moviesModel.getMovies()) {
-                mainFragmentClickListener?.onOpenDetailMovieClicked(it)
+                mainFragmentClickListener?.onOpenDetailMovieClick(it)
             }
 
         initView(view)

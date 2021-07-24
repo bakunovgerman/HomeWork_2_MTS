@@ -4,6 +4,6 @@ import com.example.homework_2_mts.data.dto.MovieDto
 import com.example.homework_2_mts.data.dto.PopularNowDto
 
 interface MainFragmentClickListener {
-    fun onOpenDetailMovieClicked(movieDto: MovieDto)
-    fun onClickPopularNow(popularNowDto: PopularNowDto)
+    fun onOpenDetailMovieClick(movieDto: MovieDto)
+    fun onPopularNowClick(popularNowDto: PopularNowDto)
 }

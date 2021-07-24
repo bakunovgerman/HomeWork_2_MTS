@@ -70,11 +70,11 @@ class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
             .commit()
     }
 
-    override fun onOpenDetailMovieClicked(movieDto: MovieDto) {
+    override fun onOpenDetailMovieClick(movieDto: MovieDto) {
         openDetailMovie(movieDto)
     }
 
-    override fun onClickPopularNow(popularNowDto: PopularNowDto) {
+    override fun onPopularNowClick(popularNowDto: PopularNowDto) {
         Toast.makeText(this, popularNowDto.name, Toast.LENGTH_LONG).show()
     }
 
