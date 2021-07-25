@@ -35,7 +35,7 @@ class MovieDetailFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_movie_detail, container, false)
 
         tvMovieTitle = view.findViewById(R.id.tvMovieTitle)
-        movieRatingLayout = view.findViewById(R.id.movieRatingLayout)
+        movieRatingLayout = view.findViewById(R.id.rbMovie)
         tvMovieAge = view.findViewById(R.id.tvMovieAge)
         tvMovieDescription = view.findViewById(R.id.tvMovieDescription)
         imgMoviePoster = view.findViewById(R.id.imgMoviePoster)

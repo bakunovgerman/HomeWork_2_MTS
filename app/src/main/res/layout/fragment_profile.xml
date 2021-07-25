@@ -281,6 +281,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 style="@style/btn_profile_fragment"
                 tools:ignore="UnusedAttribute" />
+
             <com.google.android.material.button.MaterialButton
                 android:layout_width="0dp"
                 android:layout_height="65dp"
@@ -298,7 +299,6 @@
                 android:layout_marginBottom="@dimen/btn_log_out_margin_bottom"
                 android:foreground="?attr/selectableItemBackgroundBorderless"
                 tools:ignore="UnusedAttribute" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

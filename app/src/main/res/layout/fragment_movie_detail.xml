@@ -95,7 +95,7 @@
                 android:textSize="@dimen/movie_age_text_size"/>
 
             <RatingBar
-                android:id="@+id/movieRatingLayout"
+                android:id="@+id/rbMovie"
                 style="@style/CustomRatingBarDetailMovie"
                 app:layout_constraintTop_toBottomOf="@+id/tvMovieTitle"
                 app:layout_constraintStart_toStartOf="@id/guideLine_1"
@@ -115,7 +115,7 @@
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="@id/guideLine_2"
                 app:layout_constraintStart_toStartOf="@id/guideLine_1"
-                app:layout_constraintTop_toBottomOf="@id/movieRatingLayout" />
+                app:layout_constraintTop_toBottomOf="@id/rbMovie" />
 
             <TextView
                 android:id="@+id/tvPopularNowTitle"
