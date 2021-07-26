@@ -41,4 +41,8 @@
         <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
         <item name="android:stateListAnimator">@null</item>
     </style>
+
+    <style name="ProgressBarStyle">
+        <item name="colorAccent">@color/black</item>
+    </style>
 </resources>
