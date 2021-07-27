@@ -94,7 +94,7 @@ class MainFragment : Fragment() {
             val popularNowList: List<PopularNowDto>
 
             withContext(Dispatchers.IO){
-                Thread.sleep(5000L)
+                Thread.sleep(2000)
                 moviesList = moviesModel.getMovies()
                 popularNowList = popularNowModel.getPopularNow()
             }
