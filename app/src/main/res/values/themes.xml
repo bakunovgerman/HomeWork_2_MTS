@@ -21,4 +21,24 @@
         <item name="android:minHeight">16dp</item>
         <item name="android:maxHeight">16dp</item>
     </style>
+    <style name="CustomRatingBarDetailMovie" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/custom_ratingbar_dm</item>
+<!--        <item name="minWidth">20dp</item>-->
+<!--        <item name="maxWidth">20dp</item>-->
+<!--        <item name="android:minHeight">16dp</item>-->
+<!--        <item name="android:maxHeight">16dp</item>-->
+    </style>
+
+    <style name="btn_profile_fragment">
+        <item name="android:textAlignment">textStart</item>
+        <item name="backgroundTint">@color/white</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:drawableEnd">@drawable/ic_arrow_next_btn</item>
+        <item name="paddingStart">0dp</item>
+        <item name="paddingEnd">0dp</item>
+        <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
 </resources>

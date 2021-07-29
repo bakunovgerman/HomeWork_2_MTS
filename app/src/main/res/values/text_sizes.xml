@@ -6,4 +6,13 @@
     <dimen name="movie_actors_title_text_size">16sp</dimen>
     <dimen name="actor_name_text_size">12sp</dimen>
     <dimen name="tv_popular_now_title_text_size">16sp</dimen>
+    <dimen name="name_user">20sp</dimen>
+    <dimen name="email_user">14sp</dimen>
+    <dimen name="interests_user">16sp</dimen>
+    <dimen name="personal_user_data">16sp</dimen>
+    <dimen name="settings">16sp</dimen>
+    <dimen name="btn_log_out">16sp</dimen>
+    <dimen name="movie_title">14sp</dimen>
+    <dimen name="movie_item_description">12sp</dimen>
+    <dimen name="movie_item_age">7sp</dimen>
 </resources>

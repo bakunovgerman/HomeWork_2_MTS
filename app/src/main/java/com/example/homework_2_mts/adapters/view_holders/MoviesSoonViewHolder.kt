@@ -10,7 +10,7 @@ import com.example.homework_2_mts.R
 import com.example.homework_2_mts.data.dto.MovieDto
 import com.squareup.picasso.Picasso
 
-class MoviesViewHolder(view: View, onMovieItemClick: ((MovieDto) -> Unit)) :
+class MoviesSoonViewHolder(view: View, onMovieItemClick: ((MovieDto) -> Unit)) :
     RecyclerView.ViewHolder(view) {
 
     val movieItemRoot: ConstraintLayout = itemView.findViewById(R.id.clMovieItemRoot)
