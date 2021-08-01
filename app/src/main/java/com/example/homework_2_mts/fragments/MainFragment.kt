@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
@@ -26,16 +28,23 @@ import com.example.homework_2_mts.helpers.MoviesCallbackDiffUtils
 import com.example.homework_2_mts.models.MoviesModel
 import com.example.homework_2_mts.models.PopularNowModel
 import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
+import okhttp3.Dispatcher
+import java.lang.Exception
 
 
 class MainFragment : Fragment() {
+
+    private val errorHandler = CoroutineExceptionHandler { _, error ->
+        Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show()
+    }
 
     private val popularNowModel: PopularNowModel = PopularNowModel(PopularNowDataSourceImpl())
     private val moviesModel: MoviesModel = MoviesModel(MoviesDataSourceImpl())
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var rvMovies: RecyclerView
     private lateinit var rvPopularNow: RecyclerView
-    private lateinit var progressBar: ProgressBar
+    private lateinit var progressBar: FrameLayout
     private var mainFragmentClickListener: MainFragmentClickListener? = null
 
     private val popularNowList = popularNowModel.getPopularNow()
@@ -102,18 +111,18 @@ class MainFragment : Fragment() {
 
     private fun initListener() {
         swipeRefresh.setOnRefreshListener {
-            updateData(moviesModel.getMovies(), moviesModel.getMovies2())
+            updateData(moviesModel.getMovies())
         }
     }
 
     @DelicateCoroutinesApi
     private fun setData() {
-        CoroutineScope(Dispatchers.Main).launch {
+        CoroutineScope(Dispatchers.Main).launch(errorHandler) {
 
             val moviesList: List<MovieDto>
             val popularNowList: List<PopularNowDto>
 
-            withContext(Dispatchers.IO){
+            withContext(IO + errorHandler){
                 Thread.sleep(2000)
                 moviesList = moviesModel.getMovies()
                 popularNowList = popularNowModel.getPopularNow()
@@ -127,12 +136,26 @@ class MainFragment : Fragment() {
 
     }
 
-    private fun updateData(oldList: List<MovieDto>, newList: List<MovieDto>) {
-        val callback = MoviesCallbackDiffUtils(oldList, newList)
-        val diff = DiffUtil.calculateDiff(callback)
-        diff.dispatchUpdatesTo(moviesAdapter)
-        moviesAdapter.movieList = newList
-        swipeRefresh.isRefreshing = false
+    private fun updateData(oldList: List<MovieDto>) {
+        CoroutineScope(Dispatchers.Main).launch(errorHandler) {
+            showProgressBar()
+
+            val newList: List<MovieDto>
+
+            withContext(IO + errorHandler){
+                Thread.sleep(1500)
+                newList = moviesModel.getMovies2()
+            }
+
+            val callback = MoviesCallbackDiffUtils(oldList, newList)
+            val diff = DiffUtil.calculateDiff(callback)
+            diff.dispatchUpdatesTo(moviesAdapter)
+            moviesAdapter.movieList = newList
+            swipeRefresh.isRefreshing = false
+
+            hideProgressBar()
+        }
+
     }
 
     override fun onAttach(context: Context) {
@@ -145,9 +168,16 @@ class MainFragment : Fragment() {
         super.onDetach()
         mainFragmentClickListener = null
     }
+
     private fun hideProgressBar(){
         rvMovies.visibility = View.VISIBLE
         rvPopularNow.visibility = View.VISIBLE
         progressBar.visibility = View.INVISIBLE
+    }
+
+    private fun showProgressBar(){
+        rvMovies.visibility = View.INVISIBLE
+        rvPopularNow.visibility = View.INVISIBLE
+        progressBar.visibility = View.VISIBLE
     }
 }

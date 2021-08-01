@@ -12,8 +12,6 @@ import com.example.homework_2_mts.adapters.items_decoration.SpacesItemDecoration
 import com.example.homework_2_mts.data.features.popular.PopularNowDataSourceImpl
 import com.example.homework_2_mts.models.PopularNowModel
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 class ProfileFragment : Fragment() {
 
