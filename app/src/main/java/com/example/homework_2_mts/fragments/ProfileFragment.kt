@@ -32,12 +32,13 @@ class ProfileFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
         rvInteresting = view.findViewById(R.id.rvInterestsUser)
-        rvInteresting.apply {
-            val items = interestingUserModel.getPopularNow()
+        val popularNowAdapter = PopularNowAdapter(){
 
-            adapter = PopularNowAdapter(items) {
-                Unit
-            }
+        }
+        val items = interestingUserModel.getPopularNow()
+        popularNowAdapter.popularNowList = items
+        rvInteresting.apply {
+            adapter = popularNowAdapter
             addItemDecoration(SpacesItemDecoration(spaceRight = 6 ,spaceLeft = 20, size = items.size))
         }
 

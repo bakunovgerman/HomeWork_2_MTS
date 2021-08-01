@@ -9,8 +9,10 @@ import com.example.homework_2_mts.adapters.view_holders.MoviesViewHolder
 import com.example.homework_2_mts.data.dto.MovieDto
 import java.lang.IllegalStateException
 
-class MoviesAdapter(var movieList: List<MovieDto>, private val onMovieItemClick: (MovieDto) -> Unit) :
+class MoviesAdapter(private val onMovieItemClick: (MovieDto) -> Unit) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    lateinit var movieList: List<MovieDto>
 
     companion object {
         const val VIEW_TYPE_MOVIE_SOON = 0

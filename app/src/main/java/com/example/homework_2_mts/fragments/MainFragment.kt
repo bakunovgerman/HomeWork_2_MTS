@@ -1,14 +1,11 @@
 package com.example.homework_2_mts.fragments
 
 import android.content.Context
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import androidx.constraintlayout.solver.widgets.ConstraintWidget.GONE
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
@@ -66,11 +63,34 @@ class MainFragment : Fragment() {
 
         initView(view)
         initListener()
+        initRv()
         setData()
 
         return view
     }
 
+    private fun initRv() {
+        popularNowAdapter =
+            PopularNowAdapter() {
+                mainFragmentClickListener?.onPopularNowClick(it)
+            }
+        moviesAdapter =
+            MoviesAdapter() {
+                mainFragmentClickListener?.onOpenDetailMovieClick(it)
+            }
+
+        rvPopularNow.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = popularNowAdapter
+            addItemDecoration(SpacesItemDecoration(spaceRight = 6 ,spaceLeft = 20, size = popularNowList.size))
+        }
+
+        rvMovies.apply {
+            layoutManager = GridLayoutManager(context, 2)
+            adapter = moviesAdapter
+            addItemDecoration(GridSpacingItemDecoration(50))
+        }
+    }
 
 
     private fun initView(view: View) {
@@ -99,29 +119,10 @@ class MainFragment : Fragment() {
                 popularNowList = popularNowModel.getPopularNow()
             }
 
-            popularNowAdapter =
-                PopularNowAdapter(popularNowList) {
-                    mainFragmentClickListener?.onPopularNowClick(it)
-                }
-            moviesAdapter =
-                MoviesAdapter(moviesList) {
-                    mainFragmentClickListener?.onOpenDetailMovieClick(it)
-                }
+            moviesAdapter.movieList = moviesList
+            popularNowAdapter.popularNowList = popularNowList
 
-            rvPopularNow.apply {
-                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                adapter = popularNowAdapter
-                addItemDecoration(SpacesItemDecoration(spaceRight = 6 ,spaceLeft = 20, size = popularNowList.size))
-            }
-
-            rvMovies.apply {
-                layoutManager = GridLayoutManager(context, 2)
-                adapter = moviesAdapter
-                addItemDecoration(GridSpacingItemDecoration(50))
-            }
-            rvMovies.visibility = View.VISIBLE
-            rvPopularNow.visibility = View.VISIBLE
-            progressBar.visibility = View.INVISIBLE
+            hideProgressBar()
         }
 
     }
@@ -134,7 +135,6 @@ class MainFragment : Fragment() {
         swipeRefresh.isRefreshing = false
     }
 
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is MainFragmentClickListener)
@@ -144,5 +144,10 @@ class MainFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
         mainFragmentClickListener = null
+    }
+    private fun hideProgressBar(){
+        rvMovies.visibility = View.VISIBLE
+        rvPopularNow.visibility = View.VISIBLE
+        progressBar.visibility = View.INVISIBLE
     }
 }
