@@ -57,11 +57,6 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     @DelicateCoroutinesApi
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
