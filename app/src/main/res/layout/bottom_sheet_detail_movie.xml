@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/gray_my_1"
+    android:background="@color/gray_bg_bottom_sheet"
     style="@style/MyCardView"
     app:behavior_hideable="false"
     app:behavior_peekHeight="470dp"
@@ -94,14 +94,15 @@
                 <RatingBar
                     android:id="@+id/rbMovie"
                     style="@style/CustomRatingBarDetailMovie"
-                    app:layout_constraintTop_toBottomOf="@+id/tvMovieTitle"
-                    app:layout_constraintStart_toStartOf="@id/guideLine_1"
                     android:layout_width="wrap_content"
                     android:layout_height="15dp"
+                    android:layout_marginTop="@dimen/movie_rating_margin_top"
                     android:numStars="5"
                     android:rating="5"
                     android:stepSize="1"
-                    android:layout_marginTop="@dimen/movie_rating_margin_top"/>
+                    app:layout_constraintStart_toStartOf="@id/guideLine_1"
+                    app:layout_constraintTop_toBottomOf="@+id/tvMovieTitle"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <TextView
                     android:id="@+id/tvMovieDescription"
