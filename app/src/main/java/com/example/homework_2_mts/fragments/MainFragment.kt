@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,35 +20,44 @@ import com.example.homework_2_mts.adapters.PopularNowAdapter
 import com.example.homework_2_mts.adapters.items_decoration.GridSpacingItemDecoration
 import com.example.homework_2_mts.adapters.items_decoration.SpacesItemDecoration
 import com.example.homework_2_mts.data.dto.MovieDto
+import com.example.homework_2_mts.data.dto.PopularNowDto
 import com.example.homework_2_mts.data.features.movies.MoviesDataSourceImpl
 import com.example.homework_2_mts.data.features.popular.PopularNowDataSourceImpl
 import com.example.homework_2_mts.helpers.MainFragmentClickListener
 import com.example.homework_2_mts.helpers.MoviesCallbackDiffUtils
 import com.example.homework_2_mts.models.MoviesModel
 import com.example.homework_2_mts.models.PopularNowModel
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
+import okhttp3.Dispatcher
+import java.lang.Exception
 
 
 class MainFragment : Fragment() {
+
+    private val errorHandler = CoroutineExceptionHandler { _, error ->
+        Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show()
+    }
 
     private val popularNowModel: PopularNowModel = PopularNowModel(PopularNowDataSourceImpl())
     private val moviesModel: MoviesModel = MoviesModel(MoviesDataSourceImpl())
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var rvMovies: RecyclerView
     private lateinit var rvPopularNow: RecyclerView
+    private lateinit var progressBar: FrameLayout
     private var mainFragmentClickListener: MainFragmentClickListener? = null
 
     private val popularNowList = popularNowModel.getPopularNow()
 
-    private lateinit var popularNowRecyclerViewAdapter: PopularNowAdapter
-    private lateinit var moviesRecyclerViewAdapter: MoviesAdapter
+    private lateinit var popularNowAdapter: PopularNowAdapter
+    private lateinit var moviesAdapter: MoviesAdapter
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
+    companion object {
+        @JvmStatic
+        fun newInstance() = MainFragment()
     }
 
+    @DelicateCoroutinesApi
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,20 +65,92 @@ class MainFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_main, container, false)
 
-        popularNowRecyclerViewAdapter =
-            PopularNowAdapter(popularNowList) {
+        initView(view)
+        initListener()
+        initRv()
+        setData()
+
+        return view
+    }
+
+    private fun initRv() {
+        popularNowAdapter =
+            PopularNowAdapter() {
                 mainFragmentClickListener?.onPopularNowClick(it)
             }
-        moviesRecyclerViewAdapter =
-            MoviesAdapter(moviesModel.getMovies()) {
+        moviesAdapter =
+            MoviesAdapter() {
                 mainFragmentClickListener?.onOpenDetailMovieClick(it)
             }
 
-        initView(view)
-        setData()
-        initListener()
+        rvPopularNow.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = popularNowAdapter
+            addItemDecoration(SpacesItemDecoration(spaceRight = 6 ,spaceLeft = 20, size = popularNowList.size))
+        }
 
-        return view
+        rvMovies.apply {
+            layoutManager = GridLayoutManager(context, 2)
+            adapter = moviesAdapter
+            addItemDecoration(GridSpacingItemDecoration(50))
+        }
+    }
+
+
+    private fun initView(view: View) {
+        swipeRefresh = view.findViewById(R.id.swipe_refresh)
+        rvMovies = view.findViewById(R.id.rvMovies)
+        rvPopularNow = view.findViewById(R.id.rvPopularNow)
+        progressBar = view.findViewById(R.id.progressBar)
+    }
+
+    private fun initListener() {
+        swipeRefresh.setOnRefreshListener {
+            updateData(moviesModel.getMovies())
+        }
+    }
+
+    @DelicateCoroutinesApi
+    private fun setData() {
+        CoroutineScope(Dispatchers.Main).launch(errorHandler) {
+
+            val moviesList: List<MovieDto>
+            val popularNowList: List<PopularNowDto>
+
+            withContext(IO + errorHandler){
+                Thread.sleep(2000)
+                moviesList = moviesModel.getMovies()
+                popularNowList = popularNowModel.getPopularNow()
+            }
+
+            moviesAdapter.movieList = moviesList
+            popularNowAdapter.popularNowList = popularNowList
+
+            hideProgressBar()
+        }
+
+    }
+
+    private fun updateData(oldList: List<MovieDto>) {
+        CoroutineScope(Dispatchers.Main).launch(errorHandler) {
+            showProgressBar()
+
+            val newList: List<MovieDto>
+
+            withContext(IO + errorHandler){
+                Thread.sleep(1500)
+                newList = moviesModel.getMovies2()
+            }
+
+            val callback = MoviesCallbackDiffUtils(oldList, newList)
+            val diff = DiffUtil.calculateDiff(callback)
+            diff.dispatchUpdatesTo(moviesAdapter)
+            moviesAdapter.movieList = newList
+            swipeRefresh.isRefreshing = false
+
+            hideProgressBar()
+        }
+
     }
 
     override fun onAttach(context: Context) {
@@ -80,41 +164,15 @@ class MainFragment : Fragment() {
         mainFragmentClickListener = null
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance() = MainFragment()
+    private fun hideProgressBar(){
+        rvMovies.visibility = View.VISIBLE
+        rvPopularNow.visibility = View.VISIBLE
+        progressBar.visibility = View.INVISIBLE
     }
 
-    private fun initView(view: View) {
-        swipeRefresh = view.findViewById(R.id.swipe_refresh)
-        rvMovies = view.findViewById(R.id.rvMovies)
-        rvPopularNow = view.findViewById(R.id.rvPopularNow)
-    }
-
-    private fun initListener() {
-        swipeRefresh.setOnRefreshListener {
-            updateData(moviesModel.getMovies(), moviesModel.getMovies2())
-        }
-    }
-
-    private fun setData() {
-        rvPopularNow.apply {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            adapter = popularNowRecyclerViewAdapter
-            addItemDecoration(SpacesItemDecoration(spaceRight = 6 ,spaceLeft = 20, size = popularNowList.size))
-        }
-        rvMovies.apply {
-            layoutManager = GridLayoutManager(context, 2)
-            adapter = moviesRecyclerViewAdapter
-            addItemDecoration(GridSpacingItemDecoration(50))
-        }
-    }
-
-    private fun updateData(oldList: List<MovieDto>, newList: List<MovieDto>) {
-        val callback = MoviesCallbackDiffUtils(oldList, newList)
-        val diff = DiffUtil.calculateDiff(callback)
-        diff.dispatchUpdatesTo(moviesRecyclerViewAdapter)
-        moviesRecyclerViewAdapter.movieList = newList
-        swipeRefresh.isRefreshing = false
+    private fun showProgressBar(){
+        rvMovies.visibility = View.INVISIBLE
+        rvPopularNow.visibility = View.INVISIBLE
+        progressBar.visibility = View.VISIBLE
     }
 }

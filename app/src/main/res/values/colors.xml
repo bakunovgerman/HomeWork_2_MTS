@@ -8,5 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="beige">#F1F1F1</color>
-    <color name="gray_my">#E4E4E4</color>
+    <color name="gray_bg_fragment">#E4E4E4</color>
+    <color name="gray_bg_bottom_sheet">#F1F1F1</color>
 </resources>
