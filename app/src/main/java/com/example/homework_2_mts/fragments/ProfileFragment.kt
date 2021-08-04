@@ -29,7 +29,7 @@ class ProfileFragment : Fragment() {
 
         }
         val items = interestingUserModel.getPopularNow()
-        popularNowAdapter.popularNowList = items
+        popularNowAdapter.initData(items)
         rvInteresting.apply {
             adapter = popularNowAdapter
             addItemDecoration(SpacesItemDecoration(spaceRight = 6 ,spaceLeft = 20, size = items.size))

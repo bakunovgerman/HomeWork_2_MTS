@@ -12,7 +12,7 @@ class PopularNowAdapter(
     private val onPopularNowItemClick: (PopularNowDto) -> Unit
 ) : RecyclerView.Adapter<PopularNowAdapter.PopularNowViewHolder>() {
 
-    lateinit var popularNowList: List<PopularNowDto>
+    private var popularNowList: MutableList<PopularNowDto> = ArrayList()
 
     inner class PopularNowViewHolder(view: View) :
         RecyclerView.ViewHolder(view) {
@@ -31,6 +31,12 @@ class PopularNowAdapter(
             popularNowNameText.text = popularNowDto.name
         }
 
+    }
+
+    fun initData(popularNowItems: List<PopularNowDto>?){
+        popularNowList.clear()
+        popularNowList.addAll(popularNowItems!!)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularNowViewHolder {

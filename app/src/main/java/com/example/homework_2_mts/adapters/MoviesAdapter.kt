@@ -8,11 +8,12 @@ import com.example.homework_2_mts.adapters.view_holders.MoviesSoonViewHolder
 import com.example.homework_2_mts.adapters.view_holders.MoviesViewHolder
 import com.example.homework_2_mts.data.dto.MovieDto
 import java.lang.IllegalStateException
+import java.util.ArrayList
 
 class MoviesAdapter(private val onMovieItemClick: (MovieDto) -> Unit) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    lateinit var movieList: List<MovieDto>
+    private var moviesList: MutableList<MovieDto> = ArrayList()
 
     companion object {
         const val VIEW_TYPE_MOVIE_SOON = 0
@@ -35,15 +36,23 @@ class MoviesAdapter(private val onMovieItemClick: (MovieDto) -> Unit) :
         }
     }
 
-    override fun getItemCount(): Int = movieList.size
+    fun initData(movies: List<MovieDto>?){
+        if (movies != null){
+            moviesList.clear()
+            moviesList.addAll(movies)
+            notifyDataSetChanged()
+        }
+    }
+
+    override fun getItemCount(): Int = moviesList.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is MoviesViewHolder -> {
-                holder.bind(movieList[position])
+                holder.bind(moviesList[position])
             }
             is MoviesSoonViewHolder -> {
-                holder.bind(movieList[position])
+                holder.bind(moviesList[position])
             }
         }
     }
