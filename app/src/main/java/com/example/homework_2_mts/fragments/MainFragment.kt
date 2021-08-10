@@ -53,11 +53,6 @@ class MainFragment : Fragment() {
     private lateinit var popularNowAdapter: PopularNowAdapter
     private lateinit var moviesAdapter: MoviesAdapter
 
-    companion object {
-        @JvmStatic
-        fun newInstance() = MainFragment()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -106,13 +101,15 @@ class MainFragment : Fragment() {
 
         // init listener
         swipeRefresh.setOnRefreshListener {
-            //updateData(moviesModel.getMovies())
+            showProgressBar()
+            mainFragmentViewModel.updateData()
         }
 
         // init observe
         mainFragmentViewModel.moviesList.observe(viewLifecycleOwner, Observer(moviesAdapter::initData))
         mainFragmentViewModel.popularNowList.observe(viewLifecycleOwner, Observer(::initPopularNowData))
         mainFragmentViewModel.viewState.observe(viewLifecycleOwner, Observer(::setViewState))
+        mainFragmentViewModel.updateMoviesList.observe(viewLifecycleOwner, Observer(::updateData))
     }
 
     private fun initPopularNowData(popularNowItems: List<PopularNowDto>?){
@@ -120,7 +117,6 @@ class MainFragment : Fragment() {
             popularNowAdapter.initData(popularNowItems)
             rvPopularNow.addItemDecoration(SpacesItemDecoration(spaceRight = 6 ,spaceLeft = 20, size = popularNowItems.size))
         }
-
     }
 
 
@@ -136,48 +132,15 @@ class MainFragment : Fragment() {
         }
     }
 
-    @DelicateCoroutinesApi
-    private fun setData() {
+    private fun updateData(newList: List<MovieDto>) {
+        val oldList = moviesAdapter.moviesList
+        val callback = MoviesCallbackDiffUtils(oldList, newList)
+        val diff = DiffUtil.calculateDiff(callback)
+        diff.dispatchUpdatesTo(moviesAdapter)
+        moviesAdapter.initData(newList)
+        swipeRefresh.isRefreshing = false
 
-//        CoroutineScope(Dispatchers.Main).launch(errorHandler) {
-//
-//            val moviesList: List<MovieDto>
-//            val popularNowList: List<PopularNowDto>
-//
-//            withContext(IO + errorHandler){
-//                Thread.sleep(2000)
-//                moviesList = moviesModel.getMovies()
-//                popularNowList = popularNowModel.getPopularNow()
-//            }
-//
-//            moviesAdapter.moviesList = moviesList
-//            popularNowAdapter.popularNowList = popularNowList
-//
-//            hideProgressBar()
-//        }
-
-    }
-
-    private fun updateData(oldList: List<MovieDto>) {
-//        CoroutineScope(Dispatchers.Main).launch(errorHandler) {
-//            showProgressBar()
-//
-//            val newList: List<MovieDto>
-//
-//            withContext(IO + errorHandler){
-//                Thread.sleep(1500)
-//                newList = moviesModel.getMovies2()
-//            }
-//
-//            val callback = MoviesCallbackDiffUtils(oldList, newList)
-//            val diff = DiffUtil.calculateDiff(callback)
-//            diff.dispatchUpdatesTo(moviesAdapter)
-//            moviesAdapter.moviesList = newList
-//            swipeRefresh.isRefreshing = false
-//
-//            hideProgressBar()
-//        }
-
+        hideProgressBar()
     }
 
     override fun onAttach(context: Context) {

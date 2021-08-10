@@ -2,6 +2,7 @@ package com.example.homework_2_mts.adapters.items_decoration
 
 import android.content.res.Resources
 import android.graphics.Rect
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.size
@@ -34,6 +35,9 @@ class SpacesItemDecoration(
 
     }
     private fun dpToPx(dp: Int): Int {
+        if (dp == 20)
+            Log.d("dpToPx", (dp * Resources.getSystem().displayMetrics.density).toInt().toString())
+
         return (dp * Resources.getSystem().displayMetrics.density).toInt()
     }
 }

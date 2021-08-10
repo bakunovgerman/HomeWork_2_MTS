@@ -33,15 +33,15 @@ class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
         bottomNavigationView.setupWithNavController(navController)
 
         // имитация popBackStack для того, чтобы mainFragment не пересоздавался
-        bottomNavigationView.setOnItemReselectedListener {
-            when (it.itemId) {
-                R.id.menu_home -> {
-                    if (navController.currentDestination?.id == R.id.movieDetailFragment) {
-                        navController.popBackStack(R.id.mainFragment, false)
-                    }
-                }
-            }
-        }
+//        bottomNavigationView.setOnItemReselectedListener {
+//            when (it.itemId) {
+//                R.id.menu_home -> {
+//                    if (navController.currentDestination?.id == R.id.movieDetailFragment) {
+//                        navController.popBackStack(R.id.mainFragment, false)
+//                    }
+//                }
+//            }
+//        }
 
         bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {

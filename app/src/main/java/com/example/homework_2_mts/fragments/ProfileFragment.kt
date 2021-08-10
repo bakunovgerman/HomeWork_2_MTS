@@ -36,9 +36,4 @@ class ProfileFragment : Fragment() {
 
         return view
     }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = ProfileFragment()
-    }
 }
