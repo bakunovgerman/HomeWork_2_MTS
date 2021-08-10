@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso
 
 class MovieDetailFragment : Fragment() {
 
-    private lateinit var movie: MovieDto
+    private var movie: MovieDto? = null
     private lateinit var tvMovieTitle: TextView
     private lateinit var movieRatingLayout: RatingBar
     private lateinit var tvMovieAge: TextView
@@ -23,9 +23,7 @@ class MovieDetailFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            movie = it.getParcelable("movie")!!
-        }
+        movie = requireArguments().getParcelable<MovieDto>("movie")
     }
 
     override fun onCreateView(
@@ -44,20 +42,11 @@ class MovieDetailFragment : Fragment() {
         return view
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(item: MovieDto) =
-            MovieDetailFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable("movie", item)
-                }
-            }
-    }
     private fun setInfo(){
-        tvMovieTitle.text = movie.title
-        movieRatingLayout.rating = movie.rateScore.toFloat()
-        tvMovieAge.text = String.format(movie.ageRestriction.toString() + '+')
-        tvMovieDescription.text = movie.description
-        Picasso.get().load(movie.imageUrl).into(imgMoviePoster)
+        tvMovieTitle.text = movie!!.title
+        movieRatingLayout.rating = movie!!.rateScore.toFloat()
+        tvMovieAge.text = String.format(movie!!.ageRestriction.toString() + '+')
+        tvMovieDescription.text = movie!!.description
+        Picasso.get().load(movie!!.imageUrl).into(imgMoviePoster)
     }
 }
