@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.homework_2_mts.fragments.MainFragment"
+        tools:layout="@layout/fragment_main">
+
+        <action
+            android:id="@+id/action_main_fragment_to_movie_detail_fragment"
+            app:destination="@id/movieDetailFragment" />
+        <action
+            android:id="@+id/action_main_fragment_to_profile_fragment"
+            app:destination="@id/profileFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.example.homework_2_mts.fragments.MovieDetailFragment"
+        tools:layout="@layout/fragment_movie_detail">
+
+        <action
+            android:id="@+id/action_movie_detail_fragment_to_main_fragment"
+            app:destination="@id/mainFragment" />
+
+        <action
+            android:id="@+id/action_movie_detail_fragment_to_profile_fragment"
+            app:destination="@id/profileFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.homework_2_mts.fragments.ProfileFragment"
+        tools:layout="@layout/fragment_profile">
+
+        <action
+            android:id="@+id/action_profile_fragment_to_main_fragment"
+            app:destination="@id/mainFragment" />
+
+    </fragment>
+
+</navigation>
