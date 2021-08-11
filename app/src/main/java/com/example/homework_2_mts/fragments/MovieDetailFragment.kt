@@ -21,9 +21,13 @@ class MovieDetailFragment : Fragment() {
     private lateinit var tvMovieDescription: TextView
     private lateinit var imgMoviePoster: ImageView
 
+    companion object{
+        const val MOVIE_KEY = "movie"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        movie = requireArguments().getParcelable<MovieDto>(MovieDto.MOVIE_KEY)
+        movie = requireArguments().getParcelable<MovieDto>(MOVIE_KEY)
     }
 
     override fun onCreateView(

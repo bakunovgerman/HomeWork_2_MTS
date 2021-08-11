@@ -24,6 +24,10 @@ class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var navController: NavController
 
+    companion object{
+        const val MOVIE_KEY = "movie"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -69,7 +73,7 @@ class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
     }
 
     override fun onOpenDetailMovieClick(movieDto: MovieDto) {
-        val bundle = bundleOf(MovieDto.MOVIE_KEY to movieDto)
+        val bundle = bundleOf(MovieDetailFragment.MOVIE_KEY to movieDto)
         navController.navigate(R.id.action_main_fragment_to_movie_detail_fragment, bundle)
     }
 

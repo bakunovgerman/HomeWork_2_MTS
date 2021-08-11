@@ -10,8 +10,4 @@ data class MovieDto(
 	val rateScore: Int,
 	val ageRestriction: Int,
 	val imageUrl: String
-): Parcelable{
-	companion object{
-		const val MOVIE_KEY = "movie"
-	}
-}
+): Parcelable
