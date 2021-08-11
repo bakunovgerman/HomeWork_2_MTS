@@ -35,9 +35,6 @@ class SpacesItemDecoration(
 
     }
     private fun dpToPx(dp: Int): Int {
-        if (dp == 20)
-            Log.d("dpToPx", (dp * Resources.getSystem().displayMetrics.density).toInt().toString())
-
         return (dp * Resources.getSystem().displayMetrics.density).toInt()
     }
 }
