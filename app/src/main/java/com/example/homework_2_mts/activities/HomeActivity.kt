@@ -32,17 +32,6 @@ class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
         navController = findNavController(R.id.nav_host)
         bottomNavigationView.setupWithNavController(navController)
 
-        // имитация popBackStack для того, чтобы mainFragment не пересоздавался
-//        bottomNavigationView.setOnItemReselectedListener {
-//            when (it.itemId) {
-//                R.id.menu_home -> {
-//                    if (navController.currentDestination?.id == R.id.movieDetailFragment) {
-//                        navController.popBackStack(R.id.mainFragment, false)
-//                    }
-//                }
-//            }
-//        }
-
         bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_home -> {
@@ -80,7 +69,7 @@ class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
     }
 
     override fun onOpenDetailMovieClick(movieDto: MovieDto) {
-        val bundle = bundleOf("movie" to movieDto)
+        val bundle = bundleOf(MovieDto.MOVIE_KEY to movieDto)
         navController.navigate(R.id.action_main_fragment_to_movie_detail_fragment, bundle)
     }
 

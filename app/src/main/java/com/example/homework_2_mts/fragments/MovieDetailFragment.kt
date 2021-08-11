@@ -23,7 +23,7 @@ class MovieDetailFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        movie = requireArguments().getParcelable<MovieDto>("movie")
+        movie = requireArguments().getParcelable<MovieDto>(MovieDto.MOVIE_KEY)
     }
 
     override fun onCreateView(
