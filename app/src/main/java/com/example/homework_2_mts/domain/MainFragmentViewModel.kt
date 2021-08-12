@@ -1,6 +1,7 @@
 package com.example.homework_2_mts.domain
 
 import androidx.lifecycle.*
+import com.example.homework_2_mts.App
 import com.example.homework_2_mts.repository.database.entities.Movie
 import com.example.homework_2_mts.repository.database.entities.Genre
 import com.example.homework_2_mts.repository.data.features.movies.MoviesDataSourceImpl
@@ -8,6 +9,7 @@ import com.example.homework_2_mts.repository.data.features.popular.PopularNowDat
 import com.example.homework_2_mts.presentation.fragments.MainFragment
 import com.example.homework_2_mts.repository.models.MoviesModel
 import com.example.homework_2_mts.repository.models.PopularNowModel
+import com.example.homework_2_mts.repository.repositories.MovieRepository
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,6 +36,9 @@ class MainFragmentViewModel: ViewModel() {
     val updateMoviesList: LiveData<List<Movie>> get() = _updateMoviesList
     private val _updateMoviesList = MutableLiveData<List<Movie>>()
 
+    // init Repositories
+    private val movieRepository = MovieRepository()
+
     // init Models
     private val popularNowModel: PopularNowModel = PopularNowModel(PopularNowDataSourceImpl())
     private val moviesModel: MoviesModel = MoviesModel(MoviesDataSourceImpl())
@@ -42,7 +47,7 @@ class MainFragmentViewModel: ViewModel() {
         viewModelScope.launch(errorHandler) {
             withContext(Dispatchers.IO){
                 Thread.sleep(2000)
-                _moviesList.postValue(moviesModel.getMovies())
+                _moviesList.postValue(movieRepository.getMoviesAPI())
                 _popularNowList.postValue(popularNowModel.getPopularNow())
             }
             _viewState.postValue(MainFragmentViewState(isDownloaded = true))
@@ -53,7 +58,7 @@ class MainFragmentViewModel: ViewModel() {
         viewModelScope.launch(errorHandler) {
             withContext(Dispatchers.IO){
                 Thread.sleep(2000)
-                _updateMoviesList.postValue(moviesModel.getMovies2())
+                _updateMoviesList.postValue(movieRepository.getMoviesAPIRefresh())
             }
             _viewState.postValue(MainFragmentViewState(isDownloaded = true))
         }
