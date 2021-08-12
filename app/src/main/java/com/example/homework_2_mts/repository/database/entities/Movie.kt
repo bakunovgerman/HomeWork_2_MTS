@@ -1,4 +1,4 @@
-package com.example.homework_2_mts.repository.database
+package com.example.homework_2_mts.repository.database.entities
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo

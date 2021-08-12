@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.homework_2_mts.R
-import com.example.homework_2_mts.repository.database.Genre
+import com.example.homework_2_mts.repository.database.entities.Genre
 
 class PopularNowAdapter(
     private val onPopularNowItemClick: (Genre) -> Unit

@@ -1,6 +1,6 @@
 package com.example.homework_2_mts.repository.data.features.popular
 
-import com.example.homework_2_mts.repository.database.Genre
+import com.example.homework_2_mts.repository.database.entities.Genre
 
 class PopularNowDataSourceImpl : PopularNowDataSource {
     override fun getPopularNow() = listOf(

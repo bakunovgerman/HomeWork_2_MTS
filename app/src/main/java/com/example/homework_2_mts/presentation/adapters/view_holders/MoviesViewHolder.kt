@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.homework_2_mts.R
-import com.example.homework_2_mts.repository.database.Movie
+import com.example.homework_2_mts.repository.database.entities.Movie
 import com.squareup.picasso.Picasso
 
 class MoviesViewHolder(view: View, onMovieItemClick: ((Movie) -> Unit)) :

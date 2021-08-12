@@ -1,6 +1,6 @@
 package com.example.homework_2_mts.repository.data.features.movies
 
-import com.example.homework_2_mts.repository.database.Movie
+import com.example.homework_2_mts.repository.database.entities.Movie
 
 class MoviesDataSourceImpl : MoviesDataSource {
 	override fun getMovies() = listOf(

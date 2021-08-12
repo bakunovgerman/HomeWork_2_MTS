@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import com.example.homework_2_mts.R
-import com.example.homework_2_mts.repository.database.Movie
+import com.example.homework_2_mts.repository.database.entities.Movie
 import com.squareup.picasso.Picasso
 
 class MovieDetailFragment : Fragment() {

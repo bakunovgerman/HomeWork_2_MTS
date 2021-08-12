@@ -1,8 +1,8 @@
 package com.example.homework_2_mts.domain
 
 import androidx.lifecycle.*
-import com.example.homework_2_mts.repository.database.Movie
-import com.example.homework_2_mts.repository.database.Genre
+import com.example.homework_2_mts.repository.database.entities.Movie
+import com.example.homework_2_mts.repository.database.entities.Genre
 import com.example.homework_2_mts.repository.data.features.movies.MoviesDataSourceImpl
 import com.example.homework_2_mts.repository.data.features.popular.PopularNowDataSourceImpl
 import com.example.homework_2_mts.presentation.fragments.MainFragment
