@@ -2,7 +2,7 @@ package com.example.homework_2_mts.domain
 
 import androidx.lifecycle.*
 import com.example.homework_2_mts.repository.database.Movie
-import com.example.homework_2_mts.repository.data.dto.PopularNowDto
+import com.example.homework_2_mts.repository.database.Genre
 import com.example.homework_2_mts.repository.data.features.movies.MoviesDataSourceImpl
 import com.example.homework_2_mts.repository.data.features.popular.PopularNowDataSourceImpl
 import com.example.homework_2_mts.presentation.fragments.MainFragment
@@ -28,8 +28,8 @@ class MainFragmentViewModel: ViewModel() {
     val moviesList: LiveData<List<Movie>> get() = _moviesList
     private val _moviesList= MutableLiveData<List<Movie>>()
 
-    val popularNowList: LiveData<List<PopularNowDto>> get() = _popularNowList
-    private val _popularNowList = MutableLiveData<List<PopularNowDto>>()
+    val popularNowList: LiveData<List<Genre>> get() = _popularNowList
+    private val _popularNowList = MutableLiveData<List<Genre>>()
 
     val updateMoviesList: LiveData<List<Movie>> get() = _updateMoviesList
     private val _updateMoviesList = MutableLiveData<List<Movie>>()

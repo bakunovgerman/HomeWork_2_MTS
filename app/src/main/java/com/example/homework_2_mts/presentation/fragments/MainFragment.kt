@@ -20,7 +20,7 @@ import com.example.homework_2_mts.presentation.adapters.PopularNowAdapter
 import com.example.homework_2_mts.presentation.adapters.items_decoration.GridSpacingItemDecoration
 import com.example.homework_2_mts.presentation.adapters.items_decoration.SpacesItemDecoration
 import com.example.homework_2_mts.repository.database.Movie
-import com.example.homework_2_mts.repository.data.dto.PopularNowDto
+import com.example.homework_2_mts.repository.database.Genre
 import com.example.homework_2_mts.presentation.helpers.MainFragmentClickListener
 import com.example.homework_2_mts.presentation.helpers.MoviesCallbackDiffUtils
 import com.example.homework_2_mts.domain.MainFragmentViewModel
@@ -105,7 +105,7 @@ class MainFragment : Fragment() {
         mainFragmentViewModel.updateMoviesList.observe(viewLifecycleOwner, Observer(::updateData))
     }
 
-    private fun initPopularNowData(popularNowItems: List<PopularNowDto>?){
+    private fun initPopularNowData(popularNowItems: List<Genre>?){
         if (popularNowItems != null){
             popularNowAdapter.initData(popularNowItems)
             rvPopularNow.addItemDecoration(SpacesItemDecoration(spaceRight = 6 ,spaceLeft = 20, size = popularNowItems.size))

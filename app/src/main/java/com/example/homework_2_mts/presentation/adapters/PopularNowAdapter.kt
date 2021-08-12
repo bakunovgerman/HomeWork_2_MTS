@@ -6,19 +6,19 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.homework_2_mts.R
-import com.example.homework_2_mts.repository.data.dto.PopularNowDto
+import com.example.homework_2_mts.repository.database.Genre
 
 class PopularNowAdapter(
-    private val onPopularNowItemClick: (PopularNowDto) -> Unit
+    private val onPopularNowItemClick: (Genre) -> Unit
 ) : RecyclerView.Adapter<PopularNowAdapter.PopularNowViewHolder>() {
 
-    private var popularNowList: MutableList<PopularNowDto> = ArrayList()
+    private var popularNowList: MutableList<Genre> = ArrayList()
 
     inner class PopularNowViewHolder(view: View) :
         RecyclerView.ViewHolder(view) {
 
         val popularNowNameText: TextView = itemView.findViewById(R.id.tvPopularNow)
-        private lateinit var item: PopularNowDto
+        private lateinit var item: Genre
 
         init {
             popularNowNameText.setOnClickListener {
@@ -26,14 +26,14 @@ class PopularNowAdapter(
             }
         }
 
-        fun bind(popularNowDto: PopularNowDto) {
-            item = popularNowDto
-            popularNowNameText.text = popularNowDto.name
+        fun bind(genre: Genre) {
+            item = genre
+            popularNowNameText.text = genre.name
         }
 
     }
 
-    fun initData(popularNowItems: List<PopularNowDto>?){
+    fun initData(popularNowItems: List<Genre>?){
         popularNowList.clear()
         popularNowList.addAll(popularNowItems!!)
         notifyDataSetChanged()

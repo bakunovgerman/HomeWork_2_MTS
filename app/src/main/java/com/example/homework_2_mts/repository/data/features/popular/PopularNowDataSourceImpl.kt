@@ -1,16 +1,16 @@
 package com.example.homework_2_mts.repository.data.features.popular
 
-import com.example.homework_2_mts.repository.data.dto.PopularNowDto
+import com.example.homework_2_mts.repository.database.Genre
 
 class PopularNowDataSourceImpl : PopularNowDataSource {
     override fun getPopularNow() = listOf(
-        PopularNowDto("боевики"),
-        PopularNowDto("драмы"),
-        PopularNowDto("комедии"),
-        PopularNowDto("артхаус"),
-        PopularNowDto("мелодрамы"),
-        PopularNowDto("ужасы"),
-        PopularNowDto("фантастика"),
-        PopularNowDto("документальные")
+        Genre("боевики"),
+        Genre("драмы"),
+        Genre("комедии"),
+        Genre("артхаус"),
+        Genre("мелодрамы"),
+        Genre("ужасы"),
+        Genre("фантастика"),
+        Genre("документальные")
     )
 }
