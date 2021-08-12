@@ -1,4 +1,4 @@
-package com.example.homework_2_mts.viewModels
+package com.example.homework_2_mts.domain
 
 import android.widget.Toast
 import androidx.lifecycle.*

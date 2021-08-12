@@ -29,7 +29,7 @@ import com.example.homework_2_mts.helpers.MainFragmentClickListener
 import com.example.homework_2_mts.helpers.MoviesCallbackDiffUtils
 import com.example.homework_2_mts.models.MoviesModel
 import com.example.homework_2_mts.models.PopularNowModel
-import com.example.homework_2_mts.viewModels.MainFragmentViewModel
+import com.example.homework_2_mts.domain.MainFragmentViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 
