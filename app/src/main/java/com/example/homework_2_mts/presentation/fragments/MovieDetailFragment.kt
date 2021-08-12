@@ -9,12 +9,12 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import com.example.homework_2_mts.R
-import com.example.homework_2_mts.repository.data.dto.MovieDto
+import com.example.homework_2_mts.repository.database.Movie
 import com.squareup.picasso.Picasso
 
 class MovieDetailFragment : Fragment() {
 
-    private var movie: MovieDto? = null
+    private var movie: Movie? = null
     private lateinit var tvMovieTitle: TextView
     private lateinit var movieRatingLayout: RatingBar
     private lateinit var tvMovieAge: TextView
@@ -27,7 +27,7 @@ class MovieDetailFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        movie = requireArguments().getParcelable<MovieDto>(MOVIE_KEY)
+        movie = requireArguments().getParcelable<Movie>(MOVIE_KEY)
     }
 
     override fun onCreateView(

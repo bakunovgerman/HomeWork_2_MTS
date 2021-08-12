@@ -7,10 +7,10 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.homework_2_mts.R
-import com.example.homework_2_mts.repository.data.dto.MovieDto
+import com.example.homework_2_mts.repository.database.Movie
 import com.squareup.picasso.Picasso
 
-class MoviesSoonViewHolder(view: View, onMovieItemClick: ((MovieDto) -> Unit)) :
+class MoviesSoonViewHolder(view: View, onMovieItemClick: ((Movie) -> Unit)) :
     RecyclerView.ViewHolder(view) {
 
     val movieItemRoot: ConstraintLayout = itemView.findViewById(R.id.clMovieItemRoot)
@@ -20,19 +20,19 @@ class MoviesSoonViewHolder(view: View, onMovieItemClick: ((MovieDto) -> Unit)) :
     private val tvMovieAge = itemView.findViewById<TextView>(R.id.tvMovieAge)
     private val rbMovie = itemView.findViewById<RatingBar>(R.id.rbMovie)
 
-    private lateinit var item: MovieDto
+    private lateinit var item: Movie
 
     init {
         movieItemRoot.setOnClickListener { onMovieItemClick.invoke(item) }
     }
 
-    fun bind(movieDto: MovieDto) {
-        item = movieDto
-        Picasso.get().load(movieDto.imageUrl).into(imgMoviePoster)
-        tvMovieTitle.text = movieDto.title
-        tvMovieDescription.text = movieDto.description
-        tvMovieAge.text = String.format(movieDto.ageRestriction.toString() + '+')
-        rbMovie.rating = movieDto.rateScore.toFloat()
+    fun bind(movie: Movie) {
+        item = movie
+        Picasso.get().load(movie.imageUrl).into(imgMoviePoster)
+        tvMovieTitle.text = movie.title
+        tvMovieDescription.text = movie.description
+        tvMovieAge.text = String.format(movie.ageRestriction.toString() + '+')
+        rbMovie.rating = movie.rateScore.toFloat()
     }
 
 }

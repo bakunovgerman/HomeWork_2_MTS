@@ -6,8 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.Toast
-import androidx.constraintlayout.motion.utils.ViewState
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -21,17 +19,12 @@ import com.example.homework_2_mts.presentation.adapters.MoviesAdapter
 import com.example.homework_2_mts.presentation.adapters.PopularNowAdapter
 import com.example.homework_2_mts.presentation.adapters.items_decoration.GridSpacingItemDecoration
 import com.example.homework_2_mts.presentation.adapters.items_decoration.SpacesItemDecoration
-import com.example.homework_2_mts.repository.data.dto.MovieDto
+import com.example.homework_2_mts.repository.database.Movie
 import com.example.homework_2_mts.repository.data.dto.PopularNowDto
-import com.example.homework_2_mts.repository.data.features.movies.MoviesDataSourceImpl
-import com.example.homework_2_mts.repository.data.features.popular.PopularNowDataSourceImpl
 import com.example.homework_2_mts.presentation.helpers.MainFragmentClickListener
 import com.example.homework_2_mts.presentation.helpers.MoviesCallbackDiffUtils
-import com.example.homework_2_mts.repository.models.MoviesModel
-import com.example.homework_2_mts.repository.models.PopularNowModel
 import com.example.homework_2_mts.domain.MainFragmentViewModel
 import kotlinx.coroutines.*
-import kotlinx.coroutines.Dispatchers.IO
 
 
 class MainFragment : Fragment() {
@@ -132,7 +125,7 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun updateData(newList: List<MovieDto>) {
+    private fun updateData(newList: List<Movie>) {
         val oldList = moviesAdapter.moviesList
         val callback = MoviesCallbackDiffUtils(oldList, newList)
         val diff = DiffUtil.calculateDiff(callback)

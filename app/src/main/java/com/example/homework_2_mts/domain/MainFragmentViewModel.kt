@@ -1,8 +1,7 @@
 package com.example.homework_2_mts.domain
 
-import android.widget.Toast
 import androidx.lifecycle.*
-import com.example.homework_2_mts.repository.data.dto.MovieDto
+import com.example.homework_2_mts.repository.database.Movie
 import com.example.homework_2_mts.repository.data.dto.PopularNowDto
 import com.example.homework_2_mts.repository.data.features.movies.MoviesDataSourceImpl
 import com.example.homework_2_mts.repository.data.features.popular.PopularNowDataSourceImpl
@@ -26,14 +25,14 @@ class MainFragmentViewModel: ViewModel() {
     val viewState: LiveData<MainFragmentViewState> get() = _viewState
     private val _viewState = MutableLiveData<MainFragmentViewState>()
 
-    val moviesList: LiveData<List<MovieDto>> get() = _moviesList
-    private val _moviesList= MutableLiveData<List<MovieDto>>()
+    val moviesList: LiveData<List<Movie>> get() = _moviesList
+    private val _moviesList= MutableLiveData<List<Movie>>()
 
     val popularNowList: LiveData<List<PopularNowDto>> get() = _popularNowList
     private val _popularNowList = MutableLiveData<List<PopularNowDto>>()
 
-    val updateMoviesList: LiveData<List<MovieDto>> get() = _updateMoviesList
-    private val _updateMoviesList = MutableLiveData<List<MovieDto>>()
+    val updateMoviesList: LiveData<List<Movie>> get() = _updateMoviesList
+    private val _updateMoviesList = MutableLiveData<List<Movie>>()
 
     // init Models
     private val popularNowModel: PopularNowModel = PopularNowModel(PopularNowDataSourceImpl())

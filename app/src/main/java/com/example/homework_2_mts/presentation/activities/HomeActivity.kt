@@ -4,15 +4,11 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.homework_2_mts.presentation.fragments.MainFragment
-import com.example.homework_2_mts.presentation.fragments.ProfileFragment
 import com.example.homework_2_mts.R
-import com.example.homework_2_mts.repository.data.dto.MovieDto
+import com.example.homework_2_mts.repository.database.Movie
 import com.example.homework_2_mts.repository.data.dto.PopularNowDto
 import com.example.homework_2_mts.presentation.fragments.MovieDetailFragment
 import com.example.homework_2_mts.presentation.helpers.MainFragmentClickListener
@@ -72,8 +68,8 @@ class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
         }
     }
 
-    override fun onOpenDetailMovieClick(movieDto: MovieDto) {
-        val bundle = bundleOf(MovieDetailFragment.MOVIE_KEY to movieDto)
+    override fun onOpenDetailMovieClick(movie: Movie) {
+        val bundle = bundleOf(MovieDetailFragment.MOVIE_KEY to movie)
         navController.navigate(R.id.action_main_fragment_to_movie_detail_fragment, bundle)
     }
 
