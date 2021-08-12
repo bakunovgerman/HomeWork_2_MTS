@@ -2,13 +2,13 @@ package com.example.homework_2_mts.domain
 
 import android.widget.Toast
 import androidx.lifecycle.*
-import com.example.homework_2_mts.data.dto.MovieDto
-import com.example.homework_2_mts.data.dto.PopularNowDto
-import com.example.homework_2_mts.data.features.movies.MoviesDataSourceImpl
-import com.example.homework_2_mts.data.features.popular.PopularNowDataSourceImpl
-import com.example.homework_2_mts.fragments.MainFragment
-import com.example.homework_2_mts.models.MoviesModel
-import com.example.homework_2_mts.models.PopularNowModel
+import com.example.homework_2_mts.repository.data.dto.MovieDto
+import com.example.homework_2_mts.repository.data.dto.PopularNowDto
+import com.example.homework_2_mts.repository.data.features.movies.MoviesDataSourceImpl
+import com.example.homework_2_mts.repository.data.features.popular.PopularNowDataSourceImpl
+import com.example.homework_2_mts.presentation.fragments.MainFragment
+import com.example.homework_2_mts.repository.models.MoviesModel
+import com.example.homework_2_mts.repository.models.PopularNowModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

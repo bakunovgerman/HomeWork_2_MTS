@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.homework_2_mts.fragments.MainFragment"
+        android:name="com.example.homework_2_mts.presentation.fragments.MainFragment"
         tools:layout="@layout/fragment_main">
 
         <action
@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/movieDetailFragment"
-        android:name="com.example.homework_2_mts.fragments.MovieDetailFragment"
+        android:name="com.example.homework_2_mts.presentation.fragments.MovieDetailFragment"
         tools:layout="@layout/fragment_movie_detail">
 
         <action
@@ -36,7 +36,7 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.homework_2_mts.fragments.ProfileFragment"
+        android:name="com.example.homework_2_mts.presentation.fragments.ProfileFragment"
         tools:layout="@layout/fragment_profile">
 
         <action
