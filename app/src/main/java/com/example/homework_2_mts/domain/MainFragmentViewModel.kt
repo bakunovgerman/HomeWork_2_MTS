@@ -1,13 +1,11 @@
 package com.example.homework_2_mts.domain
 
+import android.util.Log
 import androidx.lifecycle.*
-import com.example.homework_2_mts.App
 import com.example.homework_2_mts.repository.database.entities.Movie
 import com.example.homework_2_mts.repository.database.entities.Genre
-import com.example.homework_2_mts.repository.data.features.movies.MoviesDataSourceImpl
 import com.example.homework_2_mts.repository.data.features.popular.PopularNowDataSourceImpl
 import com.example.homework_2_mts.presentation.fragments.MainFragment
-import com.example.homework_2_mts.repository.models.MoviesModel
 import com.example.homework_2_mts.repository.models.PopularNowModel
 import com.example.homework_2_mts.repository.repositories.MovieRepository
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -46,10 +44,13 @@ class MainFragmentViewModel: ViewModel() {
         viewModelScope.launch(errorHandler) {
             withContext(Dispatchers.IO){
                 Thread.sleep(2000)
-                //val movies = movieRepository.getMoviesAPI()
+                if (!movieRepository.ApiEqualsDb()){
+                    Log.d("update_dp", "database is update")
+                    Log.d("update_dp", "database insert data")
+                    movieRepository.insertMoviesDb(movieRepository.getMoviesAPI())
+                }
                 val movies = movieRepository.getMoviesDb()
                 _moviesList.postValue(movies)
-                //movieRepository.addMoviesDb(movies)
                 _popularNowList.postValue(popularNowModel.getPopularNow())
             }
             _viewState.postValue(MainFragmentViewState(isDownloaded = true))
@@ -60,7 +61,10 @@ class MainFragmentViewModel: ViewModel() {
         viewModelScope.launch(errorHandler) {
             withContext(Dispatchers.IO){
                 Thread.sleep(2000)
-                _updateMoviesList.postValue(movieRepository.getMoviesAPIRefresh())
+                movieRepository.clearAllDb()
+                val movies = movieRepository.getMoviesAPIRefresh()
+                movieRepository.insertMoviesDb(movies)
+                _updateMoviesList.postValue(movieRepository.getMoviesDb())
             }
             _viewState.postValue(MainFragmentViewState(isDownloaded = true))
         }
