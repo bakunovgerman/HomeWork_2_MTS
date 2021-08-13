@@ -1,6 +1,5 @@
 package com.example.homework_2_mts.domain
 
-import android.provider.ContactsContract
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,6 +11,7 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.lang.Exception
 
 typealias ProfileFragmentInsertProfileState = ProfileFragment.InsertProfileState
 
@@ -23,8 +23,8 @@ class ProfileFragmentViewModel : ViewModel() {
     }
 
     // init LiveData
-    val profileInfo: LiveData<Profile> get() = _profileInfo
-    private val _profileInfo = MutableLiveData<Profile>()
+    val getProfileInfo: LiveData<Profile?> get() = _getProfileInfo
+    private val _getProfileInfo = MutableLiveData<Profile?>()
 
     val profileInsertComplete: LiveData<ProfileFragmentInsertProfileState> get() = _profileInsertComplete
     private val _profileInsertComplete = MutableLiveData<ProfileFragmentInsertProfileState>()
@@ -36,14 +36,15 @@ class ProfileFragmentViewModel : ViewModel() {
         viewModelScope.launch {
             withContext(Dispatchers.IO){
                 val profile = profileRepository.getProfile()
-                _profileInfo.postValue(profile)
+                _getProfileInfo.postValue(profile)
             }
         }
     }
 
     fun insertProfile(profile: Profile){
-        viewModelScope.launch {
+        viewModelScope.launch(errorHandler) {
             withContext(Dispatchers.IO + errorHandler){
+                throw AssertionError()
                 profileRepository.insertProfile(profile)
                 _profileInsertComplete.postValue(ProfileFragmentInsertProfileState(true))
             }

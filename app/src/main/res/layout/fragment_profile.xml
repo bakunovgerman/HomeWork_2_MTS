@@ -114,7 +114,8 @@
                 app:layout_constraintStart_toStartOf="@id/guideLine_1"
                 app:layout_constraintTop_toBottomOf="@id/tvPersonalDataUser">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <EditText
+                    android:id="@+id/ilEtNameUser"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:backgroundTint="@color/white"
@@ -134,7 +135,8 @@
                 app:layout_constraintEnd_toEndOf="@id/guideLine_2"
                 android:layout_marginTop="@dimen/et_margin_top">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <EditText
+                    android:id="@+id/ilEtPasswordUser"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="@string/password_user_input"
@@ -154,7 +156,8 @@
                 app:layout_constraintEnd_toEndOf="@id/guideLine_2"
                 android:layout_marginTop="@dimen/et_margin_top">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <EditText
+                    android:id="@+id/ilEtEmailUser"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="@string/email_user_input"
@@ -174,15 +177,17 @@
                 app:layout_constraintEnd_toEndOf="@id/guideLine_2"
                 android:layout_marginTop="@dimen/et_margin_top">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <EditText
+                    android:id="@+id/ilEtPhoneNumberUser"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:backgroundTint="@color/white"
                     android:hint="@string/phone_user_input"
                     android:inputType="phone"
-                    android:backgroundTint="@color/white"
-                    android:textColor="@color/black"
                     android:paddingStart="@dimen/et_padding_start"
+                    android:textColor="@color/black"
                     tools:ignore="RtlSymmetry" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
@@ -320,5 +325,23 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <FrameLayout
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:theme="@style/ProgressBarStyle"
+            android:layout_gravity="center"/>
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
