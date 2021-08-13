@@ -41,13 +41,15 @@ class MainFragmentViewModel: ViewModel() {
 
     // init Models
     private val popularNowModel: PopularNowModel = PopularNowModel(PopularNowDataSourceImpl())
-    private val moviesModel: MoviesModel = MoviesModel(MoviesDataSourceImpl())
 
     fun loadData(){
         viewModelScope.launch(errorHandler) {
             withContext(Dispatchers.IO){
                 Thread.sleep(2000)
-                _moviesList.postValue(movieRepository.getMoviesAPI())
+                //val movies = movieRepository.getMoviesAPI()
+                val movies = movieRepository.getMoviesDb()
+                _moviesList.postValue(movies)
+                //movieRepository.addMoviesDb(movies)
                 _popularNowList.postValue(popularNowModel.getPopularNow())
             }
             _viewState.postValue(MainFragmentViewState(isDownloaded = true))
