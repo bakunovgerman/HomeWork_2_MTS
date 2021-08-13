@@ -56,17 +56,6 @@
                 app:layout_constraintStart_toStartOf="@id/guideLine_1"
                 android:layout_marginTop="@dimen/email_user_margin_top"/>
 
-            <Button
-                android:id="@+id/btnEditProfileInfo"
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:text="@string/edit_profile_info"
-                app:layout_constraintTop_toBottomOf="@id/tvEmailUser"
-                app:layout_constraintStart_toStartOf="@id/guideLine_1"
-                android:layout_marginTop="@dimen/btn_edit_profile_info_margin_top"
-                android:backgroundTint="@color/black"
-                android:textSize="13sp"/>
-
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/civAvatarUser"
                 android:layout_width="@dimen/avatar_user_width"
@@ -84,7 +73,7 @@
                 android:textSize="@dimen/interests_user"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                app:layout_constraintTop_toBottomOf="@id/btnEditProfileInfo"
+                app:layout_constraintTop_toBottomOf="@id/tvEmailUser"
                 app:layout_constraintStart_toStartOf="@id/guideLine_1"
                 android:layout_marginTop="@dimen/interests_user_margin_top"/>
 
@@ -117,19 +106,21 @@
                 android:id="@+id/ilNameUser"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/tvPersonalDataUser"
-                app:layout_constraintStart_toStartOf="@id/guideLine_1"
+                android:layout_marginTop="@dimen/et_margin_top"
+                app:boxStrokeColor="@color/black"
+                app:hintTextColor="@color/black"
                 app:layout_constraintEnd_toEndOf="@id/guideLine_2"
-                android:layout_marginTop="@dimen/et_margin_top">
+                app:layout_constraintStart_toStartOf="@id/guideLine_1"
+                app:layout_constraintTop_toBottomOf="@id/tvPersonalDataUser">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:backgroundTint="@color/white"
                     android:hint="@string/name_user_input"
                     android:inputType="text"
-                    android:backgroundTint="@color/white"
-                    android:textColor="@color/black"
                     android:paddingStart="@dimen/et_padding_start"
+                    android:textColor="@color/black"
                     tools:ignore="RtlSymmetry" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -193,6 +184,18 @@
                     tools:ignore="RtlSymmetry" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <Button
+                android:id="@+id/btnEditProfileInfo"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:text="@string/save_profile_info"
+                app:layout_constraintTop_toBottomOf="@id/ilPhoneUser"
+                app:layout_constraintStart_toStartOf="@id/guideLine_1"
+                app:layout_constraintEnd_toEndOf="@id/guideLine_2"
+                android:layout_marginTop="@dimen/btn_save_profile_info_margin_top"
+                android:backgroundTint="@color/black"
+                android:textSize="@dimen/btn_save_profile_info"/>
+
             <TextView
                 android:id="@+id/tvSettings"
                 android:layout_width="wrap_content"
@@ -201,7 +204,7 @@
                 android:textSize="@dimen/settings"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                app:layout_constraintTop_toBottomOf="@id/ilPhoneUser"
+                app:layout_constraintTop_toBottomOf="@id/btnEditProfileInfo"
                 app:layout_constraintStart_toStartOf="@id/guideLine_1"
                 android:layout_marginTop="@dimen/settings_margin_top"/>
 
@@ -280,6 +283,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tvApp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/btn_profile_fragment_margin_top"
                 style="@style/btn_profile_fragment"
                 tools:ignore="UnusedAttribute" />
 

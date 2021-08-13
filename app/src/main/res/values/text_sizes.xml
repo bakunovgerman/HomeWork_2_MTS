@@ -15,4 +15,5 @@
     <dimen name="movie_title">14sp</dimen>
     <dimen name="movie_item_description">12sp</dimen>
     <dimen name="movie_item_age">7sp</dimen>
+    <dimen name="btn_save_profile_info">13sp</dimen>
 </resources>
