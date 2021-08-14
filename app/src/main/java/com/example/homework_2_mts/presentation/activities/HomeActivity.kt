@@ -35,10 +35,9 @@ class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
         bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_home -> {
-                    if (navController.currentDestination?.id == R.id.movieDetailFragment) {
+                    if (navController.currentDestination?.id == R.id.movieDetailFragment ||
+                        navController.currentDestination?.id == R.id.profileFragment) {
                         navController.popBackStack(R.id.mainFragment, false)
-                    } else if (navController.currentDestination?.id == R.id.profileFragment) {
-                        navController.navigate(R.id.action_profile_fragment_to_main_fragment)
                     }
                     true
                 }
