@@ -2,6 +2,7 @@ package com.example.homework_2_mts.presentation.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -99,16 +100,32 @@ class MainFragment : Fragment() {
         }
 
         // init observe
-        mainFragmentViewModel.moviesList.observe(viewLifecycleOwner, Observer(moviesAdapter::initData))
-        mainFragmentViewModel.popularNowList.observe(viewLifecycleOwner, Observer(::initPopularNowData))
+        mainFragmentViewModel.moviesList.observe(
+            viewLifecycleOwner,
+            Observer(moviesAdapter::initData)
+        )
+        mainFragmentViewModel.popularNowList.observe(
+            viewLifecycleOwner,
+            Observer(::initPopularNowData)
+        )
         mainFragmentViewModel.viewState.observe(viewLifecycleOwner, Observer(::setViewState))
         mainFragmentViewModel.updateMoviesList.observe(viewLifecycleOwner, Observer(::updateData))
     }
 
-    private fun initPopularNowData(popularNowItems: List<Genre>?){
-        if (popularNowItems != null){
+    private fun initPopularNowData(popularNowItems: List<Genre>?) {
+        if (popularNowItems != null) {
+            Log.d("addItemDecoration", "addItemDecoration rvPopular")
             popularNowAdapter.initData(popularNowItems)
-            rvPopularNow.addItemDecoration(SpacesItemDecoration(spaceRight = 6 ,spaceLeft = 20, size = popularNowItems.size))
+            if (rvPopularNow.itemDecorationCount == 0){
+                rvPopularNow.addItemDecoration(
+                    SpacesItemDecoration(
+                        spaceRight = 6,
+                        spaceLeft = 20,
+                        size = popularNowItems.size
+                    )
+                )
+            }
+
         }
     }
 
@@ -117,8 +134,8 @@ class MainFragment : Fragment() {
         val isDownloaded: Boolean = false
     )
 
-    private fun setViewState(viewState: ViewState) = with(viewState){
-        if (isDownloaded){
+    private fun setViewState(viewState: ViewState) = with(viewState) {
+        if (isDownloaded) {
             hideProgressBar()
         } else {
             showProgressBar()
@@ -147,13 +164,13 @@ class MainFragment : Fragment() {
         mainFragmentClickListener = null
     }
 
-    private fun hideProgressBar(){
+    private fun hideProgressBar() {
         rvMovies.visibility = View.VISIBLE
         rvPopularNow.visibility = View.VISIBLE
         progressBar.visibility = View.INVISIBLE
     }
 
-    private fun showProgressBar(){
+    private fun showProgressBar() {
         rvMovies.visibility = View.INVISIBLE
         rvPopularNow.visibility = View.INVISIBLE
         progressBar.visibility = View.VISIBLE
