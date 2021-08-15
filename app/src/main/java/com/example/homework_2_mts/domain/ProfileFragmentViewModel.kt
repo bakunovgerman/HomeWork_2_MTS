@@ -44,7 +44,6 @@ class ProfileFragmentViewModel : ViewModel() {
     fun insertProfile(profile: Profile){
         viewModelScope.launch(errorHandler) {
             withContext(Dispatchers.IO + errorHandler){
-                throw AssertionError()
                 profileRepository.insertProfile(profile)
                 _profileInsertComplete.postValue(ProfileFragmentInsertProfileState(true))
             }

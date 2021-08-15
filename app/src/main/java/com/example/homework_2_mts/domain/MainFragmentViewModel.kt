@@ -49,7 +49,7 @@ class MainFragmentViewModel: ViewModel() {
                     Log.d("update_dp", "database insert data")
                     movieRepository.insertMoviesDb(movieRepository.getMoviesAPI())
                 }
-                val movies = movieRepository.getMoviesDb()
+                val movies = movieRepository.getDbMovies()
                 _moviesList.postValue(movies)
                 _popularNowList.postValue(popularNowModel.getPopularNow())
             }
@@ -64,7 +64,7 @@ class MainFragmentViewModel: ViewModel() {
                 movieRepository.clearAllDb()
                 val movies = movieRepository.getMoviesAPIRefresh()
                 movieRepository.insertMoviesDb(movies)
-                _updateMoviesList.postValue(movieRepository.getMoviesDb())
+                _updateMoviesList.postValue(movieRepository.getDbMovies())
             }
             _viewState.postValue(MainFragmentViewState(isDownloaded = true))
         }

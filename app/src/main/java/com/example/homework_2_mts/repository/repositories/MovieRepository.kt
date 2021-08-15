@@ -11,7 +11,7 @@ class MovieRepository() {
     private val movieDao = AppDatabase.instance.movieDao()
 
     // DB methods
-    suspend fun getMoviesDb(): List<Movie> = movieDao.getMovies()
+    suspend fun getDbMovies(): List<Movie> = movieDao.getMovies()
 
 
     suspend fun insertMoviesDb(movies: List<Movie>){
@@ -29,6 +29,6 @@ class MovieRepository() {
 
     // equals
     suspend fun ApiEqualsDb(): Boolean{
-        return getMoviesAPI() == getMoviesDb()
+        return getMoviesAPI() == getDbMovies()
     }
 }
