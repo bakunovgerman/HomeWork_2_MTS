@@ -34,16 +34,16 @@ class ProfileFragmentViewModel : ViewModel() {
 
     fun getProfile(){
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 val profile = profileRepository.getProfile()
                 _getProfileInfo.postValue(profile)
             }
         }
     }
 
-    fun insertProfile(profile: Profile){
+    fun insertProfile(profile: Profile) {
         viewModelScope.launch(errorHandler) {
-            withContext(Dispatchers.IO + errorHandler){
+            withContext(Dispatchers.IO + errorHandler) {
                 profileRepository.insertProfile(profile)
                 _profileInsertComplete.postValue(ProfileFragmentInsertProfileState(true))
             }

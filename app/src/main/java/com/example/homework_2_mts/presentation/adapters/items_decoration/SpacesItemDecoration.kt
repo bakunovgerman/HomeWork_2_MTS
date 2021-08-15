@@ -22,7 +22,7 @@ class SpacesItemDecoration(
     ) {
         super.getItemOffsets(outRect, view, parent, state)
 
-        when (parent.getChildAdapterPosition(view)){
+        when (parent.getChildAdapterPosition(view)) {
             0 -> {
                 outRect.left = dpToPx(spaceLeft)
                 outRect.right = dpToPx(spaceRight)

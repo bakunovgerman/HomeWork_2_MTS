@@ -123,7 +123,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun showSnackBar(insertProfileState: InsertProfileState) {
-        if (insertProfileState.isInsert){
+        if (insertProfileState.isInsert) {
             Snackbar.make(rootView, "Информация о профиле изменена!", Snackbar.LENGTH_LONG).show()
             showProgressBar()
             profileFragmentViewModel.getProfile()
@@ -134,7 +134,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setProfileInfo(profile: Profile?) {
-        if (profile != null){
+        if (profile != null) {
             nameProfileTextView.text = profile.name
             emailProfileTextView.text = profile.email
             nameEditText.setText(profile.name)
@@ -145,11 +145,11 @@ class ProfileFragment : Fragment() {
         hideProgressBar()
     }
 
-    private fun showProgressBar(){
+    private fun showProgressBar() {
         progressBar.visibility = View.VISIBLE
     }
 
-    private fun hideProgressBar(){
+    private fun hideProgressBar() {
         progressBar.visibility = View.GONE
     }
 }

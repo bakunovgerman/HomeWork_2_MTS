@@ -127,5 +127,4 @@ class MoviesDataSourceImpl : MoviesDataSource {
 			imageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/mbtN6V6y5kdawvAkzqN4ohi576a.jpg"
 		)
 	)
-
 }

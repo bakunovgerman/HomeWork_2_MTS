@@ -11,7 +11,7 @@ class ProfileRepository {
     // init methods
     suspend fun getProfile() : Profile? = profileDao.getProfile()
 
-    suspend fun insertProfile(profile: Profile){
+    suspend fun insertProfile(profile: Profile) {
         profileDao.insertProfile(profile)
     }
 }

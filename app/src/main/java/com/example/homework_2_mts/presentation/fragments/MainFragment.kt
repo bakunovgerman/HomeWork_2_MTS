@@ -116,7 +116,7 @@ class MainFragment : Fragment() {
         if (popularNowItems != null) {
             Log.d("addItemDecoration", "addItemDecoration rvPopular")
             popularNowAdapter.initData(popularNowItems)
-            if (rvPopularNow.itemDecorationCount == 0){
+            if (rvPopularNow.itemDecorationCount == 0) {
                 rvPopularNow.addItemDecoration(
                     SpacesItemDecoration(
                         spaceRight = 6,

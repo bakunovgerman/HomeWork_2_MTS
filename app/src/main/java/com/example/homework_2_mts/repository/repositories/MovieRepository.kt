@@ -14,7 +14,7 @@ class MovieRepository() {
     suspend fun getDbMovies(): List<Movie> = movieDao.getMovies()
 
 
-    suspend fun insertMoviesDb(movies: List<Movie>){
+    suspend fun insertMoviesDb(movies: List<Movie>) {
         movieDao.insertMovies(movies)
     }
 
@@ -28,7 +28,7 @@ class MovieRepository() {
     fun getMoviesAPIRefresh(): List<Movie> = MoviesModel(MoviesDataSourceImpl()).getMovies2()
 
     // equals
-    suspend fun ApiEqualsDb(): Boolean{
+    suspend fun ApiEqualsDb(): Boolean {
         return getMoviesAPI() == getDbMovies()
     }
 }

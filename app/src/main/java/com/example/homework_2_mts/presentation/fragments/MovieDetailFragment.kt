@@ -46,7 +46,7 @@ class MovieDetailFragment : Fragment() {
         return view
     }
 
-    private fun setInfo(){
+    private fun setInfo() {
         tvMovieTitle.text = movie!!.title
         movieRatingLayout.rating = movie!!.rateScore.toFloat()
         tvMovieAge.text = String.format(movie!!.ageRestriction.toString() + '+')

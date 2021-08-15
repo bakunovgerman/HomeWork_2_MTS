@@ -42,9 +42,9 @@ class MainFragmentViewModel: ViewModel() {
 
     fun loadData(){
         viewModelScope.launch(errorHandler) {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 Thread.sleep(2000)
-                if (!movieRepository.ApiEqualsDb()){
+                if (!movieRepository.ApiEqualsDb()) {
                     Log.d("update_dp", "database is update")
                     Log.d("update_dp", "database insert data")
                     movieRepository.insertMoviesDb(movieRepository.getMoviesAPI())
@@ -57,9 +57,9 @@ class MainFragmentViewModel: ViewModel() {
         }
     }
 
-    fun updateData(){
+    fun updateData() {
         viewModelScope.launch(errorHandler) {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 Thread.sleep(2000)
                 movieRepository.clearAllDb()
                 val movies = movieRepository.getMoviesAPIRefresh()
