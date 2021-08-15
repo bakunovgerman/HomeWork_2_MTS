@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.homework_2_mts.R
 import com.example.homework_2_mts.presentation.adapters.view_holders.MoviesSoonViewHolder
 import com.example.homework_2_mts.presentation.adapters.view_holders.MoviesViewHolder
-import com.example.homework_2_mts.repository.database.entities.Movie
+import com.example.homework_2_mts.repository.database.entities.MovieEntity
 import java.lang.IllegalStateException
 import java.util.ArrayList
 
-class MoviesAdapter(private val onMovieItemClick: (Movie) -> Unit) :
+class MoviesAdapter(private val onMovieItemClick: (MovieEntity) -> Unit) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var moviesList: MutableList<Movie> = ArrayList()
+    var moviesList: MutableList<MovieEntity> = ArrayList()
 
     companion object {
         const val VIEW_TYPE_MOVIE_SOON = 0
@@ -36,10 +36,10 @@ class MoviesAdapter(private val onMovieItemClick: (Movie) -> Unit) :
         }
     }
 
-    fun initData(movies: List<Movie>?) {
-        if (movies != null) {
+    fun initData(movieEntities: List<MovieEntity>?) {
+        if (movieEntities != null) {
             moviesList.clear()
-            moviesList.addAll(movies)
+            moviesList.addAll(movieEntities)
             //notifyDataSetChanged()
         }
     }

@@ -20,7 +20,7 @@ import com.example.homework_2_mts.presentation.adapters.MoviesAdapter
 import com.example.homework_2_mts.presentation.adapters.PopularNowAdapter
 import com.example.homework_2_mts.presentation.adapters.items_decoration.GridSpacingItemDecoration
 import com.example.homework_2_mts.presentation.adapters.items_decoration.SpacesItemDecoration
-import com.example.homework_2_mts.repository.database.entities.Movie
+import com.example.homework_2_mts.repository.database.entities.MovieEntity
 import com.example.homework_2_mts.repository.database.entities.Genre
 import com.example.homework_2_mts.presentation.helpers.MainFragmentClickListener
 import com.example.homework_2_mts.presentation.helpers.MoviesCallbackDiffUtils
@@ -142,7 +142,7 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun updateData(newList: List<Movie>) {
+    private fun updateData(newList: List<MovieEntity>) {
         val oldList = moviesAdapter.moviesList
         val callback = MoviesCallbackDiffUtils(oldList, newList)
         val diff = DiffUtil.calculateDiff(callback)

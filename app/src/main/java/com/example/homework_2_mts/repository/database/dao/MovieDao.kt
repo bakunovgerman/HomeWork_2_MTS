@@ -1,20 +1,21 @@
 package com.example.homework_2_mts.repository.database.dao
 
 import androidx.room.*
-import com.example.homework_2_mts.repository.database.entities.Movie
+import com.example.homework_2_mts.repository.database.entities.MovieEntity
 
 @Dao
 interface MovieDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMovies(movies: List<Movie>)
+    suspend fun insertMovies(movieEntities: List<MovieEntity>)
 
     @Query("SELECT * FROM movies")
-    suspend fun getMovies(): List<Movie>
+    suspend fun getMovies(): List<MovieEntity>
 
     @Query("SELECT COUNT(id) FROM movies")
     suspend fun getMoviesCount(): Int
 
-    @Query("DELETE from movies")
+    @Query("DELETE FROM movies")
     suspend fun clearAllDb()
+
 }

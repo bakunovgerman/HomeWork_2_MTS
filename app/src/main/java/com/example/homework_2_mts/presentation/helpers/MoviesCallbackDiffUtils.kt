@@ -1,9 +1,9 @@
 package com.example.homework_2_mts.presentation.helpers
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.homework_2_mts.repository.database.entities.Movie
+import com.example.homework_2_mts.repository.database.entities.MovieEntity
 
-class MoviesCallbackDiffUtils(private val oldList: List<Movie>, private val newList: List<Movie>) :
+class MoviesCallbackDiffUtils(private val oldList: List<MovieEntity>, private val newList: List<MovieEntity>) :
     DiffUtil.Callback() {
     override fun getOldListSize(): Int {
         return oldList.size

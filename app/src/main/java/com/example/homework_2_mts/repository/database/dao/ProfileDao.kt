@@ -9,7 +9,7 @@ import com.example.homework_2_mts.repository.database.entities.Profile
 @Dao
 interface ProfileDao {
 
-    @Query("SELECT * from profile")
+    @Query("SELECT * FROM profile")
     suspend fun getProfile() : Profile?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

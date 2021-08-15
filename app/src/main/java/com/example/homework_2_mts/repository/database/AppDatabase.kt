@@ -6,10 +6,10 @@ import androidx.room.RoomDatabase
 import com.example.homework_2_mts.App
 import com.example.homework_2_mts.repository.database.dao.MovieDao
 import com.example.homework_2_mts.repository.database.dao.ProfileDao
-import com.example.homework_2_mts.repository.database.entities.Movie
+import com.example.homework_2_mts.repository.database.entities.MovieEntity
 import com.example.homework_2_mts.repository.database.entities.Profile
 
-@Database(entities = [Movie::class, Profile::class], version = 1)
+@Database(entities = [MovieEntity::class, Profile::class], version = 1)
 abstract class AppDatabase: RoomDatabase() {
 
     abstract fun movieDao(): MovieDao

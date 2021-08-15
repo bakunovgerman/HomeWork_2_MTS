@@ -9,12 +9,12 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import com.example.homework_2_mts.R
-import com.example.homework_2_mts.repository.database.entities.Movie
+import com.example.homework_2_mts.repository.database.entities.MovieEntity
 import com.squareup.picasso.Picasso
 
 class MovieDetailFragment : Fragment() {
 
-    private var movie: Movie? = null
+    private var movieEntity: MovieEntity? = null
     private lateinit var tvMovieTitle: TextView
     private lateinit var movieRatingLayout: RatingBar
     private lateinit var tvMovieAge: TextView
@@ -27,7 +27,7 @@ class MovieDetailFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        movie = requireArguments().getParcelable<Movie>(MOVIE_KEY)
+        movieEntity = requireArguments().getParcelable<MovieEntity>(MOVIE_KEY)
     }
 
     override fun onCreateView(
@@ -47,10 +47,10 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun setInfo() {
-        tvMovieTitle.text = movie!!.title
-        movieRatingLayout.rating = movie!!.rateScore.toFloat()
-        tvMovieAge.text = String.format(movie!!.ageRestriction.toString() + '+')
-        tvMovieDescription.text = movie!!.description
-        Picasso.get().load(movie!!.imageUrl).into(imgMoviePoster)
+        tvMovieTitle.text = movieEntity!!.title
+        movieRatingLayout.rating = movieEntity!!.rateScore.toFloat()
+        tvMovieAge.text = String.format(movieEntity!!.ageRestriction.toString() + '+')
+        tvMovieDescription.text = movieEntity!!.description
+        Picasso.get().load(movieEntity!!.imageUrl).into(imgMoviePoster)
     }
 }
