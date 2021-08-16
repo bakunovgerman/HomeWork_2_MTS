@@ -41,16 +41,16 @@ class MovieDetailFragment : Fragment() {
         tvMovieAge = view.findViewById(R.id.tvMovieAge)
         tvMovieDescription = view.findViewById(R.id.tvMovieDescription)
         imgMoviePoster = view.findViewById(R.id.imgMoviePoster)
-        setInfo()
+        // setInfo
+        movie?.let {
+            tvMovieTitle.text = movie!!.title
+            movieRatingLayout.rating = movie!!.rateScore.toFloat()
+            tvMovieAge.text = String.format(movie!!.ageRestriction.toString() + '+')
+            tvMovieDescription.text = movie!!.description
+            Picasso.get().load(movie!!.imageUrl).into(imgMoviePoster)
+        }
 
         return view
     }
 
-    private fun setInfo() {
-        tvMovieTitle.text = movie!!.title
-        movieRatingLayout.rating = movie!!.rateScore.toFloat()
-        tvMovieAge.text = String.format(movie!!.ageRestriction.toString() + '+')
-        tvMovieDescription.text = movie!!.description
-        Picasso.get().load(movie!!.imageUrl).into(imgMoviePoster)
-    }
 }

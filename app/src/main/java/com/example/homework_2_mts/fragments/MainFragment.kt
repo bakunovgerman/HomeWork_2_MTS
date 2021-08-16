@@ -117,7 +117,6 @@ class MainFragment : Fragment() {
         }
     }
 
-
     data class ViewState(
         val isDownloaded: Boolean = false
     )
