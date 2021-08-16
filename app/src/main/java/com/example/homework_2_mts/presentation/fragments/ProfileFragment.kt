@@ -21,12 +21,10 @@ import com.example.homework_2_mts.repository.database.entities.Profile
 import com.example.homework_2_mts.repository.models.PopularNowModel
 import com.google.android.material.snackbar.Snackbar
 
-
 class ProfileFragment : Fragment() {
 
     // init ViewModel
     private lateinit var profileFragmentViewModel: ProfileFragmentViewModel
-
     private lateinit var rvInteresting: RecyclerView
     private lateinit var saveProfileInfoButton: Button
     private val interestingUserModel = PopularNowModel(PopularNowDataSourceImpl())

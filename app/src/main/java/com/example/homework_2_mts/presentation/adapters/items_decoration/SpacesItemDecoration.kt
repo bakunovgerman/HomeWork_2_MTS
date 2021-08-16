@@ -2,10 +2,7 @@ package com.example.homework_2_mts.presentation.adapters.items_decoration
 
 import android.content.res.Resources
 import android.graphics.Rect
-import android.util.Log
 import android.view.View
-import android.widget.Toast
-import androidx.core.view.size
 import androidx.recyclerview.widget.RecyclerView
 
 class SpacesItemDecoration(

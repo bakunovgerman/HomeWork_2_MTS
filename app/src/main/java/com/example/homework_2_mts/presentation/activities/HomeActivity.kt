@@ -14,7 +14,6 @@ import com.example.homework_2_mts.presentation.fragments.MovieDetailFragment
 import com.example.homework_2_mts.presentation.helpers.MainFragmentClickListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-
 class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
 
     private lateinit var bottomNavigationView: BottomNavigationView
