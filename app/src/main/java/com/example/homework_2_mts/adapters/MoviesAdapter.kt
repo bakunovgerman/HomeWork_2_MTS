@@ -15,11 +15,6 @@ class MoviesAdapter(private val onMovieItemClick: (MovieDto) -> Unit) :
 
     var items: MutableList<MovieDto> = ArrayList()
 
-    companion object {
-        const val VIEW_TYPE_MOVIE_SOON = 0
-        const val VIEW_TYPE_MOVIE = 1
-    }
-
     override fun getItemViewType(position: Int): Int {
         return when (position) {
             0 -> VIEW_TYPE_MOVIE_SOON
@@ -56,4 +51,10 @@ class MoviesAdapter(private val onMovieItemClick: (MovieDto) -> Unit) :
             }
         }
     }
+
+    companion object {
+        const val VIEW_TYPE_MOVIE_SOON = 0
+        const val VIEW_TYPE_MOVIE = 1
+    }
+
 }
