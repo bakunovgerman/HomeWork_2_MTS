@@ -21,10 +21,6 @@ class MovieDetailFragment : Fragment() {
     private lateinit var tvMovieDescription: TextView
     private lateinit var imgMoviePoster: ImageView
 
-    companion object{
-        const val MOVIE_KEY = "movie"
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         movieEntity = requireArguments().getParcelable<MovieEntity>(MOVIE_KEY)
@@ -53,4 +49,9 @@ class MovieDetailFragment : Fragment() {
         tvMovieDescription.text = movieEntity!!.description
         Picasso.get().load(movieEntity!!.imageUrl).into(imgMoviePoster)
     }
+
+    companion object{
+        const val MOVIE_KEY = "movie"
+    }
+
 }
