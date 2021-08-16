@@ -33,7 +33,7 @@ class PopularNowAdapter(
 
     }
 
-    fun initData(popularNowItems: List<PopularNowDto>?){
+    fun initData(popularNowItems: List<PopularNowDto>?) {
         popularNowList.clear()
         popularNowList.addAll(popularNowItems!!)
         notifyDataSetChanged()

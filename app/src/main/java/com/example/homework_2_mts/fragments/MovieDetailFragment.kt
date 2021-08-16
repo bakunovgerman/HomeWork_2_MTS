@@ -21,7 +21,7 @@ class MovieDetailFragment : Fragment() {
     private lateinit var tvMovieDescription: TextView
     private lateinit var imgMoviePoster: ImageView
 
-    companion object{
+    companion object {
         const val MOVIE_KEY = "movie"
     }
 
@@ -46,7 +46,7 @@ class MovieDetailFragment : Fragment() {
         return view
     }
 
-    private fun setInfo(){
+    private fun setInfo() {
         tvMovieTitle.text = movie!!.title
         movieRatingLayout.rating = movie!!.rateScore.toFloat()
         tvMovieAge.text = String.format(movie!!.ageRestriction.toString() + '+')

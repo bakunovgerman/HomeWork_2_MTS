@@ -21,7 +21,7 @@ class GridSpacingItemDecoration(private val bottom: Int) : RecyclerView.ItemDeco
         (view.context as Activity).windowManager.defaultDisplay.getMetrics(displayMetrics)
         val width = displayMetrics.widthPixels
 
-        if (position % 2 != 0){
+        if (position % 2 != 0) {
             outRect.left = (width - dpToPx(40)) / 2 - view.layoutParams.width
         }
 

@@ -106,16 +106,28 @@ class MainFragment : Fragment() {
         }
 
         // init observe
-        mainFragmentViewModel.moviesList.observe(viewLifecycleOwner, Observer(moviesAdapter::initData))
-        mainFragmentViewModel.popularNowList.observe(viewLifecycleOwner, Observer(::initPopularNowData))
+        mainFragmentViewModel.moviesList.observe(
+            viewLifecycleOwner,
+            Observer(moviesAdapter::initData)
+        )
+        mainFragmentViewModel.popularNowList.observe(
+            viewLifecycleOwner,
+            Observer(::initPopularNowData)
+        )
         mainFragmentViewModel.viewState.observe(viewLifecycleOwner, Observer(::setViewState))
         mainFragmentViewModel.updateMoviesList.observe(viewLifecycleOwner, Observer(::updateData))
     }
 
-    private fun initPopularNowData(popularNowItems: List<PopularNowDto>?){
-        if (popularNowItems != null){
+    private fun initPopularNowData(popularNowItems: List<PopularNowDto>?) {
+        if (popularNowItems != null) {
             popularNowAdapter.initData(popularNowItems)
-            rvPopularNow.addItemDecoration(SpacesItemDecoration(spaceRight = 6 ,spaceLeft = 20, size = popularNowItems.size))
+            rvPopularNow.addItemDecoration(
+                SpacesItemDecoration(
+                    spaceRight = 6,
+                    spaceLeft = 20,
+                    size = popularNowItems.size
+                )
+            )
         }
     }
 
@@ -124,8 +136,8 @@ class MainFragment : Fragment() {
         val isDownloaded: Boolean = false
     )
 
-    private fun setViewState(viewState: ViewState) = with(viewState){
-        if (isDownloaded){
+    private fun setViewState(viewState: ViewState) = with(viewState) {
+        if (isDownloaded) {
             hideProgressBar()
         } else {
             showProgressBar()
@@ -154,13 +166,13 @@ class MainFragment : Fragment() {
         mainFragmentClickListener = null
     }
 
-    private fun hideProgressBar(){
+    private fun hideProgressBar() {
         rvMovies.visibility = View.VISIBLE
         rvPopularNow.visibility = View.VISIBLE
         progressBar.visibility = View.INVISIBLE
     }
 
-    private fun showProgressBar(){
+    private fun showProgressBar() {
         rvMovies.visibility = View.INVISIBLE
         rvPopularNow.visibility = View.INVISIBLE
         progressBar.visibility = View.VISIBLE

@@ -36,8 +36,8 @@ class MoviesAdapter(private val onMovieItemClick: (MovieDto) -> Unit) :
         }
     }
 
-    fun initData(movies: List<MovieDto>?){
-        if (movies != null){
+    fun initData(movies: List<MovieDto>?) {
+        if (movies != null) {
             moviesList.clear()
             moviesList.addAll(movies)
             //notifyDataSetChanged()
