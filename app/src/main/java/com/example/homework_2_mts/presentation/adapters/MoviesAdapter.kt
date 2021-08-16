@@ -13,7 +13,7 @@ import java.util.ArrayList
 class MoviesAdapter(private val onMovieItemClick: (MovieEntity) -> Unit) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var moviesList: MutableList<MovieEntity> = ArrayList()
+    var items: MutableList<MovieEntity> = ArrayList()
 
     override fun getItemViewType(position: Int): Int {
         return when (position) {
@@ -45,21 +45,21 @@ class MoviesAdapter(private val onMovieItemClick: (MovieEntity) -> Unit) :
 
     fun initData(movieEntities: List<MovieEntity>?) {
         if (movieEntities != null) {
-            moviesList.clear()
-            moviesList.addAll(movieEntities)
+            items.clear()
+            items.addAll(movieEntities)
             //notifyDataSetChanged()
         }
     }
 
-    override fun getItemCount(): Int = moviesList.size
+    override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is MoviesViewHolder -> {
-                holder.bind(moviesList[position])
+                holder.bind(items[position])
             }
             is MoviesSoonViewHolder -> {
-                holder.bind(moviesList[position])
+                holder.bind(items[position])
             }
         }
     }

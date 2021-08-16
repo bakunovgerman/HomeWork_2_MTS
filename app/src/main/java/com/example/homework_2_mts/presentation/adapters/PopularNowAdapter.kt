@@ -12,7 +12,7 @@ class PopularNowAdapter(
     private val onPopularNowItemClick: (Genre) -> Unit
 ) : RecyclerView.Adapter<PopularNowAdapter.PopularNowViewHolder>() {
 
-    private var popularNowList: MutableList<Genre> = ArrayList()
+    private var items: MutableList<Genre> = ArrayList()
 
     inner class PopularNowViewHolder(view: View) :
         RecyclerView.ViewHolder(view) {
@@ -34,8 +34,8 @@ class PopularNowAdapter(
     }
 
     fun initData(popularNowItems: List<Genre>?) {
-        popularNowList.clear()
-        popularNowList.addAll(popularNowItems!!)
+        items.clear()
+        items.addAll(popularNowItems!!)
         notifyDataSetChanged()
     }
 
@@ -45,9 +45,9 @@ class PopularNowAdapter(
     }
 
     override fun onBindViewHolder(holder: PopularNowViewHolder, position: Int) {
-        holder.bind(popularNowList[position])
-        holder.popularNowNameText.setOnClickListener { onPopularNowItemClick.invoke(popularNowList[position]) }
+        holder.bind(items[position])
+        holder.popularNowNameText.setOnClickListener { onPopularNowItemClick.invoke(items[position]) }
     }
 
-    override fun getItemCount(): Int = popularNowList.size
+    override fun getItemCount(): Int = items.size
 }

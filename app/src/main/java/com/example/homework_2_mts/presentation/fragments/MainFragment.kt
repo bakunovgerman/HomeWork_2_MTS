@@ -137,7 +137,7 @@ class MainFragment : Fragment() {
     }
 
     private fun updateData(newList: List<MovieEntity>) {
-        val oldList = moviesAdapter.moviesList
+        val oldList = moviesAdapter.items
         val callback = MoviesCallbackDiffUtils(oldList, newList)
         val diff = DiffUtil.calculateDiff(callback)
         diff.dispatchUpdatesTo(moviesAdapter)
