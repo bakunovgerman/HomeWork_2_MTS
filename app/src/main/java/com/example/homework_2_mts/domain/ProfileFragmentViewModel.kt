@@ -31,7 +31,7 @@ class ProfileFragmentViewModel : ViewModel() {
     // init Repositories
     private val profileRepository = ProfileRepository()
 
-    fun getProfile(){
+    fun getProfile() {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 val profile = profileRepository.getProfile()

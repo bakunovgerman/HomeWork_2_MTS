@@ -10,10 +10,10 @@ import com.example.homework_2_mts.repository.database.entities.MovieEntity
 import com.example.homework_2_mts.repository.database.entities.Profile
 
 @Database(entities = [MovieEntity::class, Profile::class], version = 1)
-abstract class AppDatabase: RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
 
     abstract fun movieDao(): MovieDao
-    abstract fun profileDao() : ProfileDao
+    abstract fun profileDao(): ProfileDao
 
     companion object {
 

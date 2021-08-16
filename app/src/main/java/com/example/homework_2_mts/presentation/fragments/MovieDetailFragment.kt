@@ -50,7 +50,7 @@ class MovieDetailFragment : Fragment() {
         Picasso.get().load(movieEntity!!.imageUrl).into(imgMoviePoster)
     }
 
-    companion object{
+    companion object {
         const val MOVIE_KEY = "movie"
     }
 

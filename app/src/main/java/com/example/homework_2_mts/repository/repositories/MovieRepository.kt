@@ -18,7 +18,7 @@ class MovieRepository() {
         movieDao.insertMovies(movieEntities)
     }
 
-    suspend fun getMoviesCountDb() : Int = movieDao.getMoviesCount()
+    suspend fun getMoviesCountDb(): Int = movieDao.getMoviesCount()
 
     suspend fun clearAllDb() = movieDao.clearAllDb()
 

@@ -125,8 +125,7 @@ class ProfileFragment : Fragment() {
             Snackbar.make(rootView, "Информация о профиле изменена!", Snackbar.LENGTH_LONG).show()
             showProgressBar()
             profileFragmentViewModel.getProfile()
-        }
-        else if (insertProfileState.exception != null)
+        } else if (insertProfileState.exception != null)
             Snackbar.make(rootView, "Ошибка: ${insertProfileState.exception}", Snackbar.LENGTH_LONG)
                 .show()
     }

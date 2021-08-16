@@ -30,8 +30,20 @@ class MoviesAdapter(private val onMovieItemClick: (MovieEntity) -> Unit) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
-            VIEW_TYPE_MOVIE_SOON -> MoviesViewHolder(inflater.inflate(R.layout.movie_soon_item, parent, false), onMovieItemClick)
-            VIEW_TYPE_MOVIE -> MoviesSoonViewHolder(inflater.inflate(R.layout.movie_item, parent, false), onMovieItemClick)
+            VIEW_TYPE_MOVIE_SOON -> MoviesViewHolder(
+                inflater.inflate(
+                    R.layout.movie_soon_item,
+                    parent,
+                    false
+                ), onMovieItemClick
+            )
+            VIEW_TYPE_MOVIE -> MoviesSoonViewHolder(
+                inflater.inflate(
+                    R.layout.movie_item,
+                    parent,
+                    false
+                ), onMovieItemClick
+            )
             else -> throw IllegalStateException()
         }
     }

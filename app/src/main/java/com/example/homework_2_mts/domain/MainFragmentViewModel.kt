@@ -15,7 +15,7 @@ import kotlinx.coroutines.withContext
 
 typealias MainFragmentViewState = MainFragment.ViewState
 
-class MainFragmentViewModel: ViewModel() {
+class MainFragmentViewModel : ViewModel() {
     // init CoroutineExceptionHandler
     private val errorHandler = CoroutineExceptionHandler { _, error ->
         //Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show()
@@ -26,7 +26,7 @@ class MainFragmentViewModel: ViewModel() {
     private val _viewState = MutableLiveData<MainFragmentViewState>()
 
     val moviesList: LiveData<List<MovieEntity>> get() = _moviesList
-    private val _moviesList= MutableLiveData<List<MovieEntity>>()
+    private val _moviesList = MutableLiveData<List<MovieEntity>>()
 
     val popularNowList: LiveData<List<Genre>> get() = _popularNowList
     private val _popularNowList = MutableLiveData<List<Genre>>()
@@ -40,7 +40,7 @@ class MainFragmentViewModel: ViewModel() {
     // init Models
     private val popularNowModel: PopularNowModel = PopularNowModel(PopularNowDataSourceImpl())
 
-    fun loadData(){
+    fun loadData() {
         viewModelScope.launch(errorHandler) {
             withContext(Dispatchers.IO) {
                 Thread.sleep(2000)

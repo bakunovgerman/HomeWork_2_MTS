@@ -31,7 +31,8 @@ class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
             when (it.itemId) {
                 R.id.menu_home -> {
                     if (navController.currentDestination?.id == R.id.movieDetailFragment ||
-                        navController.currentDestination?.id == R.id.profileFragment) {
+                        navController.currentDestination?.id == R.id.profileFragment
+                    ) {
                         navController.popBackStack(R.id.mainFragment, false)
                     }
                     true
@@ -53,7 +54,8 @@ class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
     override fun onBackPressed() {
         if (navController.currentDestination?.id == R.id.profileFragment
             && navController.previousBackStackEntry?.destination?.id == R.id.movieDetailFragment
-            || navController.previousBackStackEntry?.destination?.id == R.id.mainFragment) {
+            || navController.previousBackStackEntry?.destination?.id == R.id.mainFragment
+        ) {
 
             bottomNavigationView.selectedItemId = R.id.menu_home
 
@@ -71,7 +73,7 @@ class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
         Toast.makeText(this, genre.name, Toast.LENGTH_LONG).show()
     }
 
-    companion object{
+    companion object {
         const val MOVIE_KEY = "movie"
     }
 }
