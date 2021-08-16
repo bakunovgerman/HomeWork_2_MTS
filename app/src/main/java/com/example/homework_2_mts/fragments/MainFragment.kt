@@ -66,13 +66,6 @@ class MainFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
 
-        init(view)
-        mainFragmentViewModel.loadData()
-
-        return view
-    }
-
-    private fun init(view: View) {
         swipeRefresh = view.findViewById(R.id.swipe_refresh)
         rvMovies = view.findViewById(R.id.rvMovies)
         rvPopularNow = view.findViewById(R.id.rvPopularNow)
@@ -116,6 +109,9 @@ class MainFragment : Fragment() {
         )
         mainFragmentViewModel.viewState.observe(viewLifecycleOwner, Observer(::setViewState))
         mainFragmentViewModel.updateMoviesList.observe(viewLifecycleOwner, Observer(::updateData))
+        mainFragmentViewModel.loadData()
+
+        return view
     }
 
     private fun initPopularNowData(popularNowItems: List<PopularNowDto>?) {
