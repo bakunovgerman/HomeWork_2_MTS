@@ -49,29 +49,7 @@ class ProfileFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
-        initView(view)
-        initListener()
-        initRv(view)
-        initObserver()
-
-        profileFragmentViewModel.getProfile()
-
-        return view
-    }
-
-    private fun initObserver() {
-        profileFragmentViewModel = ProfileFragmentViewModel()
-        profileFragmentViewModel.profileInsertComplete.observe(
-            viewLifecycleOwner,
-            Observer(::showSnackBar)
-        )
-        profileFragmentViewModel.getProfileInfo.observe(
-            viewLifecycleOwner,
-            Observer(::setProfileInfo)
-        )
-    }
-
-    private fun initView(view: View) {
+        // initView
         saveProfileInfoButton = view.findViewById(R.id.btnSaveProfileInfo)
         rootView = view.findViewById(R.id.rootViewProfileFragment)
         nameProfileTextView = view.findViewById(R.id.tvFirstNameUser)
@@ -81,9 +59,8 @@ class ProfileFragment : Fragment() {
         emailIEditText = view.findViewById(R.id.ilEtEmailUser)
         phoneNumberEditText = view.findViewById(R.id.ilEtPhoneNumberUser)
         progressBar = view.findViewById(R.id.progressBar)
-    }
 
-    private fun initListener() {
+        //initListener
         saveProfileInfoButton.setOnClickListener {
             val name = nameEditText.text.toString()
             val email = emailIEditText.text.toString()
@@ -99,9 +76,8 @@ class ProfileFragment : Fragment() {
                 )
             )
         }
-    }
 
-    private fun initRv(view: View) {
+        // initRv
         rvInteresting = view.findViewById(R.id.rvInterestsUser)
         val popularNowAdapter = PopularNowAdapter() {
 
@@ -118,6 +94,21 @@ class ProfileFragment : Fragment() {
                 )
             )
         }
+
+        // initObserver
+        profileFragmentViewModel = ProfileFragmentViewModel()
+        profileFragmentViewModel.profileInsertComplete.observe(
+            viewLifecycleOwner,
+            Observer(::showSnackBar)
+        )
+        profileFragmentViewModel.getProfileInfo.observe(
+            viewLifecycleOwner,
+            Observer(::setProfileInfo)
+        )
+
+        profileFragmentViewModel.getProfile()
+
+        return view
     }
 
     private fun showSnackBar(insertProfileState: InsertProfileState) {
