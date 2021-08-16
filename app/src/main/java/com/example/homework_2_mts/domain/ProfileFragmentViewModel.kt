@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.homework_2_mts.presentation.fragments.ProfileFragment
-import com.example.homework_2_mts.repository.database.entities.Profile
+import com.example.homework_2_mts.repository.database.entities.ProfileEntity
 import com.example.homework_2_mts.repository.repositories.ProfileRepository
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -22,8 +22,8 @@ class ProfileFragmentViewModel : ViewModel() {
     }
 
     // init LiveData
-    val getProfileInfo: LiveData<Profile?> get() = _getProfileInfo
-    private val _getProfileInfo = MutableLiveData<Profile?>()
+    val getProfileEntityInfo: LiveData<ProfileEntity?> get() = _getProfileInfo
+    private val _getProfileInfo = MutableLiveData<ProfileEntity?>()
 
     val profileInsertComplete: LiveData<ProfileFragmentInsertProfileState> get() = _profileInsertComplete
     private val _profileInsertComplete = MutableLiveData<ProfileFragmentInsertProfileState>()
@@ -40,10 +40,10 @@ class ProfileFragmentViewModel : ViewModel() {
         }
     }
 
-    fun insertProfile(profile: Profile) {
+    fun insertProfile(profileEntity: ProfileEntity) {
         viewModelScope.launch(errorHandler) {
             withContext(Dispatchers.IO + errorHandler) {
-                profileRepository.insertProfile(profile)
+                profileRepository.insertProfile(profileEntity)
                 _profileInsertComplete.postValue(ProfileFragmentInsertProfileState(true))
             }
         }

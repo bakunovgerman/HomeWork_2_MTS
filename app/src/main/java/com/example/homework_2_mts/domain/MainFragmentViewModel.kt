@@ -3,7 +3,7 @@ package com.example.homework_2_mts.domain
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.homework_2_mts.repository.database.entities.MovieEntity
-import com.example.homework_2_mts.repository.database.entities.Genre
+import com.example.homework_2_mts.repository.database.entities.GenreEntity
 import com.example.homework_2_mts.repository.data.features.popular.PopularNowDataSourceImpl
 import com.example.homework_2_mts.presentation.fragments.MainFragment
 import com.example.homework_2_mts.repository.models.PopularNowModel
@@ -28,8 +28,8 @@ class MainFragmentViewModel : ViewModel() {
     val moviesList: LiveData<List<MovieEntity>> get() = _moviesList
     private val _moviesList = MutableLiveData<List<MovieEntity>>()
 
-    val popularNowList: LiveData<List<Genre>> get() = _popularNowList
-    private val _popularNowList = MutableLiveData<List<Genre>>()
+    val popularNowList: LiveData<List<GenreEntity>> get() = _popularNowList
+    private val _popularNowList = MutableLiveData<List<GenreEntity>>()
 
     val updateMoviesList: LiveData<List<MovieEntity>> get() = _updateMoviesList
     private val _updateMoviesList = MutableLiveData<List<MovieEntity>>()

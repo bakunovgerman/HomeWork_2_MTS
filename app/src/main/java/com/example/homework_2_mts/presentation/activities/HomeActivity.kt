@@ -9,7 +9,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.homework_2_mts.R
 import com.example.homework_2_mts.repository.database.entities.MovieEntity
-import com.example.homework_2_mts.repository.database.entities.Genre
+import com.example.homework_2_mts.repository.database.entities.GenreEntity
 import com.example.homework_2_mts.presentation.fragments.MovieDetailFragment
 import com.example.homework_2_mts.presentation.helpers.MainFragmentClickListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -69,8 +69,8 @@ class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
         navController.navigate(R.id.action_main_fragment_to_movie_detail_fragment, bundle)
     }
 
-    override fun onPopularNowClick(genre: Genre) {
-        Toast.makeText(this, genre.name, Toast.LENGTH_LONG).show()
+    override fun onPopularNowClick(genreEntity: GenreEntity) {
+        Toast.makeText(this, genreEntity.name, Toast.LENGTH_LONG).show()
     }
 
     companion object {

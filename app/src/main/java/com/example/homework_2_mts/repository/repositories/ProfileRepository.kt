@@ -1,7 +1,7 @@
 package com.example.homework_2_mts.repository.repositories
 
 import com.example.homework_2_mts.repository.database.AppDatabase
-import com.example.homework_2_mts.repository.database.entities.Profile
+import com.example.homework_2_mts.repository.database.entities.ProfileEntity
 
 class ProfileRepository {
 
@@ -9,9 +9,9 @@ class ProfileRepository {
     private val profileDao = AppDatabase.instance.profileDao()
 
     // init methods
-    suspend fun getProfile(): Profile? = profileDao.getProfile()
+    suspend fun getProfile(): ProfileEntity? = profileDao.getProfile()
 
-    suspend fun insertProfile(profile: Profile) {
-        profileDao.insertProfile(profile)
+    suspend fun insertProfile(profileEntity: ProfileEntity) {
+        profileDao.insertProfile(profileEntity)
     }
 }

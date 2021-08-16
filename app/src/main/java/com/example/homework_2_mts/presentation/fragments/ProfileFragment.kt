@@ -17,7 +17,7 @@ import com.example.homework_2_mts.domain.ProfileFragmentViewModel
 import com.example.homework_2_mts.presentation.adapters.PopularNowAdapter
 import com.example.homework_2_mts.presentation.adapters.items_decoration.SpacesItemDecoration
 import com.example.homework_2_mts.repository.data.features.popular.PopularNowDataSourceImpl
-import com.example.homework_2_mts.repository.database.entities.Profile
+import com.example.homework_2_mts.repository.database.entities.ProfileEntity
 import com.example.homework_2_mts.repository.models.PopularNowModel
 import com.google.android.material.snackbar.Snackbar
 
@@ -67,7 +67,7 @@ class ProfileFragment : Fragment() {
             val password = passwordEditText.text.toString()
             val phone = phoneNumberEditText.text.toString()
             profileFragmentViewModel.insertProfile(
-                Profile(
+                ProfileEntity(
                     id = 1,
                     name = name,
                     email = email,
@@ -101,7 +101,7 @@ class ProfileFragment : Fragment() {
             viewLifecycleOwner,
             Observer(::showSnackBar)
         )
-        profileFragmentViewModel.getProfileInfo.observe(
+        profileFragmentViewModel.getProfileEntityInfo.observe(
             viewLifecycleOwner,
             Observer(::setProfileInfo)
         )
@@ -121,14 +121,14 @@ class ProfileFragment : Fragment() {
                 .show()
     }
 
-    private fun setProfileInfo(profile: Profile?) {
-        if (profile != null) {
-            nameProfileTextView.text = profile.name
-            emailProfileTextView.text = profile.email
-            nameEditText.setText(profile.name)
-            emailIEditText.setText(profile.email)
-            passwordEditText.setText(profile.password)
-            phoneNumberEditText.setText(profile.phoneNumber)
+    private fun setProfileInfo(profileEntity: ProfileEntity?) {
+        if (profileEntity != null) {
+            nameProfileTextView.text = profileEntity.name
+            emailProfileTextView.text = profileEntity.email
+            nameEditText.setText(profileEntity.name)
+            emailIEditText.setText(profileEntity.email)
+            passwordEditText.setText(profileEntity.password)
+            phoneNumberEditText.setText(profileEntity.phoneNumber)
         }
         hideProgressBar()
     }
