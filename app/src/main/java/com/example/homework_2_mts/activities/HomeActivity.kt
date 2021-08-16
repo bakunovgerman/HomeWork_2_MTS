@@ -24,10 +24,6 @@ class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var navController: NavController
 
-    companion object{
-        const val MOVIE_KEY = "movie"
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -79,6 +75,10 @@ class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
 
     override fun onPopularNowClick(popularNowDto: PopularNowDto) {
         Toast.makeText(this, popularNowDto.name, Toast.LENGTH_LONG).show()
+    }
+
+    companion object{
+        const val MOVIE_KEY = "movie"
     }
 
 }
