@@ -1,6 +1,5 @@
 package com.example.homework_2_mts.viewModels
 
-import android.widget.Toast
 import androidx.lifecycle.*
 import com.example.homework_2_mts.data.dto.MovieDto
 import com.example.homework_2_mts.data.dto.PopularNowDto

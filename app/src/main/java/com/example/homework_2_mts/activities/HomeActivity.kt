@@ -4,20 +4,15 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.homework_2_mts.fragments.MainFragment
-import com.example.homework_2_mts.fragments.ProfileFragment
 import com.example.homework_2_mts.R
 import com.example.homework_2_mts.data.dto.MovieDto
 import com.example.homework_2_mts.data.dto.PopularNowDto
 import com.example.homework_2_mts.fragments.MovieDetailFragment
 import com.example.homework_2_mts.helpers.MainFragmentClickListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
-
 
 class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
 

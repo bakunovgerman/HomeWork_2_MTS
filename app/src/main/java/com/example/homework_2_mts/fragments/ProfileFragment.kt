@@ -12,7 +12,6 @@ import com.example.homework_2_mts.adapters.items_decoration.SpacesItemDecoration
 import com.example.homework_2_mts.data.features.popular.PopularNowDataSourceImpl
 import com.example.homework_2_mts.models.PopularNowModel
 
-
 class ProfileFragment : Fragment() {
 
     private lateinit var rvInteresting: RecyclerView

@@ -26,10 +26,7 @@ import com.example.homework_2_mts.helpers.MoviesCallbackDiffUtils
 import com.example.homework_2_mts.viewModels.MainFragmentViewModel
 import kotlinx.coroutines.*
 
-
 class MainFragment : Fragment() {
-
-
     // init viewModel
     private lateinit var mainFragmentViewModel: MainFragmentViewModel
 

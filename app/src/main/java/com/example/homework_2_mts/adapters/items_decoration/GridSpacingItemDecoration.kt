@@ -5,7 +5,6 @@ import android.content.res.Resources
 import android.graphics.Rect
 import android.util.DisplayMetrics
 import android.view.View
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 
