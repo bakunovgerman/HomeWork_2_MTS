@@ -4,16 +4,19 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.homework_2_mts.App
+import com.example.homework_2_mts.repository.database.dao.GenreDao
 import com.example.homework_2_mts.repository.database.dao.MovieDao
 import com.example.homework_2_mts.repository.database.dao.ProfileDao
+import com.example.homework_2_mts.repository.database.entities.GenreEntity
 import com.example.homework_2_mts.repository.database.entities.MovieEntity
 import com.example.homework_2_mts.repository.database.entities.ProfileEntity
 
-@Database(entities = [MovieEntity::class, ProfileEntity::class], version = 1)
+@Database(entities = [MovieEntity::class, ProfileEntity::class, GenreEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun movieDao(): MovieDao
     abstract fun profileDao(): ProfileDao
+    abstract fun genreDao(): GenreDao
 
     companion object {
 
