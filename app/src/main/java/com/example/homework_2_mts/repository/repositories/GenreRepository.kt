@@ -5,7 +5,7 @@ import com.example.homework_2_mts.repository.database.AppDatabase
 import com.example.homework_2_mts.repository.database.entities.GenreEntity
 import com.example.homework_2_mts.repository.models.PopularNowModel
 
-class GenresRepository() {
+class GenreRepository() {
 
     // init Dao
     private val genreDao = AppDatabase.instance.genreDao()

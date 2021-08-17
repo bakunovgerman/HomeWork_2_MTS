@@ -39,8 +39,6 @@ class MainFragment : Fragment() {
     private lateinit var progressBar: FrameLayout
     private var mainFragmentClickListener: MainFragmentClickListener? = null
 
-    // private val popularNowList = popularNowModel.getPopularNow()
-
     //init adapter
     private lateinit var popularNowAdapter: PopularNowAdapter
     private lateinit var moviesAdapter: MoviesAdapter
@@ -95,12 +93,13 @@ class MainFragment : Fragment() {
             viewLifecycleOwner,
             Observer(moviesAdapter::initData)
         )
-        mainFragmentViewModel.popularNowList.observe(
+        mainFragmentViewModel.genresList.observe(
             viewLifecycleOwner,
             Observer(::initPopularNowData)
         )
         mainFragmentViewModel.viewState.observe(viewLifecycleOwner, Observer(::setViewState))
         mainFragmentViewModel.updateMoviesList.observe(viewLifecycleOwner, Observer(::updateData))
+
         mainFragmentViewModel.loadData()
 
         return view
@@ -122,7 +121,6 @@ class MainFragment : Fragment() {
 
         }
     }
-
 
     data class ViewState(
         val isDownloaded: Boolean = false
