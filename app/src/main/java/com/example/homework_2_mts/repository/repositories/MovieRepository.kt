@@ -27,8 +27,4 @@ class MovieRepository() {
     fun getMoviesAPI(): List<MovieEntity> = MoviesModel(MoviesDataSourceImpl()).getMovies()
     fun getMoviesAPIRefresh(): List<MovieEntity> = MoviesModel(MoviesDataSourceImpl()).getMovies2()
 
-    // equals
-    suspend fun ApiEqualsDb(): Boolean {
-        return getMoviesAPI() == getDbMovies()
-    }
 }

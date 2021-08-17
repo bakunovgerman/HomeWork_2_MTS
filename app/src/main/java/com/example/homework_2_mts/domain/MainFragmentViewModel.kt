@@ -6,17 +6,21 @@ import com.example.homework_2_mts.repository.database.entities.MovieEntity
 import com.example.homework_2_mts.repository.database.entities.GenreEntity
 import com.example.homework_2_mts.repository.data.features.popular.PopularNowDataSourceImpl
 import com.example.homework_2_mts.presentation.fragments.MainFragment
+import com.example.homework_2_mts.repository.database.entities.UpdateDbDateEntity
 import com.example.homework_2_mts.repository.models.PopularNowModel
 import com.example.homework_2_mts.repository.repositories.GenreRepository
 import com.example.homework_2_mts.repository.repositories.MovieRepository
+import com.example.homework_2_mts.repository.repositories.UpdateDbDateRepository
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.*
 
 typealias MainFragmentViewState = MainFragment.ViewState
 
 class MainFragmentViewModel : ViewModel() {
+
     // init CoroutineExceptionHandler
     private val errorHandler = CoroutineExceptionHandler { _, error ->
         //Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show()
@@ -38,24 +42,21 @@ class MainFragmentViewModel : ViewModel() {
     // init Repositories
     private val movieRepository = MovieRepository()
     private val genreRepository = GenreRepository()
-
-    // init Models
-    private val popularNowModel: PopularNowModel = PopularNowModel(PopularNowDataSourceImpl())
+    private val updateDbDateRepository = UpdateDbDateRepository()
 
     fun loadData() {
         viewModelScope.launch(errorHandler) {
             withContext(Dispatchers.IO) {
                 Thread.sleep(2000)
-                if (!movieRepository.ApiEqualsDb()) {
+                if (updateDbDateRepository.getUpdateDbDateCount() == 0 || updateDbDateRepository.isUpdateDb()) {
                     Log.d("update_dp", "database is update")
                     Log.d("update_dp", "database insert data")
                     movieRepository.insertMoviesDb(movieRepository.getMoviesAPI())
                     genreRepository.insertDbGenres(genreRepository.getGenresAPI())
+                    updateDbDateRepository.insertDate(UpdateDbDateEntity(1, Date().time))
                 }
-                val movies = movieRepository.getDbMovies()
-                val genres = genreRepository.getDbGenres()
-                _moviesList.postValue(movies)
-                _genresList.postValue(genres)
+                _moviesList.postValue(movieRepository.getDbMovies())
+                _genresList.postValue(genreRepository.getDbGenres())
             }
             _viewState.postValue(MainFragmentViewState(isDownloaded = true))
         }
@@ -73,6 +74,7 @@ class MainFragmentViewModel : ViewModel() {
             _viewState.postValue(MainFragmentViewState(isDownloaded = true))
         }
     }
+
 }
 
 

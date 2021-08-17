@@ -7,6 +7,7 @@ import com.example.homework_2_mts.App
 import com.example.homework_2_mts.repository.database.dao.GenreDao
 import com.example.homework_2_mts.repository.database.dao.MovieDao
 import com.example.homework_2_mts.repository.database.dao.ProfileDao
+import com.example.homework_2_mts.repository.database.dao.UpdateDbDateDao
 import com.example.homework_2_mts.repository.database.entities.GenreEntity
 import com.example.homework_2_mts.repository.database.entities.MovieEntity
 import com.example.homework_2_mts.repository.database.entities.ProfileEntity
@@ -21,6 +22,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun movieDao(): MovieDao
     abstract fun profileDao(): ProfileDao
     abstract fun genreDao(): GenreDao
+    abstract fun updateDbDateDao(): UpdateDbDateDao
 
     companion object {
 

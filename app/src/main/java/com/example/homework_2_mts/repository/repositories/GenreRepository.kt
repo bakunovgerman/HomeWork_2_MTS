@@ -25,8 +25,4 @@ class GenreRepository() {
     // API methods
     fun getGenresAPI(): List<GenreEntity> = PopularNowModel(PopularNowDataSourceImpl()).getPopularNow()
 
-    // equals
-//    suspend fun ApiEqualsDb(): Boolean {
-//        return getMoviesAPI() == getDbMovies()
-//    }
 }

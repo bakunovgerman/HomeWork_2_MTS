@@ -10,5 +10,5 @@ data class UpdateDbDateEntity(
     @ColumnInfo(name = "id")
     val id: Long,
     @ColumnInfo(name = "date")
-    val date: String
+    val date: Long
 )
