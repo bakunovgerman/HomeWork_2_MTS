@@ -10,8 +10,12 @@ import com.example.homework_2_mts.repository.database.dao.ProfileDao
 import com.example.homework_2_mts.repository.database.entities.GenreEntity
 import com.example.homework_2_mts.repository.database.entities.MovieEntity
 import com.example.homework_2_mts.repository.database.entities.ProfileEntity
+import com.example.homework_2_mts.repository.database.entities.UpdateDbDateEntity
 
-@Database(entities = [MovieEntity::class, ProfileEntity::class, GenreEntity::class], version = 1)
+@Database(
+    entities = [MovieEntity::class, ProfileEntity::class, GenreEntity::class, UpdateDbDateEntity::class],
+    version = 1
+)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun movieDao(): MovieDao
