@@ -1,11 +1,8 @@
 package com.example.homework_2_mts.repository.repositories
 
-import com.example.homework_2_mts.repository.data.features.movies.MoviesDataSourceImpl
 import com.example.homework_2_mts.repository.data.features.popular.PopularNowDataSourceImpl
 import com.example.homework_2_mts.repository.database.AppDatabase
 import com.example.homework_2_mts.repository.database.entities.GenreEntity
-import com.example.homework_2_mts.repository.database.entities.MovieEntity
-import com.example.homework_2_mts.repository.models.MoviesModel
 import com.example.homework_2_mts.repository.models.PopularNowModel
 
 class GenresRepository() {

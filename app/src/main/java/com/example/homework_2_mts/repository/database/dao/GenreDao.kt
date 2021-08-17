@@ -2,7 +2,6 @@ package com.example.homework_2_mts.repository.database.dao
 
 import androidx.room.*
 import com.example.homework_2_mts.repository.database.entities.GenreEntity
-import com.example.homework_2_mts.repository.database.entities.MovieEntity
 
 @Dao
 interface GenreDao {
