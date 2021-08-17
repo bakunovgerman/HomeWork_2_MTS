@@ -17,6 +17,7 @@ import com.example.homework_2_mts.domain.ProfileFragmentViewModel
 import com.example.homework_2_mts.presentation.adapters.PopularNowAdapter
 import com.example.homework_2_mts.presentation.adapters.items_decoration.SpacesItemDecoration
 import com.example.homework_2_mts.repository.data.features.popular.PopularNowDataSourceImpl
+import com.example.homework_2_mts.repository.database.entities.GenreEntity
 import com.example.homework_2_mts.repository.database.entities.ProfileEntity
 import com.example.homework_2_mts.repository.models.PopularNowModel
 import com.google.android.material.snackbar.Snackbar
@@ -27,7 +28,6 @@ class ProfileFragment : Fragment() {
     private lateinit var profileFragmentViewModel: ProfileFragmentViewModel
     private lateinit var rvInteresting: RecyclerView
     private lateinit var saveProfileInfoButton: Button
-    private val interestingUserModel = PopularNowModel(PopularNowDataSourceImpl())
     private lateinit var rootView: ConstraintLayout
     private lateinit var nameProfileTextView: TextView
     private lateinit var emailProfileTextView: TextView
@@ -36,6 +36,7 @@ class ProfileFragment : Fragment() {
     private lateinit var emailIEditText: EditText
     private lateinit var phoneNumberEditText: EditText
     private lateinit var progressBar: FrameLayout
+    private lateinit var genresAdapter: PopularNowAdapter
 
     data class InsertProfileState(
         val isInsert: Boolean = false,
@@ -79,21 +80,7 @@ class ProfileFragment : Fragment() {
 
         // initRv
         rvInteresting = view.findViewById(R.id.rvInterestsUser)
-        val popularNowAdapter = PopularNowAdapter() {
-
-        }
-        val items = interestingUserModel.getPopularNow()
-        popularNowAdapter.initData(items)
-        rvInteresting.apply {
-            adapter = popularNowAdapter
-            addItemDecoration(
-                SpacesItemDecoration(
-                    spaceRight = 6,
-                    spaceLeft = 20,
-                    size = items.size
-                )
-            )
-        }
+        genresAdapter = PopularNowAdapter() {}
 
         // initObserver
         profileFragmentViewModel = ProfileFragmentViewModel()
@@ -105,10 +92,30 @@ class ProfileFragment : Fragment() {
             viewLifecycleOwner,
             Observer(::setProfileInfo)
         )
+        profileFragmentViewModel.genresList.observe(
+            viewLifecycleOwner,
+            Observer(::initGenresData)
+        )
 
         profileFragmentViewModel.getProfile()
 
         return view
+    }
+
+    private fun initGenresData(genresList: List<GenreEntity>) {
+        genresAdapter.initData(genresList)
+        rvInteresting.apply {
+            adapter = genresAdapter
+            if (this.itemDecorationCount == 0) {
+                addItemDecoration(
+                    SpacesItemDecoration(
+                        spaceRight = 6,
+                        spaceLeft = 20,
+                        size = genresList.size
+                    )
+                )
+            }
+        }
     }
 
     private fun showSnackBar(insertProfileState: InsertProfileState) {

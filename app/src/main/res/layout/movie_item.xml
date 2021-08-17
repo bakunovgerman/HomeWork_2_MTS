@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cvMoviePoster"
         app:layout_constraintStart_toStartOf="parent"
         android:text="@string/movie_title"
-        android:textSize="@dimen/movie_title"
+        android:textSize="@dimen/movie_item_title_text_size"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_marginTop="@dimen/movie_item_title_margin_top"/>
@@ -48,7 +48,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvMovieTitle"
         android:text="@string/movie_description"
-        android:textSize="@dimen/movie_item_description"
+        android:textSize="@dimen/movie_item_description_text_size"
         android:textColor="@color/black"
         android:layout_marginTop="@dimen/movie_item_description_margin_top"
         android:maxLines="6"
@@ -78,7 +78,7 @@
         android:layout_marginEnd="@dimen/movie_item_age_margin_end"
         android:background="@drawable/bg_circle_age_movie_item"
         android:textColor="@color/black"
-        android:textSize="@dimen/movie_item_age"
+        android:textSize="@dimen/movie_item_age_text_size"
         tools:ignore="SmallSp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,6 +25,7 @@ class UpdateDbDateRepository() {
 
     // equals
     suspend fun isUpdateDb(): Boolean {
+        // если база обновлялась больше часа назад, то разрешаем обновление
         return ((Date().time - updateDbDateDao.getUpdateDbDate().date) / (1000 * 60 * 60)) > 1
     }
 }

@@ -1,16 +1,19 @@
 package com.example.homework_2_mts.domain
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.homework_2_mts.presentation.fragments.ProfileFragment
+import com.example.homework_2_mts.repository.database.entities.GenreEntity
 import com.example.homework_2_mts.repository.database.entities.ProfileEntity
+import com.example.homework_2_mts.repository.database.entities.UpdateDbDateEntity
+import com.example.homework_2_mts.repository.repositories.GenreRepository
 import com.example.homework_2_mts.repository.repositories.ProfileRepository
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.example.homework_2_mts.repository.repositories.UpdateDbDateRepository
+import kotlinx.coroutines.*
+import java.util.*
 
 typealias ProfileFragmentInsertProfileState = ProfileFragment.InsertProfileState
 
@@ -28,11 +31,31 @@ class ProfileFragmentViewModel : ViewModel() {
     val profileInsertComplete: LiveData<ProfileFragmentInsertProfileState> get() = _profileInsertComplete
     private val _profileInsertComplete = MutableLiveData<ProfileFragmentInsertProfileState>()
 
+    val genresList: LiveData<List<GenreEntity>> get() = _genresList
+    private val _genresList = MutableLiveData<List<GenreEntity>>()
+
     // init Repositories
     private val profileRepository = ProfileRepository()
+    private val genreRepository = GenreRepository()
+    private val updateDbDateRepository = UpdateDbDateRepository()
+
+    private fun loadGenres(): Job {
+        return viewModelScope.launch {
+            delay(2000)
+            withContext(Dispatchers.IO) {
+                if (updateDbDateRepository.getUpdateDbDateCount() == 0 || updateDbDateRepository.isUpdateDb()) {
+                    genreRepository.insertDbGenres(genreRepository.getGenresAPI())
+                    updateDbDateRepository.insertDate(UpdateDbDateEntity(1, Date().time))
+                }
+                _genresList.postValue(genreRepository.getDbGenres())
+            }
+        }
+    }
 
     fun getProfile() {
         viewModelScope.launch {
+            val jobLoadGenres = loadGenres()
+            jobLoadGenres.join()
             withContext(Dispatchers.IO) {
                 val profile = profileRepository.getProfile()
                 _getProfileInfo.postValue(profile)
