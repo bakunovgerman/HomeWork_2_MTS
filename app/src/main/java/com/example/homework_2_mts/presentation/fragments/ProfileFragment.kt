@@ -43,12 +43,8 @@ class ProfileFragment : Fragment() {
         val exception: Throwable? = null
     )
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        val view = inflater.inflate(R.layout.fragment_profile, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         // initView
         saveProfileInfoButton = view.findViewById(R.id.btnSaveProfileInfo)
@@ -98,8 +94,14 @@ class ProfileFragment : Fragment() {
         )
 
         profileFragmentViewModel.getProfile()
+    }
 
-        return view
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
     private fun initGenresData(genresList: List<GenreEntity>) {

@@ -49,12 +49,8 @@ class MainFragment : Fragment() {
         mainFragmentViewModel = ViewModelProvider(this).get(MainFragmentViewModel::class.java)
     }
 
-    @DelicateCoroutinesApi
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_main, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         swipeRefresh = view.findViewById(R.id.swipe_refresh)
         rvMovies = view.findViewById(R.id.rvMovies)
@@ -101,8 +97,13 @@ class MainFragment : Fragment() {
         mainFragmentViewModel.updateMoviesList.observe(viewLifecycleOwner, Observer(::updateData))
 
         mainFragmentViewModel.loadData()
+    }
 
-        return view
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
     private fun initPopularNowData(popularNowItems: List<GenreEntity>?) {

@@ -44,10 +44,10 @@ class MoviesAdapter(private val onMovieItemClick: (MovieEntity) -> Unit) :
     }
 
     fun initData(movieEntities: List<MovieEntity>?) {
+        items.clear()
         if (movieEntities != null) {
-            items.clear()
             items.addAll(movieEntities)
-            //notifyDataSetChanged()
+            notifyDataSetChanged()
         }
     }
 

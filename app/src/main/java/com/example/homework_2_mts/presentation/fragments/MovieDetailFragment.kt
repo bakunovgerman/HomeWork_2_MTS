@@ -26,11 +26,8 @@ class MovieDetailFragment : Fragment() {
         movieEntity = requireArguments().getParcelable<MovieEntity>(MOVIE_KEY)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_movie_detail, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         tvMovieTitle = view.findViewById(R.id.tvMovieTitle)
         movieRatingLayout = view.findViewById(R.id.rbMovie)
@@ -45,9 +42,13 @@ class MovieDetailFragment : Fragment() {
             tvMovieDescription.text = it.description
             Picasso.get().load(it.imageUrl).into(imgMoviePoster)
         }
+    }
 
-
-        return view
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_movie_detail, container, false)
     }
 
     companion object {
