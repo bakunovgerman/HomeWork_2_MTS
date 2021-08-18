@@ -30,8 +30,10 @@ class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
         bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_home -> {
-                    if (navController.currentDestination?.id == R.id.movieDetailFragment ||
-                        navController.currentDestination?.id == R.id.profileFragment
+                    if (navController.currentDestination?.id in listOf(
+                            R.id.movieDetailFragment,
+                            R.id.profileFragment
+                        )
                     ) {
                         navController.popBackStack(R.id.mainFragment, false)
                     }

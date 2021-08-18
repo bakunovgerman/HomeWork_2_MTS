@@ -39,11 +39,11 @@ class MovieDetailFragment : Fragment() {
         imgMoviePoster = view.findViewById(R.id.imgMoviePoster)
         // set text
         movieEntity?.let {
-            tvMovieTitle.text = movieEntity!!.title
-            movieRatingLayout.rating = movieEntity!!.rateScore.toFloat()
-            tvMovieAge.text = String.format(movieEntity!!.ageRestriction.toString() + '+')
-            tvMovieDescription.text = movieEntity!!.description
-            Picasso.get().load(movieEntity!!.imageUrl).into(imgMoviePoster)
+            tvMovieTitle.text = it.title
+            movieRatingLayout.rating = it.rateScore.toFloat()
+            tvMovieAge.text = String.format(it.ageRestriction.toString() + '+')
+            tvMovieDescription.text = it.description
+            Picasso.get().load(it.imageUrl).into(imgMoviePoster)
         }
 
 
