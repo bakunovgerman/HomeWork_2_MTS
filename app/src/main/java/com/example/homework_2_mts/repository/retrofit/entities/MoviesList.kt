@@ -1,11 +1,11 @@
-package com.example.homework_2_mts.repository.retrofit
+package com.example.homework_2_mts.repository.retrofit.entities
 
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Result(
+data class MoviesList(
     @SerialName("backdrop_path")
     val backdropPath: String,
     @SerialName("id")
