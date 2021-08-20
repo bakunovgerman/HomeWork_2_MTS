@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MoviesList(
+data class MoviesApiListItem(
     @SerialName("backdrop_path")
     val backdropPath: String,
     @SerialName("id")
@@ -19,5 +19,7 @@ data class MoviesList(
     @SerialName("video")
     val video: Boolean,
     @SerialName("vote_average")
-    val voteAverage: Double
+    val voteAverage: Double,
+    @SerialName("adult")
+    val adult: Boolean
 )

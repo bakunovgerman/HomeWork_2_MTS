@@ -32,4 +32,7 @@
     <string name="exit">Выйти</string>
     <string name="soon">Скоро</string>
     <string name="save_profile_info">Сохранить</string>
+    <string name="api_key">97d1d87288586c192d78f03b0336edd0</string>
+    <string name="poster_base_url">https://www.themoviedb.org/t/p/w600_and_h900_bestv2/</string>
+    <string name="bg_img_base_url">https://www.themoviedb.org/t/p/w1000_and_h450_multi_faces</string>
 </resources>

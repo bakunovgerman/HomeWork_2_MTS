@@ -1,9 +1,11 @@
 package com.example.homework_2_mts.repository.repositories
 
-import com.example.homework_2_mts.repository.data.features.movies.MoviesDataSourceImpl
+import com.example.homework_2_mts.App
+import com.example.homework_2_mts.R
 import com.example.homework_2_mts.repository.database.AppDatabase
 import com.example.homework_2_mts.repository.database.entities.MovieEntity
-import com.example.homework_2_mts.repository.models.MoviesModel
+import com.example.homework_2_mts.repository.retrofit.entities.MoviesApiPopularResponse
+import retrofit2.Response
 
 class MovieRepository() {
 
@@ -14,7 +16,7 @@ class MovieRepository() {
     suspend fun getDbMovies(): List<MovieEntity> = movieDao.getMovies()
 
 
-    suspend fun insertMoviesDb(movieEntities: List<MovieEntity>) {
+    suspend fun insertDbMovies(movieEntities: List<MovieEntity>) {
         movieDao.insertMovies(movieEntities)
     }
 
@@ -24,7 +26,15 @@ class MovieRepository() {
 
 
     // API methods
-    fun getMoviesAPI(): List<MovieEntity> = MoviesModel(MoviesDataSourceImpl()).getMovies()
-    fun getMoviesAPIRefresh(): List<MovieEntity> = MoviesModel(MoviesDataSourceImpl()).getMovies2()
+    suspend fun getMoviesAPI(): Response<MoviesApiPopularResponse> =
+        App.instance.apiService.getPopularMovies(
+            App.applicationContext.getString(
+                R.string.api_key
+            ),
+            "ru-RU",
+            1
+        )
+
+    //fun getMoviesAPIRefresh(): List<MovieEntity> = MoviesModel(MoviesDataSourceImpl()).getMovies2()
 
 }

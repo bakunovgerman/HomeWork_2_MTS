@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import com.example.homework_2_mts.App
 import com.example.homework_2_mts.R
 import com.example.homework_2_mts.repository.database.entities.MovieEntity
 import com.squareup.picasso.Picasso
@@ -40,7 +41,9 @@ class MovieDetailFragment : Fragment() {
             movieRatingLayout.rating = it.rateScore.toFloat()
             tvMovieAge.text = String.format(it.ageRestriction.toString() + '+')
             tvMovieDescription.text = it.description
-            Picasso.get().load(it.imageUrl).into(imgMoviePoster)
+            Picasso.get()
+                .load(App.applicationContext.getString(R.string.bg_img_base_url) + it.bgUrl)
+                .into(imgMoviePoster)
         }
     }
 

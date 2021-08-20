@@ -6,6 +6,7 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.example.homework_2_mts.App
 import com.example.homework_2_mts.R
 import com.example.homework_2_mts.repository.database.entities.MovieEntity
 import com.squareup.picasso.Picasso
@@ -28,11 +29,13 @@ class MoviesSoonViewHolder(view: View, onMovieItemClick: ((MovieEntity) -> Unit)
 
     fun bind(movieEntity: MovieEntity) {
         item = movieEntity
-        Picasso.get().load(movieEntity.imageUrl).into(imgMoviePoster)
-        tvMovieTitle.text = movieEntity.title
-        tvMovieDescription.text = movieEntity.description
-        tvMovieAge.text = String.format(movieEntity.ageRestriction.toString() + '+')
-        rbMovie.rating = movieEntity.rateScore.toFloat()
+        Picasso.get()
+            .load(App.applicationContext.getString(R.string.poster_base_url) + item.posterUrl)
+            .into(imgMoviePoster)
+        tvMovieTitle.text = item.title
+        tvMovieDescription.text = item.description
+        tvMovieAge.text = String.format(item.ageRestriction.toString() + '+')
+        rbMovie.rating = item.rateScore.toFloat()
     }
 
 }

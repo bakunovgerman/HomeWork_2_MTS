@@ -17,9 +17,11 @@ data class MovieEntity(
     @ColumnInfo(name = "description")
     val description: String,
     @ColumnInfo(name = "rate_scope")
-    val rateScore: Int,
+    val rateScore: Double,
     @ColumnInfo(name = "age_restriction")
     val ageRestriction: Int,
-    @ColumnInfo(name = "image_url")
-    val imageUrl: String
+    @ColumnInfo(name = "poster_url")
+    val posterUrl: String,
+    @ColumnInfo(name = "bg_img_url")
+    val bgUrl: String
 ) : Parcelable

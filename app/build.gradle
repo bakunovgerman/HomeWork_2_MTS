@@ -5,6 +5,7 @@ plugins {
     id 'kotlin-kapt'
     id 'org.jetbrains.kotlin.plugin.serialization' version '1.5.20'
 }
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -88,7 +89,6 @@ dependencies {
 
     // retrofit & okhttp
     implementation "com.squareup.okhttp3:okhttp"
-    implementation "com.squareup.okhttp3:logging-interceptor"
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2"
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0'
