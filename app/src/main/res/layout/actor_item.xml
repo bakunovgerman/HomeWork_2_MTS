@@ -9,7 +9,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="@dimen/actor_image_width"
         android:layout_height="@dimen/actor_image_height"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="@dimen/corner_radius_actor_photo">
 
         <ImageView
             android:id="@+id/imgActorPhoto"

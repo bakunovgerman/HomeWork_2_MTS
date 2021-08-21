@@ -64,4 +64,5 @@
     <dimen name="design_bottom_navigation_item_max_width" tools:override="true">600dp</dimen>
     <dimen name="design_bottom_navigation_active_item_max_width" tools:override="true">600dp</dimen>
     <dimen name="btn_save_profile_info_margin_top">15dp</dimen>
+    <dimen name="corner_radius_actor_photo">10dp</dimen>
 </resources>
