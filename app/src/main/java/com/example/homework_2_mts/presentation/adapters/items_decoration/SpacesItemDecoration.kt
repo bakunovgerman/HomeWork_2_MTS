@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 
 class SpacesItemDecoration(
     private val spaceRight: Int = 0,
-    private val spaceBottom: Int = 0,
     private val spaceLeft: Int = 0,
     private val size: Int
 ) : RecyclerView.ItemDecoration() {
@@ -27,8 +26,6 @@ class SpacesItemDecoration(
             size - 1 -> outRect.right = dpToPx(spaceLeft)
             else -> outRect.right = dpToPx(spaceRight)
         }
-
-        outRect.bottom = spaceBottom
 
     }
 

@@ -1,5 +1,6 @@
 package com.example.homework_2_mts.repository.retrofit
 
+import com.example.homework_2_mts.repository.retrofit.entities.MovieCreditsApiResponse
 import com.example.homework_2_mts.repository.retrofit.entities.MoviesApiPopularResponse
 import com.example.homework_2_mts.repository.retrofit.utils.RetrofitExtensions.Companion.addJsonConverter
 import com.example.homework_2_mts.repository.retrofit.utils.RetrofitExtensions.Companion.setClient
@@ -21,7 +22,10 @@ interface ApiService {
     ): Response<MoviesApiPopularResponse>
 
     @GET("movie/{movie_id}/credits")
-    suspend fun getMovieCredits(@Path("movie_id") movieId: Long, @Query("api_key") apiKey: String)
+    suspend fun getMovieCredits(
+        @Path("movie_id") movieId: Long,
+        @Query("api_key") apiKey: String
+    ): Response<MovieCreditsApiResponse>
 
     companion object {
         private const val BASE_URL = "https://api.themoviedb.org/3/"

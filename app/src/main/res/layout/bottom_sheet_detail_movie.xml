@@ -127,88 +127,19 @@
                     app:layout_constraintStart_toStartOf="@id/guideLine_1"
                     android:layout_marginTop="@dimen/movie_actors_title_margin_top"/>
 
-                <HorizontalScrollView
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvActors"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@id/tvPopularNowTitle"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginTop="@dimen/horizontal_scroll_view_margin_top"
-                    android:layout_marginBottom="@dimen/horizontal_scroll_view_margin_bottom">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_height="wrap_content">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_marginStart="@dimen/actor_item_margin_start_start">
-
-                            <ImageView
-                                android:layout_width="@dimen/actor_image_width"
-                                android:layout_height="@dimen/actor_image_height"
-                                android:src="@drawable/actor_1"/>
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/actor_1_name"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/actor_name_text_size"
-                                android:textStyle="bold"
-                                android:layout_marginTop="@dimen/actor_name_margin_top"/>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_marginStart="@dimen/actor_item_margin_start">
-
-                            <ImageView
-                                android:layout_width="@dimen/actor_image_width"
-                                android:layout_height="@dimen/actor_image_height"
-                                android:src="@drawable/actor_2"/>
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/actor_2_name"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/actor_name_text_size"
-                                android:textStyle="bold"
-                                android:layout_marginTop="@dimen/actor_name_margin_top"/>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_marginStart="@dimen/actor_item_margin_start"
-                            android:layout_marginEnd="@dimen/actor_item_margin_end">
-
-                            <ImageView
-                                android:layout_width="@dimen/actor_image_width"
-                                android:layout_height="@dimen/actor_image_height"
-                                android:src="@drawable/actor_3"/>
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/actor_3_name"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/actor_name_text_size"
-                                android:textStyle="bold"
-                                android:layout_marginTop="@dimen/actor_name_margin_top"/>
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </HorizontalScrollView>
+                    android:layout_marginBottom="@dimen/horizontal_scroll_view_margin_bottom"
+                    tools:listitem="@layout/actor_item"/>
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideLine_2"
