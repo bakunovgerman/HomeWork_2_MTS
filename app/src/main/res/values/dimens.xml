@@ -13,7 +13,7 @@
     <dimen name="movie_date_margin_top">32dp</dimen>
     <dimen name="movie_title_margin_top">14dp</dimen>
     <dimen name="movie_age_padding">12dp</dimen>
-    <dimen name="movie_age_margin_top">40dp</dimen>
+    <dimen name="movie_age_margin_top">20dp</dimen>
     <dimen name="movie_rating_margin_top">8dp</dimen>
     <dimen name="movie_description_margin_top">20dp</dimen>
     <dimen name="movie_actors_title_margin_top">35dp</dimen>

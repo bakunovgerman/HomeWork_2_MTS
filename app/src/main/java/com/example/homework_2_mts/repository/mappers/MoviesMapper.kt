@@ -13,7 +13,7 @@ class MoviesMapper {
                 title,
                 overview,
                 voteAverage / 2,
-                if (adult) 18 else 6,
+                if (adult) 18 else 12,
                 posterPath,
                 backdropPath
             )
