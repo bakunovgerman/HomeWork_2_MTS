@@ -11,20 +11,13 @@ import retrofit2.Response
 
 class ActorsRepository() {
 
-    // init Dao
-    //private val movieDao = AppDatabase.instance.movieDao()
-
-    // DB methods
-    //suspend fun getDbMovies(): List<MovieEntity> = movieDao.getMovies()
-
-
     // API methods
     suspend fun getActorsAPI(movieId: Long): Response<MovieCreditsApiResponse> =
         App.instance.apiService.getMovieCredits(
             movieId,
-            App.applicationContext.getString(R.string.api_key)
+            App.applicationContext.getString(R.string.api_key),
+            "ru-RU"
         )
 
-    //fun getMoviesAPIRefresh(): List<MovieEntity> = MoviesModel(MoviesDataSourceImpl()).getMovies2()
 
 }

@@ -2,6 +2,7 @@ package com.example.homework_2_mts.repository.retrofit
 
 import com.example.homework_2_mts.repository.retrofit.entities.MovieCreditsApiResponse
 import com.example.homework_2_mts.repository.retrofit.entities.MoviesApiPopularResponse
+import com.example.homework_2_mts.repository.retrofit.entities.ReleaseDateMovieApiResponse
 import com.example.homework_2_mts.repository.retrofit.utils.RetrofitExtensions.Companion.addJsonConverter
 import com.example.homework_2_mts.repository.retrofit.utils.RetrofitExtensions.Companion.setClient
 import retrofit2.Call
@@ -24,8 +25,15 @@ interface ApiService {
     @GET("movie/{movie_id}/credits")
     suspend fun getMovieCredits(
         @Path("movie_id") movieId: Long,
-        @Query("api_key") apiKey: String
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String
     ): Response<MovieCreditsApiResponse>
+
+    @GET("movie/{movie_id}/release_dates")
+    suspend fun getReleaseDates(
+        @Path("movie_id") movieId: Long,
+        @Query("api_key") apiKey: String
+    ): Response<ReleaseDateMovieApiResponse>
 
     companion object {
         private const val BASE_URL = "https://api.themoviedb.org/3/"

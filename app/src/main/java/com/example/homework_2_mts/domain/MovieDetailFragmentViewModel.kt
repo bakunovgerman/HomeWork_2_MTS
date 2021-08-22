@@ -14,7 +14,7 @@ import kotlinx.coroutines.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class MovieDetailFragmentViewModel() : ViewModel() {
+class MovieDetailFragmentViewModel : ViewModel() {
 
     // init CoroutineExceptionHandler
     private val errorHandler = CoroutineExceptionHandler { _, error ->
@@ -25,9 +25,31 @@ class MovieDetailFragmentViewModel() : ViewModel() {
     val getActors: LiveData<List<ActorEntity>> get() = _getActors
     private val _getActors = MutableLiveData<List<ActorEntity>>()
 
+    val getAgeRestriction: LiveData<String> get() = _getAgeRestriction
+    private val _getAgeRestriction = MutableLiveData<String>()
+
     // init Repositories
     private val actorsRepository = ActorsRepository()
     private val moviesRepository = MovieRepository()
+
+    fun loadReleaseDates(movieId: Long) {
+        viewModelScope.launch(errorHandler) {
+            withContext(Dispatchers.IO) {
+                val releaseDatesResponse = moviesRepository.getReleaseDates(movieId)
+                if (releaseDatesResponse.isSuccessful){
+                    val releaseDateList = releaseDatesResponse.body()?.results ?: emptyList()
+                    if (releaseDateList.isNotEmpty()){
+                        releaseDateList.forEach {
+                            if (it.iso31661 == "RU"){
+                                _getAgeRestriction.postValue(it.releaseDates[0].certification)
+                                return@forEach
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     fun loadActors(movieId: Long) {
         viewModelScope.launch(errorHandler) {

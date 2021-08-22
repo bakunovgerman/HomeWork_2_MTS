@@ -39,6 +39,13 @@ class MovieRepository() {
             1
         )
 
+    suspend fun getReleaseDates(movieId: Long) = App.instance.apiService.getReleaseDates(
+        movieId,
+        App.applicationContext.getString(
+            R.string.api_key
+        )
+    )
+
     //fun getMoviesAPIRefresh(): List<MovieEntity> = MoviesModel(MoviesDataSourceImpl()).getMovies2()
 
 }
