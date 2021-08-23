@@ -6,9 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,10 +22,13 @@ import com.example.homework_2_mts.domain.MovieDetailFragmentViewModel
 import com.example.homework_2_mts.presentation.adapters.ActorsAdapter
 import com.example.homework_2_mts.presentation.adapters.PopularNowAdapter
 import com.example.homework_2_mts.presentation.adapters.items_decoration.SpacesItemDecoration
+import com.example.homework_2_mts.presentation.helpers.ViewStateLayout
 import com.example.homework_2_mts.repository.database.entities.ActorEntity
 import com.example.homework_2_mts.repository.database.entities.GenreEntity
 import com.example.homework_2_mts.repository.database.entities.MovieEntity
 import com.example.homework_2_mts.repository.retrofit.entities.releaseDate.ReleaseDate
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 
 class MovieDetailFragment : Fragment() {
@@ -34,6 +40,9 @@ class MovieDetailFragment : Fragment() {
     private lateinit var movieDescriptionTextView: TextView
     private lateinit var movieDateTextView: TextView
     private lateinit var moviePosterImageView: ImageView
+    private lateinit var progressBarFrameLayout: FrameLayout
+    private lateinit var bottomSheetBehaviorCardView: CardView
+    private lateinit var fragmentDetailMovieRootView: CoordinatorLayout
     private lateinit var rvActors: RecyclerView
     private lateinit var rvGenres: RecyclerView
     private val actorAdapter: ActorsAdapter = ActorsAdapter()
@@ -51,7 +60,7 @@ class MovieDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        // init view
         movieTitleTextView = view.findViewById(R.id.tvMovieTitle)
         movieRatingLayout = view.findViewById(R.id.rbMovie)
         movieAgeTextView = view.findViewById(R.id.tvMovieAge)
@@ -60,10 +69,14 @@ class MovieDetailFragment : Fragment() {
         movieDateTextView = view.findViewById(R.id.tvMovieDate)
         rvActors = view.findViewById(R.id.rvActors)
         rvGenres = view.findViewById(R.id.rvGenres)
+        progressBarFrameLayout = view.findViewById(R.id.progressBar)
+        bottomSheetBehaviorCardView = view.findViewById(R.id.cvBottomSheetBehavior)
+        fragmentDetailMovieRootView = view.findViewById(R.id.fragmentDetailMovieRootView)
         // set visible
         movieDateTextView.visibility = View.GONE
         movieAgeTextView.visibility = View.GONE
         rvGenres.visibility = View.GONE
+        bottomSheetBehaviorCardView.visibility = View.GONE
         // set text
         movieEntity?.let {
             movieTitleTextView.text = it.title
@@ -85,9 +98,7 @@ class MovieDetailFragment : Fragment() {
         initObserves()
         // загружаем актеров
         movieEntity?.let {
-            movieDetailFragmentViewModel.loadActors(it.id)
-            movieDetailFragmentViewModel.loadReleaseDates(it.id)
-            movieDetailFragmentViewModel.loadDetail(it.id)
+            movieDetailFragmentViewModel.loadData(it.id)
         }
 
     }
@@ -99,6 +110,7 @@ class MovieDetailFragment : Fragment() {
             Observer(::setDateReleaseAndAgeRestriction)
         )
         movieDetailFragmentViewModel.getGenres.observe(viewLifecycleOwner, Observer(::initDetail))
+        movieDetailFragmentViewModel.getViewState.observe(viewLifecycleOwner, Observer(::setViewState))
     }
 
     override fun onCreateView(
@@ -112,6 +124,17 @@ class MovieDetailFragment : Fragment() {
         actorAdapter.initData(list)
         if (rvActors.itemDecorationCount == 0) {
             rvActors.addItemDecoration(SpacesItemDecoration(10, 20, list.size))
+        }
+    }
+
+    // проверяем viewState
+    private fun setViewState(viewStateLayout: ViewStateLayout) = with(viewStateLayout) {
+        if (this.isDownloaded) {
+            progressBarFrameLayout.visibility = View.GONE
+            bottomSheetBehaviorCardView.visibility = View.VISIBLE
+        } else if (this.e != null) {
+            Snackbar.make(fragmentDetailMovieRootView, "Ошибка: ${this.e}", Snackbar.LENGTH_LONG)
+                .show()
         }
     }
 

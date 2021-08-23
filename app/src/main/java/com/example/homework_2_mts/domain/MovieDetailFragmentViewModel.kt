@@ -1,10 +1,13 @@
 package com.example.homework_2_mts.domain
 
 import android.util.Log
+import android.view.View
+import androidx.constraintlayout.motion.utils.ViewState
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.homework_2_mts.presentation.helpers.ViewStateLayout
 import com.example.homework_2_mts.repository.database.entities.*
 import com.example.homework_2_mts.repository.mappers.ActorsMapper
 import com.example.homework_2_mts.repository.mappers.GenresMapper
@@ -18,7 +21,7 @@ class MovieDetailFragmentViewModel : ViewModel() {
 
     // init CoroutineExceptionHandler
     private val errorHandler = CoroutineExceptionHandler { _, error ->
-        Log.d("movieDetailApiResponse", error.toString())
+        _getViewState.postValue(ViewStateLayout(e = error))
     }
 
     // init LiveData
@@ -31,12 +34,26 @@ class MovieDetailFragmentViewModel : ViewModel() {
     val getGenres: LiveData<List<GenreEntity>> get() = _getGenres
     private val _getGenres = MutableLiveData<List<GenreEntity>>()
 
+    val getViewState: LiveData<ViewStateLayout> get() = _getViewState
+    private val _getViewState = MutableLiveData<ViewStateLayout>()
+
     // init Repositories
     private val actorsRepository = ActorsRepository()
     private val moviesRepository = MovieRepository()
 
-    fun loadDetail(movieId: Long) {
-        viewModelScope.launch(errorHandler) {
+    fun loadData(movieId: Long) {
+        viewModelScope.launch {
+            val loadDetailJob = loadDetail(movieId)
+            loadDetailJob.join()
+            val loadReleaseDatesJob = loadReleaseDates(movieId)
+            loadReleaseDatesJob.join()
+            val loadActorsJob = loadActors(movieId)
+            _getViewState.postValue(ViewStateLayout(isDownloaded = true))
+        }
+    }
+
+    fun loadDetail(movieId: Long): Job {
+        return viewModelScope.launch(errorHandler) {
             withContext(Dispatchers.IO) {
                 val movieDetailApiResponse = moviesRepository.getDetail(movieId)
                 Log.d("movieDetailApiResponse", movieDetailApiResponse.body().toString())
@@ -49,8 +66,8 @@ class MovieDetailFragmentViewModel : ViewModel() {
         }
     }
 
-    fun loadReleaseDates(movieId: Long) {
-        viewModelScope.launch(errorHandler) {
+    fun loadReleaseDates(movieId: Long): Job {
+        return viewModelScope.launch(errorHandler) {
             withContext(Dispatchers.IO) {
                 val releaseDatesResponse = moviesRepository.getReleaseDates(movieId)
                 if (releaseDatesResponse.isSuccessful) {
@@ -68,8 +85,8 @@ class MovieDetailFragmentViewModel : ViewModel() {
         }
     }
 
-    fun loadActors(movieId: Long) {
-        viewModelScope.launch(errorHandler) {
+    fun loadActors(movieId: Long): Job {
+        return viewModelScope.launch(errorHandler) {
             withContext(Dispatchers.IO) {
                 val actorsResponse = actorsRepository.getActorsAPI(movieId)
                 if (actorsResponse.isSuccessful) {

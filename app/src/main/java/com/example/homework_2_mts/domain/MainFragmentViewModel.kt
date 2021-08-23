@@ -2,9 +2,9 @@ package com.example.homework_2_mts.domain
 
 import android.util.Log
 import androidx.lifecycle.*
+import com.example.homework_2_mts.presentation.helpers.ViewStateLayout
 import com.example.homework_2_mts.repository.database.entities.MovieEntity
 import com.example.homework_2_mts.repository.database.entities.GenreEntity
-import com.example.homework_2_mts.presentation.fragments.MainFragment
 import com.example.homework_2_mts.repository.database.entities.UpdateDbDateEntity
 import com.example.homework_2_mts.repository.mappers.MoviesMapper
 import com.example.homework_2_mts.repository.repositories.GenreRepository
@@ -16,8 +16,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
 
-typealias MainFragmentViewState = MainFragment.ViewState
-
 class MainFragmentViewModel : ViewModel() {
 
     // init CoroutineExceptionHandler
@@ -26,8 +24,8 @@ class MainFragmentViewModel : ViewModel() {
     }
 
     // init LiveData
-    val viewState: LiveData<MainFragmentViewState> get() = _viewState
-    private val _viewState = MutableLiveData<MainFragmentViewState>()
+    val viewStateLayout: LiveData<ViewStateLayout> get() = _viewState
+    private val _viewState = MutableLiveData<ViewStateLayout>()
 
     val moviesList: LiveData<List<MovieEntity>> get() = _moviesList
     private val _moviesList = MutableLiveData<List<MovieEntity>>()
@@ -65,7 +63,7 @@ class MainFragmentViewModel : ViewModel() {
                 }
 
             }
-            _viewState.postValue(MainFragmentViewState(isDownloaded = true))
+            _viewState.postValue(ViewStateLayout(isDownloaded = true))
         }
     }
 
