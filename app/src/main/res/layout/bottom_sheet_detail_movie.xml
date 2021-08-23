@@ -132,7 +132,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginTop="@dimen/horizontal_scroll_view_margin_top"
                     android:layout_marginBottom="@dimen/horizontal_scroll_view_margin_bottom"
-                    tools:listitem="@layout/actor_item"/>
+                    tools:listitem="@layout/actor_item" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideLine_2"

@@ -58,6 +58,12 @@ class MovieDetailFragment : Fragment() {
         movieDescriptionTextView = view.findViewById(R.id.tvMovieDescription)
         moviePosterImageView = view.findViewById(R.id.imgMoviePoster)
         movieDateTextView = view.findViewById(R.id.tvMovieDate)
+        rvActors = view.findViewById(R.id.rvActors)
+        rvGenres = view.findViewById(R.id.rvGenres)
+        // set visible
+        movieDateTextView.visibility = View.GONE
+        movieAgeTextView.visibility = View.GONE
+        rvGenres.visibility = View.GONE
         // set text
         movieEntity?.let {
             movieTitleTextView.text = it.title
@@ -67,9 +73,6 @@ class MovieDetailFragment : Fragment() {
                 .load(App.applicationContext.getString(R.string.bg_img_base_url) + it.bgUrl)
                 .into(moviePosterImageView)
         }
-
-        rvActors = view.findViewById(R.id.rvActors)
-        rvGenres = view.findViewById(R.id.rvGenres)
         rvActors.apply {
             adapter = actorAdapter
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -114,16 +117,33 @@ class MovieDetailFragment : Fragment() {
 
     private fun initDetail(list: List<GenreEntity>) {
         // сетим жанры
-        genresAdapter.initData(list)
-        if (rvGenres.itemDecorationCount == 0) {
-            rvGenres.addItemDecoration(SpacesItemDecoration(10, 20, list.size))
+        if (list.isNotEmpty()) {
+            genresAdapter.initData(list)
+            if (rvGenres.itemDecorationCount == 0) {
+                rvGenres.addItemDecoration(SpacesItemDecoration(10, 20, list.size))
+            }
+            rvGenres.visibility = View.VISIBLE
         }
+
     }
 
     private fun setDateReleaseAndAgeRestriction(releaseDate: ReleaseDate) {
-        Log.d("setAgeRestriction", "setAgeRestriction complete")
-        movieAgeTextView.text = releaseDate.certification
-        movieDateTextView.text = String.format("Дата релиза: ${releaseDate.releaseDate.substring(0,10).replace('-', '.')}")
+        Log.d("setAgeRestriction", releaseDate.certification)
+        val age = releaseDate.certification
+        val date = String.format(
+            "Дата релиза: ${
+                releaseDate.releaseDate.substring(0, 10).replace('-', '.')
+            }"
+        )
+        if (age != "") {
+            movieAgeTextView.text = age
+            movieAgeTextView.visibility = View.VISIBLE
+        }
+        if (date != "") {
+            movieDateTextView.text = date
+            movieDateTextView.visibility = View.VISIBLE
+        }
+
     }
 
     companion object {
