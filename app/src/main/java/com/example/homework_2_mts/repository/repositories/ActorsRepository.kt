@@ -2,11 +2,7 @@ package com.example.homework_2_mts.repository.repositories
 
 import com.example.homework_2_mts.App
 import com.example.homework_2_mts.R
-import com.example.homework_2_mts.repository.database.AppDatabase
-import com.example.homework_2_mts.repository.database.entities.MovieEntity
-import com.example.homework_2_mts.repository.retrofit.entities.ActorsApi
-import com.example.homework_2_mts.repository.retrofit.entities.MovieCreditsApiResponse
-import com.example.homework_2_mts.repository.retrofit.entities.MoviesApiPopularResponse
+import com.example.homework_2_mts.repository.retrofit.entities.actors.MovieCreditsApiResponse
 import retrofit2.Response
 
 class ActorsRepository() {

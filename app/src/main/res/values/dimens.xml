@@ -9,9 +9,8 @@
     <dimen name="movie_category_padding_start">15dp</dimen>
     <dimen name="movie_category_padding_end">15dp</dimen>
     <dimen name="movie_date_text_size">12sp</dimen>
-    <dimen name="movie_date_margin_start">14dp</dimen>
-    <dimen name="movie_date_margin_top">32dp</dimen>
-    <dimen name="movie_title_margin_top">14dp</dimen>
+    <dimen name="movie_date_margin_top">15dp</dimen>
+    <dimen name="movie_title_margin_top">6dp</dimen>
     <dimen name="movie_age_padding">12dp</dimen>
     <dimen name="movie_age_margin_top">20dp</dimen>
     <dimen name="movie_rating_margin_top">8dp</dimen>
@@ -65,4 +64,5 @@
     <dimen name="design_bottom_navigation_active_item_max_width" tools:override="true">600dp</dimen>
     <dimen name="btn_save_profile_info_margin_top">15dp</dimen>
     <dimen name="corner_radius_actor_photo">10dp</dimen>
+    <dimen name="movie_category_margin_end">15dp</dimen>
 </resources>

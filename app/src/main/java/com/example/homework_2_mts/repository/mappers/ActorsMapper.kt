@@ -1,10 +1,7 @@
 package com.example.homework_2_mts.repository.mappers
 
 import com.example.homework_2_mts.repository.database.entities.ActorEntity
-import com.example.homework_2_mts.repository.database.entities.MovieEntity
-import com.example.homework_2_mts.repository.retrofit.entities.ActorsApi
-import com.example.homework_2_mts.repository.retrofit.entities.MoviesApiListItem
-import com.example.homework_2_mts.repository.retrofit.entities.MoviesApiPopularResponse
+import com.example.homework_2_mts.repository.retrofit.entities.actors.ActorsApi
 
 class ActorsMapper {
 

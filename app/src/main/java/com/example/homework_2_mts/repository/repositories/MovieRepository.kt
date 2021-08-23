@@ -5,7 +5,7 @@ import com.example.homework_2_mts.R
 import com.example.homework_2_mts.repository.database.AppDatabase
 import com.example.homework_2_mts.repository.database.entities.MovieEntity
 import com.example.homework_2_mts.repository.database.entities.MoviesWithActorsEntity
-import com.example.homework_2_mts.repository.retrofit.entities.MoviesApiPopularResponse
+import com.example.homework_2_mts.repository.retrofit.entities.moviePopular.MoviesApiPopularResponse
 import retrofit2.Response
 
 class MovieRepository() {
@@ -44,6 +44,14 @@ class MovieRepository() {
         App.applicationContext.getString(
             R.string.api_key
         )
+    )
+
+    suspend fun getDetail(movieId: Long) = App.instance.apiService.getDetailMovie(
+        movieId,
+        App.applicationContext.getString(
+            R.string.api_key
+        ),
+        "ru-RU"
     )
 
     //fun getMoviesAPIRefresh(): List<MovieEntity> = MoviesModel(MoviesDataSourceImpl()).getMovies2()

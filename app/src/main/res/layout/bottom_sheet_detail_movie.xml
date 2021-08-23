@@ -35,43 +35,36 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
-                <TextView
-                    android:id="@+id/tvMovieCategory"
-                    android:layout_width="wrap_content"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvGenres"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/guideLine_1"
-                    app:layout_constraintEnd_toStartOf="@+id/tvMovieDate"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="@dimen/movie_category_margin_top"
-                    android:paddingTop="@dimen/movie_category_padding_top"
-                    android:paddingBottom="@dimen/movie_category_padding_bottom"
-                    android:paddingStart="@dimen/movie_category_padding_start"
-                    android:paddingEnd="@dimen/movie_category_padding_end"
-                    android:textSize="@dimen/movie_category_text_size"
-                    android:background="@drawable/bg_movie_category"
-                    android:textColor="@color/black"
-                    android:text="@string/movie_category"
-                    tools:ignore="SmallSp" />
+                    tools:listitem="@layout/popular_now_item"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="4"/>
 
                 <TextView
                     android:id="@+id/tvMovieDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/movie_date_text_size"
-                    android:layout_marginStart="@dimen/movie_date_margin_start"
-                    android:text="@string/movie_date"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/tvMovieCategory"
+                    tools:text="@string/movie_date"
                     android:textColor="@color/black"
                     android:layout_marginTop="@dimen/movie_date_margin_top"
-                    app:layout_constraintStart_toEndOf="@+id/tvMovieCategory"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintStart_toStartOf="@id/guideLine_1"
+                    app:layout_constraintTop_toBottomOf="@id/rvGenres"/>
 
                 <TextView
                     android:id="@+id/tvMovieTitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:text="@string/movie_title"
-                    app:layout_constraintTop_toBottomOf="@+id/tvMovieCategory"
+                    app:layout_constraintTop_toBottomOf="@+id/tvMovieDate"
                     app:layout_constraintStart_toStartOf="@id/guideLine_1"
                     android:layout_marginTop="@dimen/movie_title_margin_top"
                     android:textSize="@dimen/movie_title_text_size"
@@ -83,7 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="@id/guideLine_2"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBaseline_toBaselineOf="@id/tvMovieTitle"
                     android:text="@string/movie_age"
                     android:padding="@dimen/movie_age_padding"
                     android:layout_marginTop="@dimen/movie_age_margin_top"

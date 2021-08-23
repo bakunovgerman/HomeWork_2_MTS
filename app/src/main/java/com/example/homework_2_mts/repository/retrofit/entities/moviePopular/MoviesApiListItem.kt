@@ -1,4 +1,4 @@
-package com.example.homework_2_mts.repository.retrofit.entities
+package com.example.homework_2_mts.repository.retrofit.entities.moviePopular
 
 
 import kotlinx.serialization.SerialName
