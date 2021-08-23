@@ -110,7 +110,10 @@ class MovieDetailFragment : Fragment() {
             Observer(::setDateReleaseAndAgeRestriction)
         )
         movieDetailFragmentViewModel.getGenres.observe(viewLifecycleOwner, Observer(::initDetail))
-        movieDetailFragmentViewModel.getViewState.observe(viewLifecycleOwner, Observer(::setViewState))
+        movieDetailFragmentViewModel.getViewState.observe(
+            viewLifecycleOwner,
+            Observer(::setViewState)
+        )
     }
 
     override fun onCreateView(
@@ -147,7 +150,6 @@ class MovieDetailFragment : Fragment() {
             }
             rvGenres.visibility = View.VISIBLE
         }
-
     }
 
     private fun setDateReleaseAndAgeRestriction(releaseDate: ReleaseDate) {

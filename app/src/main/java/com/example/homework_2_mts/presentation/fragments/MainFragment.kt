@@ -25,6 +25,7 @@ import com.example.homework_2_mts.repository.database.entities.GenreEntity
 import com.example.homework_2_mts.presentation.helpers.MainFragmentClickListener
 import com.example.homework_2_mts.presentation.helpers.MoviesCallbackDiffUtils
 import com.example.homework_2_mts.domain.MainFragmentViewModel
+import com.example.homework_2_mts.presentation.adapters.items_decoration.FooterItemDecoration
 import com.example.homework_2_mts.presentation.helpers.ViewStateLayout
 
 class MainFragment : Fragment() {
