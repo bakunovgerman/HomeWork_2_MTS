@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.homework_2_mts.App
 import com.example.homework_2_mts.presentation.helpers.ViewStateLayout
 import com.example.homework_2_mts.repository.database.entities.*
 import com.example.homework_2_mts.repository.mappers.ActorsMapper
@@ -36,8 +37,8 @@ class MovieDetailFragmentViewModel : ViewModel() {
     private val _getViewState = MutableLiveData<ViewStateLayout>()
 
     // init Repositories
-    private val actorsRepository = ActorsRepositoryImpl()
-    private val moviesRepository = MovieRepositoryImpl()
+    private val actorsRepository = ActorsRepositoryImpl(App.instance.apiService)
+    private val moviesRepository = MovieRepositoryImpl(App.instance.apiService)
 
     fun loadData(movieId: Long) {
         viewModelScope.launch {
@@ -107,5 +108,4 @@ class MovieDetailFragmentViewModel : ViewModel() {
             }
         }
     }
-
 }

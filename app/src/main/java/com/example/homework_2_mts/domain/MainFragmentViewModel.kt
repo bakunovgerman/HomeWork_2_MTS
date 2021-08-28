@@ -2,6 +2,7 @@ package com.example.homework_2_mts.domain
 
 import android.util.Log
 import androidx.lifecycle.*
+import com.example.homework_2_mts.App
 import com.example.homework_2_mts.presentation.helpers.ViewStateLayout
 import com.example.homework_2_mts.repository.database.entities.MovieEntity
 import com.example.homework_2_mts.repository.database.entities.GenreEntity
@@ -37,7 +38,7 @@ class MainFragmentViewModel : ViewModel() {
     private val _updateMoviesList = MutableLiveData<List<MovieEntity>>()
 
     // init Repositories
-    private val movieRepository = MovieRepositoryImpl()
+    private val movieRepository = MovieRepositoryImpl(App.instance.apiService)
     private val genreRepository = GenreRepositoryImpl()
     private val updateDbDateRepository = UpdateDbDateRepositoryImpl()
 

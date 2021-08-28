@@ -3,9 +3,7 @@ package com.example.homework_2_mts.presentation.adapters
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.homework_2_mts.R
 import com.example.homework_2_mts.presentation.adapters.view_holders.LoadingViewHolder
 import com.example.homework_2_mts.presentation.adapters.view_holders.MoviesSoonViewHolder
@@ -40,7 +38,7 @@ class MoviesAdapter(private val onMovieItemClick: (MovieEntity) -> Unit) :
             )
             VIEW_TYPE_MOVIE -> MoviesSoonViewHolder(
                 inflater.inflate(
-                    R.layout.movie_item,
+                    R.layout.item_movie,
                     parent,
                     false
                 ), onMovieItemClick

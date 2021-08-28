@@ -84,7 +84,7 @@
                     android:layout_marginTop="@dimen/rv_movies_margin_top"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:spanCount="2"
-                    tools:listitem="@layout/movie_item"
+                    tools:listitem="@layout/item_movie"
                     android:visibility="gone"/>
 
                 <androidx.constraintlayout.widget.Guideline
