@@ -35,7 +35,7 @@ class MoviesViewHolder(view: View, onMovieItemClick: ((MovieEntity) -> Unit)) :
         tvMovieTitle.text = item.title
         tvMovieDescription.text = item.description
         tvMovieAge.text = String.format(
-            App.applicationContext.getString(R.string.age),
+            App.applicationContext.getString(R.string.movie_age_item),
             item.ageRestriction.toString()
         )
         rbMovie.rating = item.rateScore.toFloat()

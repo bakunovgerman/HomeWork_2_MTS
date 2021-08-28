@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
+import com.example.homework_2_mts.App
 import com.example.homework_2_mts.R
 import com.example.homework_2_mts.domain.ProfileFragmentViewModel
 import com.example.homework_2_mts.presentation.adapters.PopularNowAdapter
@@ -111,8 +112,8 @@ class ProfileFragment : Fragment() {
             if (this.itemDecorationCount == 0) {
                 addItemDecoration(
                     SpacesItemDecoration(
-                        spaceRight = 6,
-                        spaceLeft = 20,
+                        App.applicationContext.resources.getDimension(R.dimen.genre_margin_right),
+                        App.applicationContext.resources.getDimension(R.dimen.genre_margin_left),
                         size = genresList.size
                     )
                 )

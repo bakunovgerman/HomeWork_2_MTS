@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.homework_2_mts.App
 import com.example.homework_2_mts.R
 import com.example.homework_2_mts.presentation.adapters.MoviesAdapter
 import com.example.homework_2_mts.presentation.adapters.PopularNowAdapter
@@ -114,9 +115,9 @@ class MainFragment : Fragment() {
             if (rvPopularNow.itemDecorationCount == 0) {
                 rvPopularNow.addItemDecoration(
                     SpacesItemDecoration(
-                        spaceRight = 6,
-                        spaceLeft = 20,
-                        size = popularNowItems.size
+                        App.applicationContext.resources.getDimension(R.dimen.genre_margin_right),
+                        App.applicationContext.resources.getDimension(R.dimen.genre_margin_left),
+                        popularNowItems.size
                     )
                 )
             }

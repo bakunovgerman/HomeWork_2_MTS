@@ -34,7 +34,7 @@ class MoviesSoonViewHolder(view: View, onMovieItemClick: ((MovieEntity) -> Unit)
             .into(imgMoviePoster)
         tvMovieTitle.text = item.title
         tvMovieDescription.text = item.description
-        tvMovieAge.text = String.format(App.applicationContext.getString(R.string.age),
+        tvMovieAge.text = String.format(App.applicationContext.getString(R.string.movie_age_item),
             item.ageRestriction.toString())
         rbMovie.rating = item.rateScore.toFloat()
     }

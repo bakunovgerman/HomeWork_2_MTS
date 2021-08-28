@@ -126,7 +126,13 @@ class MovieDetailFragment : Fragment() {
     private fun initActors(list: List<ActorEntity>) {
         actorAdapter.initData(list)
         if (rvActors.itemDecorationCount == 0) {
-            rvActors.addItemDecoration(SpacesItemDecoration(10, 20, list.size))
+            rvActors.addItemDecoration(
+                SpacesItemDecoration(
+                    App.applicationContext.resources.getDimension(R.dimen.actor_margin_right),
+                    App.applicationContext.resources.getDimension(R.dimen.actor_margin_left),
+                    list.size
+                )
+            )
         }
     }
 
@@ -136,8 +142,14 @@ class MovieDetailFragment : Fragment() {
             progressBarFrameLayout.visibility = View.GONE
             bottomSheetBehaviorCardView.visibility = View.VISIBLE
         } else if (this.e != null) {
-            Snackbar.make(fragmentDetailMovieRootView, "Ошибка: ${this.e}", Snackbar.LENGTH_LONG)
-                .show()
+            Snackbar.make(
+                fragmentDetailMovieRootView,
+                String.format(
+                    App.applicationContext.getString(R.string.error_snack_bar),
+                    this.e.toString()
+                ),
+                Snackbar.LENGTH_LONG
+            ).show()
         }
     }
 
@@ -146,14 +158,19 @@ class MovieDetailFragment : Fragment() {
         if (list.isNotEmpty()) {
             genresAdapter.initData(list)
             if (rvGenres.itemDecorationCount == 0) {
-                rvGenres.addItemDecoration(SpacesItemDecoration(10, 20, list.size))
+                rvGenres.addItemDecoration(
+                    SpacesItemDecoration(
+                        App.applicationContext.resources.getDimension(R.dimen.actor_margin_right),
+                        App.applicationContext.resources.getDimension(R.dimen.actor_margin_left),
+                        list.size
+                    )
+                )
             }
             rvGenres.visibility = View.VISIBLE
         }
     }
 
     private fun setDateReleaseAndAgeRestriction(releaseDate: ReleaseDate) {
-        Log.d("setAgeRestriction", releaseDate.certification)
         val age = releaseDate.certification
         val date = String.format(
             "Дата релиза: ${
