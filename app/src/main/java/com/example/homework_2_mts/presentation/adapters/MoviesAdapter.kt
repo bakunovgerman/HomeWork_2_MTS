@@ -1,5 +1,6 @@
 package com.example.homework_2_mts.presentation.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
@@ -44,7 +45,7 @@ class MoviesAdapter(private val onMovieItemClick: (MovieEntity) -> Unit) :
                     false
                 ), onMovieItemClick
             )
-            VIEW_TYPE_LOADING -> LoadingViewHolder(inflater.inflate(
+            VIEW_TYPE_LOADING -> LoadingViewHolder.getViewHolder(inflater.inflate(
                 R.layout.loading_item,
                 parent,
                 false
@@ -53,6 +54,7 @@ class MoviesAdapter(private val onMovieItemClick: (MovieEntity) -> Unit) :
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun initData(movieEntities: List<MovieEntity>?) {
         items.clear()
         if (movieEntities != null) {
@@ -70,9 +72,6 @@ class MoviesAdapter(private val onMovieItemClick: (MovieEntity) -> Unit) :
             }
             is MoviesSoonViewHolder -> {
                 holder.bind(items[position])
-            }
-            is LoadingViewHolder -> {
-                holder.bind()
             }
         }
     }

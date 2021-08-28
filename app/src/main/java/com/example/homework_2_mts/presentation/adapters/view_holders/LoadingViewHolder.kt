@@ -11,11 +11,8 @@ import com.example.homework_2_mts.R
 import com.example.homework_2_mts.repository.database.entities.MovieEntity
 import com.squareup.picasso.Picasso
 
-class LoadingViewHolder(view: View) :
-    RecyclerView.ViewHolder(view) {
+object LoadingViewHolder {
 
-    fun bind() {
-
-    }
+    fun getViewHolder(view: View) = object : RecyclerView.ViewHolder(view) {}
 
 }
