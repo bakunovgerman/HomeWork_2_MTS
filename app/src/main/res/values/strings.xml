@@ -38,4 +38,5 @@
     <string name="actor_photo_url">https://www.themoviedb.org/t/p/w600_and_h900_bestv2</string>
     <string name="movie_age_item">%s+</string>
     <string name="error_snack_bar">Ошибка: %s</string>
+    <string name="movie_date_release">Дата релиза: %s</string>
 </resources>

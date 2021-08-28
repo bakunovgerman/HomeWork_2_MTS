@@ -173,9 +173,8 @@ class MovieDetailFragment : Fragment() {
     private fun setDateReleaseAndAgeRestriction(releaseDate: ReleaseDate) {
         val age = releaseDate.certification
         val date = String.format(
-            "Дата релиза: ${
-                releaseDate.releaseDate.substring(0, 10).replace('-', '.')
-            }"
+            App.applicationContext.getString(R.string.movie_date_release),
+            releaseDate.releaseDate.substring(0, 10).replace('-', '.')
         )
         if (age != "") {
             movieAgeTextView.text = age

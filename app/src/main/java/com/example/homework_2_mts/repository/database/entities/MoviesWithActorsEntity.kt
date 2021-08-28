@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "movies_with_actors")
+@Entity(tableName = "movies")
 data class MoviesWithActorsEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")

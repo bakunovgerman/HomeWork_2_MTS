@@ -54,11 +54,11 @@ class MainFragmentViewModel : ViewModel() {
                         Log.d("update_dp", "database is update")
                         Log.d("update_dp", "database insert data")
 
-                        movieRepository.insertDbMovies(MoviesMapper.toMovieEntityList(movies))
+                        movieRepository.insertDbMovies(MoviesMapper().toEntityList(movies))
                         genreRepository.insertDbGenres(genreRepository.getGenresAPI())
                         updateDbDateRepository.insertDate(UpdateDbDateEntity(1, Date().time))
                     }
-                    _moviesList.postValue(MoviesMapper.toMovieEntityList(movies))
+                    _moviesList.postValue(MoviesMapper().toEntityList(movies))
                     _genresList.postValue(genreRepository.getDbGenres())
                 }
 

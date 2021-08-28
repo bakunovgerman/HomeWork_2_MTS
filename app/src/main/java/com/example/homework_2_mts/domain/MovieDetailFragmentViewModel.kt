@@ -52,7 +52,7 @@ class MovieDetailFragmentViewModel : ViewModel() {
         }
     }
 
-    fun loadDetail(movieId: Long): Job {
+    private fun loadDetail(movieId: Long): Job {
         return viewModelScope.launch(errorHandler) {
             withContext(Dispatchers.IO) {
                 val movieDetailApiResponse = moviesRepository.getDetail(movieId)
@@ -60,13 +60,13 @@ class MovieDetailFragmentViewModel : ViewModel() {
                 if (movieDetailApiResponse.isSuccessful) {
                     val genresList = movieDetailApiResponse.body()?.genresApi ?: emptyList()
                     Log.d("genresList", genresList.toString())
-                    _getGenres.postValue(GenresMapper.toGenreEntityList(genresList))
+                    _getGenres.postValue(GenresMapper().toEntityList(genresList))
                 }
             }
         }
     }
 
-    fun loadReleaseDates(movieId: Long): Job {
+    private fun loadReleaseDates(movieId: Long): Job {
         return viewModelScope.launch(errorHandler) {
             withContext(Dispatchers.IO) {
                 val releaseDatesResponse = moviesRepository.getReleaseDates(movieId)
@@ -85,7 +85,7 @@ class MovieDetailFragmentViewModel : ViewModel() {
         }
     }
 
-    fun loadActors(movieId: Long): Job {
+    private fun loadActors(movieId: Long): Job {
         return viewModelScope.launch(errorHandler) {
             withContext(Dispatchers.IO) {
                 val actorsResponse = actorsRepository.getActorsAPI(movieId)
@@ -104,7 +104,7 @@ class MovieDetailFragmentViewModel : ViewModel() {
                         }
                         moviesRepository.insertDbMoviesWithActors(movieWithActorList)
                     }
-                    _getActors.postValue(ActorsMapper.toActorEntityList(actorsList))
+                    _getActors.postValue(ActorsMapper().toEntityList(actorsList))
                 }
             }
         }
