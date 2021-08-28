@@ -1,8 +1,6 @@
 package com.example.homework_2_mts.domain
 
 import android.util.Log
-import android.view.View
-import androidx.constraintlayout.motion.utils.ViewState
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -38,8 +36,8 @@ class MovieDetailFragmentViewModel : ViewModel() {
     private val _getViewState = MutableLiveData<ViewStateLayout>()
 
     // init Repositories
-    private val actorsRepository = ActorsRepository()
-    private val moviesRepository = MovieRepository()
+    private val actorsRepository = ActorsRepositoryImpl()
+    private val moviesRepository = MovieRepositoryImpl()
 
     fun loadData(movieId: Long) {
         viewModelScope.launch {
