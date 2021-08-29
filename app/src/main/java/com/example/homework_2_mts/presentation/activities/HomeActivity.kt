@@ -5,11 +5,13 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.os.bundleOf
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -97,16 +99,18 @@ class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
         val workRequest: PeriodicWorkRequest =
             PeriodicWorkRequest.Builder(
                 WorkUpdateDb::class.java,
-                15,
-                TimeUnit.MINUTES
+                1,
+                TimeUnit.DAYS
             )
                 .setConstraints(constraint)
                 .build()
-
-        WorkManager.getInstance(this)
-            .enqueueUniquePeriodicWork(
+        val manager = WorkManager.getInstance(this)
+        manager.getWorkInfoByIdLiveData(workRequest.id).observe(this, {
+            Log.d("workRequestState", "Status: ${it.state}")
+        })
+        manager.enqueueUniquePeriodicWork(
                 TAG_NAME_WORK_UPDATE_DB,
-                ExistingPeriodicWorkPolicy.KEEP,
+                ExistingPeriodicWorkPolicy.REPLACE,
                 workRequest
             )
     }

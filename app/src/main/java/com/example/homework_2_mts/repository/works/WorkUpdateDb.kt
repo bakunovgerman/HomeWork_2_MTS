@@ -3,7 +3,9 @@ package com.example.homework_2_mts.repository.works
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.content.Context.NOTIFICATION_SERVICE
 import android.os.Build
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.CoroutineWorker
@@ -36,6 +38,7 @@ class WorkUpdateDb(
     }
 
     override suspend fun doWork(): Result {
+        Log.d("workRequestState", "doWork()")
         return try {
             val responseMoviesApi = movieRepository.getMoviesAPI()
             if (responseMoviesApi.isSuccessful) {
@@ -56,20 +59,24 @@ class WorkUpdateDb(
     }
 
     private fun showNotification() {
+        Log.d("workRequestState", "showNotification зашел")
+        Log.d("workRequestState", "applicationContext = $applicationContext")
         createNotificationChannel()
         // Создаём уведомление
-        val builder = NotificationCompat.Builder(App.applicationContext, CHANNEL_ID)
+        val builder = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
             .setSmallIcon(R.mipmap.ic_launcher_round)
             .setContentTitle(App.applicationContext.getString(R.string.notification_update_db_title))
-            .setContentText(App.applicationContext.getString(R.string.notification_update_db_description))
+            .setContentText(applicationContext.getString(R.string.notification_update_db_description))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
-        with(NotificationManagerCompat.from(App.applicationContext)) {
+        with(NotificationManagerCompat.from(applicationContext)) {
+            Log.d("workRequestState", "notify build()")
             notify(NOTIFICATION_ID, builder.build()) // посылаем уведомление
         }
     }
 
     private fun createNotificationChannel() {
+        Log.d("workRequestState", "createNotificationChannel start")
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -81,8 +88,9 @@ class WorkUpdateDb(
             }
             // Register the channel with the system
             val notificationManager: NotificationManager =
-                App.applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                applicationContext.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
+            Log.d("workRequestState", "createNotificationChannel create")
         }
     }
 
