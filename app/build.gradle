@@ -38,6 +38,7 @@ android {
 dependencies {
     def room_version = "2.3.0"
     def lifecycle_version = "2.3.1"
+    def core_version = "1.6.0"
     
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.6.0'
@@ -92,4 +93,8 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2"
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0'
+    // WorkManager
+    implementation "androidx.work:work-runtime-ktx:2.5.0"
+    // notification
+    implementation("androidx.core:core-ktx:$core_version")
 }

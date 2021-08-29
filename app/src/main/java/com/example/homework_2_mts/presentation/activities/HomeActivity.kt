@@ -1,18 +1,28 @@
 package com.example.homework_2_mts.presentation.activities
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.work.*
+import com.example.homework_2_mts.App
 import com.example.homework_2_mts.R
 import com.example.homework_2_mts.repository.database.entities.MovieEntity
 import com.example.homework_2_mts.repository.database.entities.GenreEntity
 import com.example.homework_2_mts.presentation.fragments.MovieDetailFragment
 import com.example.homework_2_mts.presentation.helpers.MainFragmentClickListener
+import com.example.homework_2_mts.repository.works.WorkUpdateDb
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.concurrent.TimeUnit
 
 class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
 
@@ -22,6 +32,9 @@ class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        // запускаю WorkManager
+        initWorkManager()
 
         bottomNavigationView = findViewById(R.id.bottom_navigation)
         navController = findNavController(R.id.nav_host)
@@ -75,7 +88,32 @@ class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
         Toast.makeText(this, genreEntity.name, Toast.LENGTH_LONG).show()
     }
 
+    private fun initWorkManager() {
+        // инит констраинтов
+        val constraint = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+        // инит переодичного запроса
+        val workRequest: PeriodicWorkRequest =
+            PeriodicWorkRequest.Builder(
+                WorkUpdateDb::class.java,
+                15,
+                TimeUnit.MINUTES
+            )
+                .setConstraints(constraint)
+                .build()
+
+        WorkManager.getInstance(this)
+            .enqueueUniquePeriodicWork(
+                TAG_NAME_WORK_UPDATE_DB,
+                ExistingPeriodicWorkPolicy.KEEP,
+                workRequest
+            )
+    }
+
     companion object {
         const val MOVIE_KEY = "movie"
+        const val TAG_NAME_WORK_UPDATE_DB = "updateDb"
     }
+
 }
