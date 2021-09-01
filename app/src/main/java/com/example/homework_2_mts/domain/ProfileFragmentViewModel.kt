@@ -1,6 +1,5 @@
 package com.example.homework_2_mts.domain
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,9 +8,9 @@ import com.example.homework_2_mts.presentation.fragments.ProfileFragment
 import com.example.homework_2_mts.repository.database.entities.GenreEntity
 import com.example.homework_2_mts.repository.database.entities.ProfileEntity
 import com.example.homework_2_mts.repository.database.entities.UpdateDbDateEntity
-import com.example.homework_2_mts.repository.repositories.GenreRepository
-import com.example.homework_2_mts.repository.repositories.ProfileRepository
-import com.example.homework_2_mts.repository.repositories.UpdateDbDateRepository
+import com.example.homework_2_mts.repository.repositories.GenreRepositoryImpl
+import com.example.homework_2_mts.repository.repositories.ProfileRepositoryImpl
+import com.example.homework_2_mts.repository.repositories.UpdateDbDateRepositoryImpl
 import kotlinx.coroutines.*
 import java.util.*
 
@@ -35,9 +34,9 @@ class ProfileFragmentViewModel : ViewModel() {
     private val _genresList = MutableLiveData<List<GenreEntity>>()
 
     // init Repositories
-    private val profileRepository = ProfileRepository()
-    private val genreRepository = GenreRepository()
-    private val updateDbDateRepository = UpdateDbDateRepository()
+    private val profileRepository = ProfileRepositoryImpl()
+    private val genreRepository = GenreRepositoryImpl()
+    private val updateDbDateRepository = UpdateDbDateRepositoryImpl()
 
     private fun loadGenres(): Job {
         return viewModelScope.launch {

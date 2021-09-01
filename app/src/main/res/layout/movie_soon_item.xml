@@ -38,6 +38,7 @@
             android:paddingEnd="@dimen/soon_padding_end"
             android:paddingBottom="@dimen/soon_padding_bottom"
             android:paddingTop="@dimen/soon_padding_top"/>
+
     </androidx.cardview.widget.CardView>
 
     <TextView
@@ -63,7 +64,7 @@
         android:textSize="@dimen/movie_item_description_text_size"
         android:textColor="@color/black"
         android:layout_marginTop="@dimen/movie_item_description_margin_top"
-        android:maxLines="6"
+        android:maxLines="5"
         android:ellipsize="end"/>
 
     <RatingBar

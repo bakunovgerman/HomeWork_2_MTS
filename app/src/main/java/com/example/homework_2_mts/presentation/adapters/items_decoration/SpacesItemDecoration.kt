@@ -6,9 +6,8 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
 class SpacesItemDecoration(
-    private val spaceRight: Int = 0,
-    private val spaceBottom: Int = 0,
-    private val spaceLeft: Int = 0,
+    private val spaceRight: Float = 0f,
+    private val spaceLeft: Float = 0f,
     private val size: Int
 ) : RecyclerView.ItemDecoration() {
     override fun getItemOffsets(
@@ -21,18 +20,16 @@ class SpacesItemDecoration(
 
         when (parent.getChildAdapterPosition(view)) {
             0 -> {
-                outRect.left = dpToPx(spaceLeft)
-                outRect.right = dpToPx(spaceRight)
+                outRect.left = spaceLeft.toInt()
+                outRect.right = spaceRight.toInt()
             }
-            size - 1 -> outRect.right = dpToPx(spaceLeft)
-            else -> outRect.right = dpToPx(spaceRight)
+            size - 1 -> outRect.right = spaceLeft.toInt()
+            else -> outRect.right = spaceRight.toInt()
         }
-
-        outRect.bottom = spaceBottom
 
     }
 
-    private fun dpToPx(dp: Int): Int {
+    private fun dpToPx(dp: Float): Int {
         return (dp * Resources.getSystem().displayMetrics.density).toInt()
     }
 }

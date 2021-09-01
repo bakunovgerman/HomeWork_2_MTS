@@ -4,7 +4,7 @@
     <string name="movie_description">Эйч — загадочный и холодный на вид джентльмен, но внутри него пылает жажда справедливости. Преследуя свои мотивы, он внедряется в инкассаторскую компанию, чтобы выйти на соучастников серии многомиллионных ограблений, потрясших Лос-Анджелес. В этой запутанной игре у каждого своя роль, но под подозрением оказываются все. Виновных же обязательно постигнет гнев человеческий.</string>
     <string name="actors">Актеры</string>
     <string name="movie_poster_description">Постер фильма</string>
-    <string name="movie_date">22.04.2021</string>
+    <string name="movie_date">Дата релиза: 22.04.2021</string>
     <string name="movie_title">Гнев человеческий</string>
     <string name="movie_age">18+</string>
     <string name="actor_1_name">Джейсон Стэйтем</string>
@@ -32,4 +32,11 @@
     <string name="exit">Выйти</string>
     <string name="soon">Скоро</string>
     <string name="save_profile_info">Сохранить</string>
+    <string name="api_key">97d1d87288586c192d78f03b0336edd0</string>
+    <string name="poster_base_url">https://www.themoviedb.org/t/p/w600_and_h900_bestv2/</string>
+    <string name="bg_img_base_url">https://www.themoviedb.org/t/p/w1000_and_h450_multi_faces</string>
+    <string name="actor_photo_url">https://www.themoviedb.org/t/p/w600_and_h900_bestv2</string>
+    <string name="movie_age_item">%s+</string>
+    <string name="error_snack_bar">Ошибка: %s</string>
+    <string name="movie_date_release">Дата релиза: %s</string>
 </resources>

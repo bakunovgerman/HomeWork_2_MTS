@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.homework_2_mts.App
 import com.example.homework_2_mts.R
 import com.example.homework_2_mts.presentation.adapters.MoviesAdapter
 import com.example.homework_2_mts.presentation.adapters.PopularNowAdapter
@@ -25,7 +26,8 @@ import com.example.homework_2_mts.repository.database.entities.GenreEntity
 import com.example.homework_2_mts.presentation.helpers.MainFragmentClickListener
 import com.example.homework_2_mts.presentation.helpers.MoviesCallbackDiffUtils
 import com.example.homework_2_mts.domain.MainFragmentViewModel
-import kotlinx.coroutines.*
+import com.example.homework_2_mts.presentation.adapters.items_decoration.FooterItemDecoration
+import com.example.homework_2_mts.presentation.helpers.ViewStateLayout
 
 class MainFragment : Fragment() {
 
@@ -93,7 +95,7 @@ class MainFragment : Fragment() {
             viewLifecycleOwner,
             Observer(::initPopularNowData)
         )
-        mainFragmentViewModel.viewState.observe(viewLifecycleOwner, Observer(::setViewState))
+        mainFragmentViewModel.viewStateLayout.observe(viewLifecycleOwner, Observer(::setViewState))
         mainFragmentViewModel.updateMoviesList.observe(viewLifecycleOwner, Observer(::updateData))
 
         mainFragmentViewModel.loadData()
@@ -113,9 +115,9 @@ class MainFragment : Fragment() {
             if (rvPopularNow.itemDecorationCount == 0) {
                 rvPopularNow.addItemDecoration(
                     SpacesItemDecoration(
-                        spaceRight = 6,
-                        spaceLeft = 20,
-                        size = popularNowItems.size
+                        App.applicationContext.resources.getDimension(R.dimen.genre_margin_right),
+                        App.applicationContext.resources.getDimension(R.dimen.genre_margin_left),
+                        popularNowItems.size
                     )
                 )
             }
@@ -123,11 +125,7 @@ class MainFragment : Fragment() {
         }
     }
 
-    data class ViewState(
-        val isDownloaded: Boolean = false
-    )
-
-    private fun setViewState(viewState: ViewState) = with(viewState) {
+    private fun setViewState(viewStateLayout: ViewStateLayout) = with(viewStateLayout) {
         if (isDownloaded) {
             hideProgressBar()
         } else {

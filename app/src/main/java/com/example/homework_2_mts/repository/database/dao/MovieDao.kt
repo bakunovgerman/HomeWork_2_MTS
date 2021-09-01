@@ -9,13 +9,13 @@ interface MovieDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovies(movieEntities: List<MovieEntity>)
 
-    @Query("SELECT * FROM movies")
+    @Query("SELECT * FROM movie")
     suspend fun getMovies(): List<MovieEntity>
 
-    @Query("SELECT COUNT(id) FROM movies")
+    @Query("SELECT COUNT(id) FROM movie")
     suspend fun getMoviesCount(): Int
 
-    @Query("DELETE FROM movies")
+    @Query("DELETE FROM movie")
     suspend fun clearAllDb()
 
 }

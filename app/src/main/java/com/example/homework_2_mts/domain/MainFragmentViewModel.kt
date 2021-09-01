@@ -2,22 +2,20 @@ package com.example.homework_2_mts.domain
 
 import android.util.Log
 import androidx.lifecycle.*
+import com.example.homework_2_mts.App
+import com.example.homework_2_mts.presentation.helpers.ViewStateLayout
 import com.example.homework_2_mts.repository.database.entities.MovieEntity
 import com.example.homework_2_mts.repository.database.entities.GenreEntity
-import com.example.homework_2_mts.repository.data.features.popular.PopularNowDataSourceImpl
-import com.example.homework_2_mts.presentation.fragments.MainFragment
 import com.example.homework_2_mts.repository.database.entities.UpdateDbDateEntity
-import com.example.homework_2_mts.repository.models.PopularNowModel
-import com.example.homework_2_mts.repository.repositories.GenreRepository
-import com.example.homework_2_mts.repository.repositories.MovieRepository
-import com.example.homework_2_mts.repository.repositories.UpdateDbDateRepository
+import com.example.homework_2_mts.repository.mappers.MoviesMapper
+import com.example.homework_2_mts.repository.repositories.GenreRepositoryImpl
+import com.example.homework_2_mts.repository.repositories.MovieRepositoryImpl
+import com.example.homework_2_mts.repository.repositories.UpdateDbDateRepositoryImpl
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
-
-typealias MainFragmentViewState = MainFragment.ViewState
 
 class MainFragmentViewModel : ViewModel() {
 
@@ -27,8 +25,8 @@ class MainFragmentViewModel : ViewModel() {
     }
 
     // init LiveData
-    val viewState: LiveData<MainFragmentViewState> get() = _viewState
-    private val _viewState = MutableLiveData<MainFragmentViewState>()
+    val viewStateLayout: LiveData<ViewStateLayout> get() = _viewState
+    private val _viewState = MutableLiveData<ViewStateLayout>()
 
     val moviesList: LiveData<List<MovieEntity>> get() = _moviesList
     private val _moviesList = MutableLiveData<List<MovieEntity>>()
@@ -40,39 +38,47 @@ class MainFragmentViewModel : ViewModel() {
     private val _updateMoviesList = MutableLiveData<List<MovieEntity>>()
 
     // init Repositories
-    private val movieRepository = MovieRepository()
-    private val genreRepository = GenreRepository()
-    private val updateDbDateRepository = UpdateDbDateRepository()
+    private val movieRepository = MovieRepositoryImpl(App.instance.apiService)
+    private val genreRepository = GenreRepositoryImpl()
+    private val updateDbDateRepository = UpdateDbDateRepositoryImpl()
 
     fun loadData() {
         viewModelScope.launch(errorHandler) {
             withContext(Dispatchers.IO) {
-                Thread.sleep(2000)
-                if (updateDbDateRepository.getUpdateDbDateCount() == 0 || updateDbDateRepository.isUpdateDb()) {
-                    Log.d("update_dp", "database is update")
-                    Log.d("update_dp", "database insert data")
-                    movieRepository.insertMoviesDb(movieRepository.getMoviesAPI())
-                    genreRepository.insertDbGenres(genreRepository.getGenresAPI())
-                    updateDbDateRepository.insertDate(UpdateDbDateEntity(1, Date().time))
+                val responseMoviesApi = movieRepository.getMoviesAPI()
+                if (responseMoviesApi.isSuccessful) {
+                    val movies = responseMoviesApi.body()?.moviesApiList ?: emptyList()
+
+                    if (updateDbDateRepository.getUpdateDbDateCount() == 0
+                        || updateDbDateRepository.isUpdateDb() && movies.isNotEmpty()
+                    ) {
+                        Log.d("update_dp", "database is update")
+                        Log.d("update_dp", "database insert data")
+
+                        movieRepository.insertDbMovies(MoviesMapper().toEntityList(movies))
+                        genreRepository.insertDbGenres(genreRepository.getGenresAPI())
+                        updateDbDateRepository.insertDate(UpdateDbDateEntity(1, Date().time))
+                    }
+                    _moviesList.postValue(MoviesMapper().toEntityList(movies))
+                    _genresList.postValue(genreRepository.getDbGenres())
                 }
-                _moviesList.postValue(movieRepository.getDbMovies())
-                _genresList.postValue(genreRepository.getDbGenres())
+
             }
-            _viewState.postValue(MainFragmentViewState(isDownloaded = true))
+            _viewState.postValue(ViewStateLayout(isDownloaded = true))
         }
     }
 
     fun updateData() {
-        viewModelScope.launch(errorHandler) {
-            withContext(Dispatchers.IO) {
-                Thread.sleep(2000)
-                movieRepository.clearAllDb()
-                val movies = movieRepository.getMoviesAPIRefresh()
-                movieRepository.insertMoviesDb(movies)
-                _updateMoviesList.postValue(movieRepository.getDbMovies())
-            }
-            _viewState.postValue(MainFragmentViewState(isDownloaded = true))
-        }
+//        viewModelScope.launch(errorHandler) {
+//            withContext(Dispatchers.IO) {
+//                Thread.sleep(2000)
+//                movieRepository.clearAllDb()
+//                val movies = movieRepository.getMoviesAPIRefresh()
+//                movieRepository.insertDbMovies(movies)
+//                _updateMoviesList.postValue(movieRepository.getDbMovies())
+//            }
+//            _viewState.postValue(MainFragmentViewState(isDownloaded = true))
+//        }
     }
 
 }
