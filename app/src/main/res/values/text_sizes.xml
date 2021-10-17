@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="movie_category_text_size">10sp</dimen>
+    <dimen name="movie_title_text_size">20sp</dimen>
+    <dimen name="movie_age_text_size">14sp</dimen>
+    <dimen name="movie_actors_title_text_size">16sp</dimen>
+    <dimen name="actor_name_text_size">12sp</dimen>
+    <dimen name="tv_popular_now_title_text_size">16sp</dimen>
+    <dimen name="name_user_text_size">20sp</dimen>
+    <dimen name="email_user_text_size">14sp</dimen>
+    <dimen name="interests_user_text_size">16sp</dimen>
+    <dimen name="personal_user_data_text_size">16sp</dimen>
+    <dimen name="settings_text_size">16sp</dimen>
+    <dimen name="btn_log_out_text_size">16sp</dimen>
+    <dimen name="movie_item_title_text_size">14sp</dimen>
+    <dimen name="movie_item_description_text_size">12sp</dimen>
+    <dimen name="movie_item_age_text_size">7sp</dimen>
+    <dimen name="btn_save_profile_info_text_size">13sp</dimen>
+</resources>

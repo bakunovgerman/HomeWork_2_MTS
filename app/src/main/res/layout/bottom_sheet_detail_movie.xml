@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cvBottomSheetBehavior"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/gray_bg_bottom_sheet"
+    style="@style/MyCardView"
+    app:behavior_hideable="false"
+    app:behavior_peekHeight="470dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/NestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideLine_1"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="@dimen/guideline_margin_begin_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvGenres"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/movie_category_margin_top"
+                    tools:listitem="@layout/popular_now_item"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="4"/>
+
+                <TextView
+                    android:id="@+id/tvMovieDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/movie_date_text_size"
+                    tools:text="@string/movie_date"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="@dimen/movie_date_margin_top"
+                    app:layout_constraintStart_toStartOf="@id/guideLine_1"
+                    app:layout_constraintTop_toBottomOf="@id/rvGenres"/>
+
+                <TextView
+                    android:id="@+id/tvMovieTitle"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/movie_title"
+                    app:layout_constraintTop_toBottomOf="@+id/tvMovieDate"
+                    app:layout_constraintStart_toStartOf="@id/guideLine_1"
+                    android:layout_marginTop="@dimen/movie_title_margin_top"
+                    android:textSize="@dimen/movie_title_text_size"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvMovieAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@id/guideLine_2"
+                    app:layout_constraintBaseline_toBaselineOf="@id/tvMovieTitle"
+                    android:text="@string/movie_age"
+                    android:padding="@dimen/movie_age_padding"
+                    android:layout_marginTop="@dimen/movie_age_margin_top"
+                    android:background="@drawable/bg_circle_age"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/movie_age_text_size"/>
+
+                <RatingBar
+                    android:id="@+id/rbMovie"
+                    style="@style/CustomRatingBarDetailMovie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"
+                    android:layout_marginTop="@dimen/movie_rating_margin_top"
+                    android:numStars="5"
+                    android:rating="5"
+                    android:stepSize="1"
+                    app:layout_constraintStart_toStartOf="@id/guideLine_1"
+                    app:layout_constraintTop_toBottomOf="@+id/tvMovieTitle"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <TextView
+                    android:id="@+id/tvMovieDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/movie_description_margin_top"
+                    android:text="@string/movie_description"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="@id/guideLine_2"
+                    app:layout_constraintStart_toStartOf="@id/guideLine_1"
+                    app:layout_constraintTop_toBottomOf="@id/rbMovie" />
+
+                <TextView
+                    android:id="@+id/tvPopularNowTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/movie_actors_title_text_size"
+                    android:text="@string/actors"
+                    app:layout_constraintTop_toBottomOf="@+id/tvMovieDescription"
+                    app:layout_constraintStart_toStartOf="@id/guideLine_1"
+                    android:layout_marginTop="@dimen/movie_actors_title_margin_top"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvActors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/tvPopularNowTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginTop="@dimen/horizontal_scroll_view_margin_top"
+                    android:layout_marginBottom="@dimen/horizontal_scroll_view_margin_bottom"
+                    tools:listitem="@layout/item_actor" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideLine_2"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="@dimen/guideline_margin_begin_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
