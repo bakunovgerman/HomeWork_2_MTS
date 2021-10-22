@@ -11,6 +11,8 @@ import com.example.homework_2_mts.repository.database.entities.*
 import com.example.homework_2_mts.repository.mappers.ActorsMapper
 import com.example.homework_2_mts.repository.mappers.GenresMapper
 import com.example.homework_2_mts.repository.repositories.*
+import com.example.homework_2_mts.repository.repositories.interfaces.ActorsRepository
+import com.example.homework_2_mts.repository.repositories.interfaces.MovieRepository
 import com.example.homework_2_mts.repository.retrofit.entities.releaseDate.ReleaseDate
 import kotlinx.coroutines.*
 import java.util.*
@@ -37,8 +39,8 @@ class MovieDetailFragmentViewModel : ViewModel() {
     private val _getViewState = MutableLiveData<ViewStateLayout>()
 
     // init Repositories
-    private val actorsRepository = ActorsRepositoryImpl(App.instance.apiService)
-    private val moviesRepository = MovieRepositoryImpl(App.instance.apiService)
+    private val actorsRepository: ActorsRepository = ActorsRepositoryImpl(App.instance.apiService)
+    private val moviesRepository: MovieRepository = MovieRepositoryImpl(App.instance.apiService)
 
     fun loadData(movieId: Long) {
         viewModelScope.launch {
@@ -46,7 +48,7 @@ class MovieDetailFragmentViewModel : ViewModel() {
             loadDetailJob.join()
             val loadReleaseDatesJob = loadReleaseDates(movieId)
             loadReleaseDatesJob.join()
-            val loadActorsJob = loadActors(movieId)
+            loadActors(movieId)
             _getViewState.postValue(ViewStateLayout(isDownloaded = true))
         }
     }
@@ -84,8 +86,8 @@ class MovieDetailFragmentViewModel : ViewModel() {
         }
     }
 
-    private fun loadActors(movieId: Long): Job {
-        return viewModelScope.launch(errorHandler) {
+    private fun loadActors(movieId: Long) {
+        viewModelScope.launch(errorHandler) {
             withContext(Dispatchers.IO) {
                 val actorsResponse = actorsRepository.getActorsAPI(movieId)
                 if (actorsResponse.isSuccessful) {

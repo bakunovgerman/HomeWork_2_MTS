@@ -11,6 +11,9 @@ import com.example.homework_2_mts.repository.database.entities.UpdateDbDateEntit
 import com.example.homework_2_mts.repository.repositories.GenreRepositoryImpl
 import com.example.homework_2_mts.repository.repositories.ProfileRepositoryImpl
 import com.example.homework_2_mts.repository.repositories.UpdateDbDateRepositoryImpl
+import com.example.homework_2_mts.repository.repositories.interfaces.GenreRepository
+import com.example.homework_2_mts.repository.repositories.interfaces.ProfileRepository
+import com.example.homework_2_mts.repository.repositories.interfaces.UpdateDbDateRepository
 import kotlinx.coroutines.*
 import java.util.*
 
@@ -34,13 +37,12 @@ class ProfileFragmentViewModel : ViewModel() {
     private val _genresList = MutableLiveData<List<GenreEntity>>()
 
     // init Repositories
-    private val profileRepository = ProfileRepositoryImpl()
-    private val genreRepository = GenreRepositoryImpl()
-    private val updateDbDateRepository = UpdateDbDateRepositoryImpl()
+    private val profileRepository: ProfileRepository = ProfileRepositoryImpl()
+    private val genreRepository: GenreRepository = GenreRepositoryImpl()
+    private val updateDbDateRepository: UpdateDbDateRepository = UpdateDbDateRepositoryImpl()
 
     private fun loadGenres(): Job {
         return viewModelScope.launch {
-            delay(2000)
             withContext(Dispatchers.IO) {
                 if (updateDbDateRepository.getUpdateDbDateCount() == 0 || updateDbDateRepository.isUpdateDb()) {
                     genreRepository.insertDbGenres(genreRepository.getGenresAPI())

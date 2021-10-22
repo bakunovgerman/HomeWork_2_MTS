@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presentation.fragments.ActorDetailFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideLine_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/guideline_margin_begin_end" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideLine_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/guideline_margin_begin_end" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/imgActorPhotoCardView"
+                android:layout_width="250dp"
+                android:layout_height="300dp"
+                android:layout_marginTop="@dimen/actor_detail_margin_top"
+                app:cardCornerRadius="@dimen/corner_radius_actor_photo"
+                app:layout_constraintBottom_toTopOf="@id/nameActorTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/imgActorPhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/nameActorTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imgActorPhotoCardView"
+                tools:text="Scarlett Johansson" />
+
+            <TextView
+                android:id="@+id/personalInfoTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/personal_info"
+                android:textColor="@color/black"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/guideLine_1"
+                app:layout_constraintTop_toBottomOf="@id/nameActorTextView" />
+
+            <TextView
+                android:id="@+id/genderTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/gender"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/personalInfoTitleTextView"
+                app:layout_constraintTop_toBottomOf="@id/personalInfoTitleTextView" />
+
+            <TextView
+                android:id="@+id/genderTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/personalInfoTitleTextView"
+                app:layout_constraintTop_toBottomOf="@id/genderTitleTextView"
+                tools:text="Женский" />
+
+            <TextView
+                android:id="@+id/dateBirthTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:text="@string/date_birth"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@id/genderTitleTextView"
+                app:layout_constraintStart_toEndOf="@id/genderTitleTextView"
+                app:layout_constraintTop_toBottomOf="@id/personalInfoTitleTextView" />
+
+            <TextView
+                android:id="@+id/dateBirthTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/genderTextView"
+                app:layout_constraintEnd_toEndOf="@id/guideLine_2"
+                app:layout_constraintStart_toStartOf="@id/dateBirthTitleTextView"
+                app:layout_constraintTop_toBottomOf="@id/genderTitleTextView"
+                tools:text="1984-11-22 (36 лет)" />
+
+            <TextView
+                android:id="@+id/placeBirthTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/place_birth"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/guideLine_1"
+                app:layout_constraintTop_toBottomOf="@id/genderTextView" />
+
+            <TextView
+                android:id="@+id/placeBirthTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/guideLine_1"
+                app:layout_constraintTop_toBottomOf="@id/placeBirthTitleTextView"
+                tools:text=" New York City, New York, USA" />
+
+            <TextView
+                android:id="@+id/biographyTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/biography"
+                android:textColor="@color/black"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/guideLine_1"
+                app:layout_constraintTop_toBottomOf="@id/placeBirthTextView" />
+
+            <TextView
+                android:id="@+id/biographyTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="20dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/guideLine_2"
+                app:layout_constraintStart_toStartOf="@id/guideLine_1"
+                app:layout_constraintTop_toBottomOf="@id/biographyTitleTextView"
+                tools:text="Скарлетт Йоханссон — американская актриса и певица. Наибольшую известность ей принесло сотрудничество с Вуди Алленом («Матч-пойнт») и Софией Копполой («Трудности перевода»), а также роль Чёрной Вдовы в серии фильмов кинематографической вселенной Marvel." />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <FrameLayout
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:theme="@style/ProgressBarStyle"
+            android:layout_gravity="center"/>
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

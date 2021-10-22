@@ -18,10 +18,14 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.work.*
 import com.example.homework_2_mts.App
 import com.example.homework_2_mts.R
+import com.example.homework_2_mts.presentation.fragments.ActorDetailFragment
 import com.example.homework_2_mts.repository.database.entities.MovieEntity
 import com.example.homework_2_mts.repository.database.entities.GenreEntity
 import com.example.homework_2_mts.presentation.fragments.MovieDetailFragment
 import com.example.homework_2_mts.presentation.helpers.MainFragmentClickListener
+import com.example.homework_2_mts.repository.repositories.GenreRepositoryImpl
+import com.example.homework_2_mts.repository.repositories.MovieRepositoryImpl
+import com.example.homework_2_mts.repository.repositories.UpdateDbDateRepositoryImpl
 import com.example.homework_2_mts.repository.works.WorkUpdateDb
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.concurrent.TimeUnit
@@ -65,7 +69,6 @@ class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
                 else -> false
             }
         }
-
     }
 
     override fun onBackPressed() {
@@ -90,6 +93,11 @@ class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
         Toast.makeText(this, genreEntity.name, Toast.LENGTH_LONG).show()
     }
 
+    override fun onOpenDetailActorClick(idActor: Long) {
+        val bundle = bundleOf(ActorDetailFragment.ID_ACTOR to idActor)
+        navController.navigate(R.id.action_movie_detail_fragment_to_actor_detail_fragment, bundle)
+    }
+
     private fun initWorkManager() {
         // инит констраинтов
         val constraint = Constraints.Builder()
@@ -103,16 +111,16 @@ class HomeActivity : AppCompatActivity(), MainFragmentClickListener {
                 TimeUnit.DAYS
             )
                 .setConstraints(constraint)
-                .build()
+                    .build()
         val manager = WorkManager.getInstance(this)
         manager.getWorkInfoByIdLiveData(workRequest.id).observe(this, {
             Log.d("workRequestState", "Status: ${it.state}")
         })
         manager.enqueueUniquePeriodicWork(
-                TAG_NAME_WORK_UPDATE_DB,
-                ExistingPeriodicWorkPolicy.REPLACE,
-                workRequest
-            )
+            TAG_NAME_WORK_UPDATE_DB,
+            ExistingPeriodicWorkPolicy.REPLACE,
+            workRequest
+        )
     }
 
     companion object {

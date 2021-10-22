@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.homework_2_mts.App
@@ -11,7 +12,8 @@ import com.example.homework_2_mts.R
 import com.example.homework_2_mts.repository.database.entities.ActorEntity
 import com.squareup.picasso.Picasso
 
-class ActorsAdapter : RecyclerView.Adapter<ActorsAdapter.ActorsViewHolder>() {
+class ActorsAdapter(private val actorOnClickListener: (Long) -> Unit) :
+    RecyclerView.Adapter<ActorsAdapter.ActorsViewHolder>() {
 
     private var items: MutableList<ActorEntity> = ArrayList()
 
@@ -20,6 +22,7 @@ class ActorsAdapter : RecyclerView.Adapter<ActorsAdapter.ActorsViewHolder>() {
 
         private val actorPhotoImageView: ImageView = itemView.findViewById(R.id.imgActorPhoto)
         private val actorNameTextView: TextView = itemView.findViewById(R.id.tvActorName)
+        private val actorRootLayout: LinearLayout = itemView.findViewById(R.id.actorRootLayout)
 
         fun bind(actorEntity: ActorEntity) {
             if (actorEntity.photoUrl != null) {
@@ -29,8 +32,10 @@ class ActorsAdapter : RecyclerView.Adapter<ActorsAdapter.ActorsViewHolder>() {
             } else {
                 actorPhotoImageView.setImageResource(R.drawable.actor_no_photo)
             }
-
             actorNameTextView.text = actorEntity.name
+            actorRootLayout.setOnClickListener {
+                actorOnClickListener.invoke(actorEntity.id)
+            }
         }
 
     }

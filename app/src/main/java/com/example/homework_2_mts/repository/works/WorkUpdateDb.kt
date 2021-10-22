@@ -17,6 +17,9 @@ import com.example.homework_2_mts.repository.mappers.MoviesMapper
 import com.example.homework_2_mts.repository.repositories.GenreRepositoryImpl
 import com.example.homework_2_mts.repository.repositories.MovieRepositoryImpl
 import com.example.homework_2_mts.repository.repositories.UpdateDbDateRepositoryImpl
+import com.example.homework_2_mts.repository.repositories.interfaces.GenreRepository
+import com.example.homework_2_mts.repository.repositories.interfaces.MovieRepository
+import com.example.homework_2_mts.repository.repositories.interfaces.UpdateDbDateRepository
 import java.util.*
 
 class WorkUpdateDb(
@@ -25,17 +28,9 @@ class WorkUpdateDb(
 ) :
     CoroutineWorker(context, workerParameters) {
 
-    private val movieRepository = MovieRepositoryImpl(App.instance.apiService)
-    private val genreRepository = GenreRepositoryImpl()
-    private val updateDbDateRepository = UpdateDbDateRepositoryImpl()
-
-    companion object {
-        const val NOTIFICATION_ID = 101
-        const val CHANNEL_ID = "channelID"
-        const val CHANNEL_NAME = "updateDbChannel"
-        const val CHANNEL_DESCRIPTION = "updateDbDescriptionChannel"
-        const val UPDATE_DB_ID: Long = 1
-    }
+    private val movieRepository: MovieRepository = MovieRepositoryImpl(App.instance.apiService)
+    private val genreRepository: GenreRepository = GenreRepositoryImpl()
+    private val updateDbDateRepository: UpdateDbDateRepository = UpdateDbDateRepositoryImpl()
 
     override suspend fun doWork(): Result {
         Log.d("workRequestState", "doWork()")
@@ -77,8 +72,6 @@ class WorkUpdateDb(
 
     private fun createNotificationChannel() {
         Log.d("workRequestState", "createNotificationChannel start")
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = CHANNEL_NAME
             val descriptionText = CHANNEL_DESCRIPTION
@@ -92,6 +85,14 @@ class WorkUpdateDb(
             notificationManager.createNotificationChannel(channel)
             Log.d("workRequestState", "createNotificationChannel create")
         }
+    }
+
+    companion object {
+        const val NOTIFICATION_ID = 101
+        const val CHANNEL_ID = "channelID"
+        const val CHANNEL_NAME = "updateDbChannel"
+        const val CHANNEL_DESCRIPTION = "updateDbDescriptionChannel"
+        const val UPDATE_DB_ID: Long = 1
     }
 
 }

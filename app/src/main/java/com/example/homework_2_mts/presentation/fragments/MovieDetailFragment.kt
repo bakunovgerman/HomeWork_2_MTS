@@ -1,5 +1,6 @@
 package com.example.homework_2_mts.presentation.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -22,6 +23,7 @@ import com.example.homework_2_mts.domain.MovieDetailFragmentViewModel
 import com.example.homework_2_mts.presentation.adapters.ActorsAdapter
 import com.example.homework_2_mts.presentation.adapters.PopularNowAdapter
 import com.example.homework_2_mts.presentation.adapters.items_decoration.SpacesItemDecoration
+import com.example.homework_2_mts.presentation.helpers.MainFragmentClickListener
 import com.example.homework_2_mts.presentation.helpers.ViewStateLayout
 import com.example.homework_2_mts.repository.database.entities.ActorEntity
 import com.example.homework_2_mts.repository.database.entities.GenreEntity
@@ -45,8 +47,11 @@ class MovieDetailFragment : Fragment() {
     private lateinit var fragmentDetailMovieRootView: CoordinatorLayout
     private lateinit var rvActors: RecyclerView
     private lateinit var rvGenres: RecyclerView
-    private val actorAdapter: ActorsAdapter = ActorsAdapter()
+    private val actorAdapter: ActorsAdapter = ActorsAdapter {
+        mainFragmentClickListener?.onOpenDetailActorClick(it)
+    }
     private val genresAdapter: PopularNowAdapter = PopularNowAdapter { }
+    private var mainFragmentClickListener: MainFragmentClickListener? = null
 
     // ViewModels
     private lateinit var movieDetailFragmentViewModel: MovieDetailFragmentViewModel
@@ -185,6 +190,17 @@ class MovieDetailFragment : Fragment() {
             movieDateTextView.visibility = View.VISIBLE
         }
 
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is MainFragmentClickListener)
+            mainFragmentClickListener = context
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        mainFragmentClickListener = null
     }
 
     companion object {

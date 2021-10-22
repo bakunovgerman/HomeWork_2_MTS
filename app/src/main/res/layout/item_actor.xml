@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
+    android:id="@+id/actorRootLayout"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,7 +10,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="@dimen/actor_image_width"
         android:layout_height="@dimen/actor_image_height"
-        app:cardCornerRadius="@dimen/corner_radius_actor_photo">
+        app:cardCornerRadius="@dimen/corner_radius_actor_photo"
+        android:foreground="?attr/selectableItemBackgroundBorderless">
 
         <ImageView
             android:id="@+id/imgActorPhoto"

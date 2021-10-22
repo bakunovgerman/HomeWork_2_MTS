@@ -41,4 +41,12 @@
     <string name="movie_date_release">Дата релиза: %s</string>
     <string name="notification_update_db_title">Обновление БД</string>
     <string name="notification_update_db_description">Обновление базы данных выполненно успешно!</string>
+    <string name="personal_info">Персональная информация</string>
+    <string name="gender">Пол</string>
+    <string name="date_birth">Дата рождения</string>
+    <string name="place_birth">Место рождения</string>
+    <string name="biography">Биография</string>
+    <string name="woman_gender">Женский</string>
+    <string name="man_gender">Мужской</string>
+    <string name="no_info_biography">Нет информации о биографии</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.homework_2_mts.repository.retrofit
 
+import com.example.homework_2_mts.repository.retrofit.entities.actorDetail.ActorDetailResponse
 import com.example.homework_2_mts.repository.retrofit.entities.actors.MovieCreditsApiResponse
 import com.example.homework_2_mts.repository.retrofit.entities.movieDetail.MovieDetailApiResponse
 import com.example.homework_2_mts.repository.retrofit.entities.moviePopular.MoviesApiPopularResponse
@@ -41,6 +42,13 @@ interface ApiService {
         @Path("movie_id") movieId: Long,
         @Query("api_key") apiKey: String
     ): Response<ReleaseDateMovieApiResponse>
+
+    @GET("person/{person_id}")
+    suspend fun getActorDetail(
+        @Path("person_id") actorId: Long,
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String
+    ): Response<ActorDetailResponse>
 
     companion object {
         private const val BASE_URL = "https://api.themoviedb.org/3/"

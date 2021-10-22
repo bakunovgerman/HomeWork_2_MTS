@@ -11,6 +11,9 @@ import com.example.homework_2_mts.repository.mappers.MoviesMapper
 import com.example.homework_2_mts.repository.repositories.GenreRepositoryImpl
 import com.example.homework_2_mts.repository.repositories.MovieRepositoryImpl
 import com.example.homework_2_mts.repository.repositories.UpdateDbDateRepositoryImpl
+import com.example.homework_2_mts.repository.repositories.interfaces.GenreRepository
+import com.example.homework_2_mts.repository.repositories.interfaces.MovieRepository
+import com.example.homework_2_mts.repository.repositories.interfaces.UpdateDbDateRepository
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -38,9 +41,9 @@ class MainFragmentViewModel : ViewModel() {
     private val _updateMoviesList = MutableLiveData<List<MovieEntity>>()
 
     // init Repositories
-    private val movieRepository = MovieRepositoryImpl(App.instance.apiService)
-    private val genreRepository = GenreRepositoryImpl()
-    private val updateDbDateRepository = UpdateDbDateRepositoryImpl()
+    private val movieRepository: MovieRepository = MovieRepositoryImpl(App.instance.apiService)
+    private val genreRepository: GenreRepository = GenreRepositoryImpl()
+    private val updateDbDateRepository: UpdateDbDateRepository = UpdateDbDateRepositoryImpl()
 
     fun loadData() {
         viewModelScope.launch(errorHandler) {

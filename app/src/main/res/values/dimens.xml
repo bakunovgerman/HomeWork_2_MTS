@@ -68,4 +68,5 @@
     <dimen name="actor_margin_left">20dp</dimen>
     <dimen name="genre_margin_right">10dp</dimen>
     <dimen name="genre_margin_left">20dp</dimen>
+    <dimen name="actor_detail_margin_top">20dp</dimen>
 </resources>
