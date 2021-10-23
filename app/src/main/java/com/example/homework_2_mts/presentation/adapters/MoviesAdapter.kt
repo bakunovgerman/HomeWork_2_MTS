@@ -9,8 +9,7 @@ import com.example.homework_2_mts.presentation.adapters.view_holders.LoadingView
 import com.example.homework_2_mts.presentation.adapters.view_holders.MoviesSoonViewHolder
 import com.example.homework_2_mts.presentation.adapters.view_holders.MoviesViewHolder
 import com.example.homework_2_mts.repository.database.entities.MovieEntity
-import java.lang.IllegalStateException
-import java.util.ArrayList
+import java.util.*
 
 class MoviesAdapter(private val onMovieItemClick: (MovieEntity) -> Unit) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -43,11 +42,13 @@ class MoviesAdapter(private val onMovieItemClick: (MovieEntity) -> Unit) :
                     false
                 ), onMovieItemClick
             )
-            VIEW_TYPE_LOADING -> LoadingViewHolder.getViewHolder(inflater.inflate(
-                R.layout.loading_item,
-                parent,
-                false
-            ))
+            VIEW_TYPE_LOADING -> LoadingViewHolder.getViewHolder(
+                inflater.inflate(
+                    R.layout.loading_item,
+                    parent,
+                    false
+                )
+            )
             else -> throw IllegalStateException()
         }
     }
@@ -61,7 +62,12 @@ class MoviesAdapter(private val onMovieItemClick: (MovieEntity) -> Unit) :
         }
     }
 
-    override fun getItemCount(): Int = items.size + 1
+    override fun getItemCount(): Int {
+        return if (items.size > 0)
+            items.size + 1
+        else
+            0
+    }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {

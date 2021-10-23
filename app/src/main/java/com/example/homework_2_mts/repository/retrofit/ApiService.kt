@@ -50,6 +50,15 @@ interface ApiService {
         @Query("language") language: String
     ): Response<ActorDetailResponse>
 
+    @GET("search/movie")
+    suspend fun searchMovies(
+        @Query("api_key") apiKey: String,
+        @Query("query") searchText: String,
+        @Query("language") language: String,
+        @Query("include_adult") includeAdult: Boolean,
+        @Query("page") page: Int
+    ): Response<MoviesApiPopularResponse>
+
     companion object {
         private const val BASE_URL = "https://api.themoviedb.org/3/"
 
@@ -61,7 +70,6 @@ interface ApiService {
                 .build()
                 .create(ApiService::class.java)
         }
-
     }
 
 }

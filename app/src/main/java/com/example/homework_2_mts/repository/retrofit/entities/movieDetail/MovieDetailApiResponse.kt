@@ -9,7 +9,7 @@ data class MovieDetailApiResponse(
     @SerialName("adult")
     val adult: Boolean,
     @SerialName("backdrop_path")
-    val backdropPath: String,
+    val backdropPath: String?,
     @SerialName("budget")
     val budget: Int,
     @SerialName("genres")
@@ -19,7 +19,7 @@ data class MovieDetailApiResponse(
     @SerialName("id")
     val id: Int,
     @SerialName("imdb_id")
-    val imdbId: String,
+    val imdbId: String?,
     @SerialName("original_language")
     val originalLanguage: String,
     @SerialName("original_title")

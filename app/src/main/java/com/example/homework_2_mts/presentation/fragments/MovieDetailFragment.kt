@@ -87,8 +87,9 @@ class MovieDetailFragment : Fragment() {
             movieTitleTextView.text = it.title
             movieRatingLayout.rating = it.rateScore.toFloat()
             movieDescriptionTextView.text = it.description
+            val bgUrl = if (it.bgUrl != null) it.bgUrl else it.posterUrl
             Picasso.get()
-                .load(App.applicationContext.getString(R.string.bg_img_base_url) + it.bgUrl)
+                .load(App.applicationContext.getString(R.string.bg_img_base_url) + bgUrl)
                 .into(moviePosterImageView)
         }
         rvActors.apply {

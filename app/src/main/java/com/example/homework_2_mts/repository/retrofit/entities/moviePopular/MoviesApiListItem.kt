@@ -7,13 +7,13 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class MoviesApiListItem(
     @SerialName("backdrop_path")
-    val backdropPath: String,
+    val backdropPath: String?,
     @SerialName("id")
     val id: Int,
     @SerialName("overview")
     val overview: String,
     @SerialName("poster_path")
-    val posterPath: String,
+    val posterPath: String?,
     @SerialName("title")
     val title: String,
     @SerialName("video")

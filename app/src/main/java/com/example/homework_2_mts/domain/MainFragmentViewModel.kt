@@ -24,7 +24,7 @@ class MainFragmentViewModel : ViewModel() {
 
     // init CoroutineExceptionHandler
     private val errorHandler = CoroutineExceptionHandler { _, error ->
-        //Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show()
+        Log.d("proverka", error.toString())
     }
 
     // init LiveData
@@ -71,19 +71,17 @@ class MainFragmentViewModel : ViewModel() {
         }
     }
 
-    fun updateData() {
-//        viewModelScope.launch(errorHandler) {
-//            withContext(Dispatchers.IO) {
-//                Thread.sleep(2000)
-//                movieRepository.clearAllDb()
-//                val movies = movieRepository.getMoviesAPIRefresh()
-//                movieRepository.insertDbMovies(movies)
-//                _updateMoviesList.postValue(movieRepository.getDbMovies())
-//            }
-//            _viewState.postValue(MainFragmentViewState(isDownloaded = true))
-//        }
+    fun getSearchMovies(searchText: String) {
+        viewModelScope.launch(errorHandler) {
+            withContext(Dispatchers.IO) {
+                val responseSearchMovies = movieRepository.searchMovies(searchText)
+                if (responseSearchMovies.isSuccessful) {
+                    val list = responseSearchMovies.body()?.moviesApiList ?: emptyList()
+                    _moviesList.postValue(MoviesMapper().toEntityList(list))
+                }
+            }
+        }
     }
-
 }
 
 

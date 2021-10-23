@@ -28,8 +28,8 @@
     <dimen name="rv_popular_now_margin_top">12dp</dimen>
     <dimen name="rv_movies_margin_top">15dp</dimen>
     <dimen name="marginMoviesGrid">45px</dimen>
-    <dimen name="search_btn_width">30dp</dimen>
-    <dimen name="search_btn_height">30dp</dimen>
+    <dimen name="search_btn_width">35dp</dimen>
+    <dimen name="search_btn_height">35dp</dimen>
     <dimen name="name_user_margin_top">64dp</dimen>
     <dimen name="email_user_margin_top">2dp</dimen>
     <dimen name="avatar_user_width">72dp</dimen>
@@ -38,7 +38,7 @@
     <dimen name="interests_user_margin_top">57dp</dimen>
     <dimen name="rv_interests_user_margin_top">14dp</dimen>
     <dimen name="personal_user_data_margin_top">40dp</dimen>
-    <dimen name="et_margin_top">15dp</dimen>
+    <dimen name="et_margin_top">23dp</dimen>
     <dimen name="et_padding_start">0dp</dimen>
     <dimen name="settings_margin_top">40dp</dimen>
     <dimen name="btn_profile_fragment_margin_top">10dp</dimen>

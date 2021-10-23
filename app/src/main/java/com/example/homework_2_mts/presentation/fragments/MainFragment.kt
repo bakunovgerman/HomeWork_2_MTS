@@ -1,12 +1,17 @@
 package com.example.homework_2_mts.presentation.fragments
 
 import android.content.Context
+import android.media.Image
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
+import android.widget.*
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.homework_2_mts.App
 import com.example.homework_2_mts.R
+import com.example.homework_2_mts.databinding.FragmentMainBinding
 import com.example.homework_2_mts.presentation.adapters.MoviesAdapter
 import com.example.homework_2_mts.presentation.adapters.PopularNowAdapter
 import com.example.homework_2_mts.presentation.adapters.items_decoration.GridSpacingItemDecoration
@@ -28,6 +34,7 @@ import com.example.homework_2_mts.presentation.helpers.MoviesCallbackDiffUtils
 import com.example.homework_2_mts.domain.MainFragmentViewModel
 import com.example.homework_2_mts.presentation.adapters.items_decoration.FooterItemDecoration
 import com.example.homework_2_mts.presentation.helpers.ViewStateLayout
+import com.google.android.material.textfield.TextInputLayout
 
 class MainFragment : Fragment() {
 
@@ -39,7 +46,13 @@ class MainFragment : Fragment() {
     private lateinit var rvMovies: RecyclerView
     private lateinit var rvPopularNow: RecyclerView
     private lateinit var progressBar: FrameLayout
+    private lateinit var imgBtnSearch: ImageView
+    private lateinit var searchTextInputLayout: TextInputLayout
+    private lateinit var tvPopularNowTitle: TextView
+    private lateinit var searchEditText: EditText
     private var mainFragmentClickListener: MainFragmentClickListener? = null
+    private lateinit var binding: FragmentMainBinding
+    private var isShowedSearch = false
 
     //init adapter
     private lateinit var popularNowAdapter: PopularNowAdapter
@@ -49,6 +62,7 @@ class MainFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         mainFragmentViewModel = ViewModelProvider(this).get(MainFragmentViewModel::class.java)
+        binding = FragmentMainBinding.inflate(layoutInflater)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,14 +72,56 @@ class MainFragment : Fragment() {
         rvMovies = view.findViewById(R.id.rvMovies)
         rvPopularNow = view.findViewById(R.id.rvPopularNow)
         progressBar = view.findViewById(R.id.progressBar)
+        imgBtnSearch = view.findViewById(R.id.imgBtnSearch)
+        searchTextInputLayout = view.findViewById(R.id.searchTextInputLayout)
+        searchEditText = view.findViewById(R.id.searchEditText)
+
+        tvPopularNowTitle = view.findViewById(R.id.tvPopularNowTitle)
+
+        imgBtnSearch.setOnClickListener { imgBtnSearch ->
+            if (isShowedSearch) {
+                isShowedSearch = false
+                searchTextInputLayout.visibility = View.INVISIBLE
+                rvPopularNow.visibility = View.VISIBLE
+                tvPopularNowTitle.visibility = View.VISIBLE
+                context?.let { context ->
+                    imgBtnSearch.background = AppCompatResources.getDrawable(context, R.drawable.ic_search)
+                }
+                searchEditText.text.clear()
+                mainFragmentViewModel.loadData()
+            } else {
+                isShowedSearch = true
+                searchTextInputLayout.visibility = View.VISIBLE
+                rvPopularNow.visibility = View.INVISIBLE
+                tvPopularNowTitle.visibility = View.GONE
+                moviesAdapter.initData(emptyList())
+                context?.let { context ->
+                    imgBtnSearch.background = AppCompatResources.getDrawable(context, R.drawable.ic_close)
+                }
+            }
+        }
+
+        searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                mainFragmentViewModel.getSearchMovies(s.toString())
+            }
+
+        })
+
 
         // init RecyclerView
         popularNowAdapter =
-            PopularNowAdapter() {
+            PopularNowAdapter {
                 mainFragmentClickListener?.onPopularNowClick(it)
             }
         moviesAdapter =
-            MoviesAdapter() {
+            MoviesAdapter {
                 mainFragmentClickListener?.onOpenDetailMovieClick(it)
             }
 
@@ -83,7 +139,7 @@ class MainFragment : Fragment() {
         // init listener
         swipeRefresh.setOnRefreshListener {
             showProgressBar()
-            mainFragmentViewModel.updateData()
+            mainFragmentViewModel.loadData()
         }
 
         // init observe
@@ -156,6 +212,8 @@ class MainFragment : Fragment() {
     }
 
     private fun hideProgressBar() {
+        if (swipeRefresh.isRefreshing)
+            swipeRefresh.isRefreshing = false
         rvMovies.visibility = View.VISIBLE
         rvPopularNow.visibility = View.VISIBLE
         progressBar.visibility = View.INVISIBLE

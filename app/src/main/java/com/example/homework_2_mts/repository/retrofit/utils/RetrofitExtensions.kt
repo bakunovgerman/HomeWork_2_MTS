@@ -19,7 +19,9 @@ class RetrofitExtensions {
 
         @Suppress("EXPERIMENTAL_API_USAGE")
         fun Retrofit.Builder.addJsonConverter() = apply {
-            val json = Json { ignoreUnknownKeys = true }
+            val json = Json {
+                ignoreUnknownKeys = true
+            }
             val contentType = MediaType.get("application/json")
             this.addConverterFactory(json.asConverterFactory(contentType))
         }

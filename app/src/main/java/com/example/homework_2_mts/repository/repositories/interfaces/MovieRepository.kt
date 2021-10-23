@@ -26,7 +26,7 @@ interface MovieRepository {
             App.applicationContext.getString(
                 R.string.api_key
             ),
-            "ru-RU",
+            App.applicationContext.getString(R.string.ru_language),
             1
         )
 
@@ -42,7 +42,9 @@ interface MovieRepository {
         App.applicationContext.getString(
             R.string.api_key
         ),
-        "ru-RU"
+        App.applicationContext.getString(R.string.ru_language)
     )
+
+    suspend fun searchMovies(searchText: String): Response<MoviesApiPopularResponse>
 
 }

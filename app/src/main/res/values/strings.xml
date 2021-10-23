@@ -49,4 +49,6 @@
     <string name="woman_gender">Женский</string>
     <string name="man_gender">Мужской</string>
     <string name="no_info_biography">Нет информации о биографии</string>
+    <string name="search_movie">Найти фильм...</string>
+    <string name="ru_language">ru-RU</string>
 </resources>

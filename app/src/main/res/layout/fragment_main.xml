@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.fragments.MainFragment"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:animateLayoutChanges="true">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh"
@@ -40,13 +41,40 @@
                     android:id="@+id/imgBtnSearch"
                     android:layout_width="@dimen/search_btn_width"
                     android:layout_height="@dimen/search_btn_height"
-                    android:background="@android:color/transparent"
+                    android:background="@drawable/ic_search"
+                    android:padding="5dp"
                     android:foreground="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_search"
                     android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="@id/guideLine_2"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginTop="@dimen/img_btn_margin_top"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/searchTextInputLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/et_margin_top"
+                    android:layout_marginEnd="20dp"
+                    app:boxStrokeColor="@color/black"
+                    app:hintTextColor="@color/black"
+                    app:layout_constraintEnd_toStartOf="@id/imgBtnSearch"
+                    app:layout_constraintStart_toStartOf="@id/guideLine_1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:visibility="invisible">
+
+                    <EditText
+                        android:id="@+id/searchEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:backgroundTint="@color/white"
+                        android:hint="@string/search_movie"
+                        android:inputType="textUri"
+                        android:paddingStart="@dimen/et_padding_start"
+                        android:textColor="@color/black"
+                        tools:ignore="RtlSymmetry"
+                        android:textIsSelectable="false"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/tvPopularNowTitle"

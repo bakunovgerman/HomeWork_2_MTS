@@ -56,6 +56,17 @@ class MovieRepositoryImpl(private val apiService: ApiService): MovieRepository {
         "ru-RU"
     )
 
+    override suspend fun searchMovies(searchText: String): Response<MoviesApiPopularResponse> {
+        return apiService.searchMovies(
+            searchText = searchText,
+            page = 1,
+            apiKey = App.applicationContext.getString(
+                R.string.api_key
+            ),
+            includeAdult = true,
+            language = App.applicationContext.getString(R.string.ru_language)
+        )
+    }
     //fun getMoviesAPIRefresh(): List<MovieEntity> = MoviesModel(MoviesDataSourceImpl()).getMovies2()
 
 }

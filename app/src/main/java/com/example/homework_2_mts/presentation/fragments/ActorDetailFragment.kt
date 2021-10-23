@@ -50,7 +50,7 @@ class ActorDetailFragment : Fragment() {
         binding.dateBirthTextView.text = birthday
         binding.placeBirthTextView.text = placeOfBirth
         binding.genderTextView.text = when (gender) {
-            1 -> getString(R.string.man_gender)
+            2 -> getString(R.string.man_gender)
             else -> getString(R.string.woman_gender)
         }
     }
