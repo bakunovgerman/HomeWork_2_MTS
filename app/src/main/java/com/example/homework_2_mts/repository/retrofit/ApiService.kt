@@ -14,7 +14,6 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
-
     // методы
     @GET("movie/popular")
     suspend fun getPopularMovies(
@@ -71,5 +70,4 @@ interface ApiService {
                 .create(ApiService::class.java)
         }
     }
-
 }

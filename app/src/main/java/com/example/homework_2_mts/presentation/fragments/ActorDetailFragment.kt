@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.homework_2_mts.R
 import com.example.homework_2_mts.databinding.FragmentActorDetailBinding
 import com.example.homework_2_mts.domain.ActorDetailViewModel
+import com.example.homework_2_mts.presentation.adapters.view_holders.MoviesViewHolder
 import com.example.homework_2_mts.presentation.helpers.ViewStateLayout
 import com.example.homework_2_mts.repository.retrofit.entities.actorDetail.ActorDetailResponse
 import com.squareup.picasso.Picasso
@@ -39,7 +40,7 @@ class ActorDetailFragment : Fragment() {
 
     private fun setData(actorDetailData: ActorDetailResponse) = with(actorDetailData) {
         Picasso.get()
-            .load(getString(R.string.actor_photo_url) + profilePath)
+            .load(MoviesViewHolder.BASE_IMAGE_URL + profilePath)
             .into(binding.imgActorPhoto)
         binding.nameActorTextView.text = name
         binding.biographyTextView.text =

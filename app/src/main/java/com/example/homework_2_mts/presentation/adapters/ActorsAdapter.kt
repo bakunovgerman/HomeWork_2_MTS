@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.homework_2_mts.App
 import com.example.homework_2_mts.R
+import com.example.homework_2_mts.presentation.adapters.view_holders.MoviesViewHolder
 import com.example.homework_2_mts.repository.database.entities.ActorEntity
 import com.squareup.picasso.Picasso
 
@@ -27,7 +28,7 @@ class ActorsAdapter(private val actorOnClickListener: (Long) -> Unit) :
         fun bind(actorEntity: ActorEntity) {
             if (actorEntity.photoUrl != null) {
                 Picasso.get()
-                    .load(App.applicationContext.getString(R.string.actor_photo_url) + actorEntity.photoUrl)
+                    .load(MoviesViewHolder.BASE_IMAGE_URL + actorEntity.photoUrl)
                     .into(actorPhotoImageView)
             } else {
                 actorPhotoImageView.setImageResource(R.drawable.actor_no_photo)

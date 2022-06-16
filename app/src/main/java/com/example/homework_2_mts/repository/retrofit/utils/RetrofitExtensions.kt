@@ -3,7 +3,9 @@ package com.example.homework_2_mts.repository.retrofit.utils
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 
 class RetrofitExtensions {
@@ -12,6 +14,7 @@ class RetrofitExtensions {
         fun Retrofit.Builder.setClient() = apply {
             val okHttpClient = OkHttpClient()
                 .newBuilder()
+                .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .build()
 
             this.client(okHttpClient)
@@ -22,7 +25,7 @@ class RetrofitExtensions {
             val json = Json {
                 ignoreUnknownKeys = true
             }
-            val contentType = MediaType.get("application/json")
+            val contentType = "application/json".toMediaType()
             this.addConverterFactory(json.asConverterFactory(contentType))
         }
 

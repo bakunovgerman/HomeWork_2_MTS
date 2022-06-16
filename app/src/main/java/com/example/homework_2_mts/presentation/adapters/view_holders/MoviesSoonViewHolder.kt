@@ -30,7 +30,7 @@ class MoviesSoonViewHolder(view: View, onMovieItemClick: ((MovieEntity) -> Unit)
     fun bind(movieEntity: MovieEntity) {
         item = movieEntity
         Picasso.get()
-            .load(App.applicationContext.getString(R.string.poster_base_url) + item.posterUrl)
+            .load(MoviesViewHolder.BASE_IMAGE_URL + item.posterUrl)
             .into(imgMoviePoster)
         tvMovieTitle.text = item.title
         tvMovieDescription.text = item.description

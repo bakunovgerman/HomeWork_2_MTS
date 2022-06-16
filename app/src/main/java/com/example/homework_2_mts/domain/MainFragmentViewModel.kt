@@ -1,11 +1,14 @@
 package com.example.homework_2_mts.domain
 
 import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.homework_2_mts.App
 import com.example.homework_2_mts.presentation.helpers.ViewStateLayout
-import com.example.homework_2_mts.repository.database.entities.MovieEntity
 import com.example.homework_2_mts.repository.database.entities.GenreEntity
+import com.example.homework_2_mts.repository.database.entities.MovieEntity
 import com.example.homework_2_mts.repository.database.entities.UpdateDbDateEntity
 import com.example.homework_2_mts.repository.mappers.MoviesMapper
 import com.example.homework_2_mts.repository.repositories.GenreRepositoryImpl
@@ -51,13 +54,9 @@ class MainFragmentViewModel : ViewModel() {
                 val responseMoviesApi = movieRepository.getMoviesAPI()
                 if (responseMoviesApi.isSuccessful) {
                     val movies = responseMoviesApi.body()?.moviesApiList ?: emptyList()
-
                     if (updateDbDateRepository.getUpdateDbDateCount() == 0
                         || updateDbDateRepository.isUpdateDb() && movies.isNotEmpty()
                     ) {
-                        Log.d("update_dp", "database is update")
-                        Log.d("update_dp", "database insert data")
-
                         movieRepository.insertDbMovies(MoviesMapper().toEntityList(movies))
                         genreRepository.insertDbGenres(genreRepository.getGenresAPI())
                         updateDbDateRepository.insertDate(UpdateDbDateEntity(1, Date().time))

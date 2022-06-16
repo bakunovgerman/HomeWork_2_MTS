@@ -23,6 +23,7 @@ import com.example.homework_2_mts.domain.MovieDetailFragmentViewModel
 import com.example.homework_2_mts.presentation.adapters.ActorsAdapter
 import com.example.homework_2_mts.presentation.adapters.PopularNowAdapter
 import com.example.homework_2_mts.presentation.adapters.items_decoration.SpacesItemDecoration
+import com.example.homework_2_mts.presentation.adapters.view_holders.MoviesViewHolder.Companion.BASE_IMAGE_URL
 import com.example.homework_2_mts.presentation.helpers.MainFragmentClickListener
 import com.example.homework_2_mts.presentation.helpers.ViewStateLayout
 import com.example.homework_2_mts.repository.database.entities.ActorEntity
@@ -87,9 +88,9 @@ class MovieDetailFragment : Fragment() {
             movieTitleTextView.text = it.title
             movieRatingLayout.rating = it.rateScore.toFloat()
             movieDescriptionTextView.text = it.description
-            val bgUrl = if (it.bgUrl != null) it.bgUrl else it.posterUrl
+            val bgUrl = it.bgUrl ?: it.posterUrl
             Picasso.get()
-                .load(App.applicationContext.getString(R.string.bg_img_base_url) + bgUrl)
+                .load(BASE_IMAGE_URL + bgUrl)
                 .into(moviePosterImageView)
         }
         rvActors.apply {

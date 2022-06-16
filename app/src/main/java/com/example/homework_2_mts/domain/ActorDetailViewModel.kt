@@ -1,5 +1,8 @@
 package com.example.homework_2_mts.domain
 
+import android.app.Service
+import android.content.Intent
+import android.os.IBinder
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,7 +21,6 @@ class ActorDetailViewModel : ViewModel() {
     private val errorHandler = CoroutineExceptionHandler { _, error ->
         //Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show()
     }
-
     // init LiveData
     val viewState: LiveData<ViewStateLayout> get() = _viewState
     private val _viewState = MutableLiveData<ViewStateLayout>()
@@ -34,9 +36,8 @@ class ActorDetailViewModel : ViewModel() {
            val response = actorDetailRepository.getActorsDetailApi(actorId)
             if (response.isSuccessful) {
                 _actorDetailData.postValue(response.body())
-                _viewState.postValue(ViewStateLayout(isDownloaded = true))
+                _viewState.postValue(ViewStateLayout(isDownloaded = true) )
             }
         }
-
     }
 }

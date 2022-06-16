@@ -1,5 +1,6 @@
 package com.example.homework_2_mts.presentation.adapters.view_holders
 
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.RatingBar
@@ -30,7 +31,7 @@ class MoviesViewHolder(view: View, onMovieItemClick: ((MovieEntity) -> Unit)) :
     fun bind(movieEntity: MovieEntity) {
         item = movieEntity
         Picasso.get()
-            .load(App.applicationContext.getString(R.string.poster_base_url) + item.posterUrl)
+            .load(BASE_IMAGE_URL + item.posterUrl)
             .into(imgMoviePoster)
         tvMovieTitle.text = item.title
         tvMovieDescription.text = item.description
@@ -41,4 +42,7 @@ class MoviesViewHolder(view: View, onMovieItemClick: ((MovieEntity) -> Unit)) :
         rbMovie.rating = item.rateScore.toFloat()
     }
 
+    companion object {
+        const val BASE_IMAGE_URL = "https://image.tmdb.org/t/p/original"
+    }
 }
